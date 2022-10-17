@@ -37,23 +37,29 @@ app.use((req, res, next) => {
 // will print stacktrace
 if (app.get("env") === "development") {
   app.use((error: any, req, res, next) => {
-    console.log(error);
+	  /*
     res.status(error["status"] || 500);
     res.render("error", {
       message: error.message,
       error,
     });
+	*/
+	console.log ("error during app get: " + error.message);
+	return null;
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use((error: any, req, res, next) => {
+	/*
   res.status(error["status"] || 500);
   res.render("error", {
     message: error.message,
     error: {},
   });
+  */
+  console.log ("error during app use: " + error.message);
   return null;
 });
 

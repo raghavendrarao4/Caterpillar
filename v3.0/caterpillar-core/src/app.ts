@@ -7,7 +7,8 @@ import * as mongoose from 'mongoose';
 import * as path from 'path';
 import models from './models/models.controller';
 
-const app: express.Express = express();
+const app = express();
+//const app: express.Express = express();
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));

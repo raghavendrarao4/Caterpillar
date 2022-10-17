@@ -3,7 +3,7 @@ import {Router} from 'express';
 import * as solc from 'solc';
 
 import {AbiCoder} from 'web3-eth-abi';
-const abiCoder = new AbiCoder();
+const abiCoder = require("web3-eth-abi");
 
 import * as Web3 from 'web3';
 import BigNumber from "bignumber.js";
@@ -43,7 +43,11 @@ import fs = require('fs');
 
 ////////////////////////////////////////////////////////////
 
-const models: Router = Router();
+const express = require('express');
+const models = express.Router();
+//const models: Router = Router();
+
+
 let web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 // var web3 = new Web3(new Web3.providers.HttpProvider("http://193.40.11.64:80"));
 
@@ -146,7 +150,7 @@ models.post('/interpreter', (req, res) => {
 });
 
 models.post('/interpreter/models', (req, res) => {
-    console.log('Parsig BPMN Model and Generating IData Smart Contracts ...');
+    console.log('Parsing BPMN Model and Generating IData Smart Contracts ...');
     parseBpmnModel(req.body.bpmn)
     .then((procInfo: SubProcessInfo) => {
         console.log('IFlow information collected ...')
@@ -170,7 +174,7 @@ models.post('/interpreter/models', (req, res) => {
                             console.log('FactoryTrans: ' + factoryRes);
                             addInterpreter()
                             .then(interpreterRes => {
-                                // printIFlow();
+                                 //printIFlow();
                                 res.status(200).send(
                                     { 
                                         iFlow: {address: iFlow.contract.address, gas: iFlow.gas},
@@ -611,7 +615,8 @@ models.get('/models', (req, res) => {
                 res.send([]);
             else {
                 repoData.forEach(data => {
-                    if(web3.toAscii(processRegistryContract.childrenFor(data._id.toString(), 0)).toString().substr(0, 24) === data._id.toString()) {
+					// -- Commented line below, since the condition value is not evaluated
+                    //if(web3.toAscii(processRegistryContract.childrenFor(data._id.toString(), 0)).toString().substr(0, 24) === data._id.toString()) {
                         console.log({id: data._id, name: data.rootProcessName});
                         actives.push({
                             id: data._id,
@@ -619,7 +624,7 @@ models.get('/models', (req, res) => {
                             bpmn: data.bpmnModel,
                             solidity: data.solidityCode
                         })
-                    }
+                    //}
                 });
                 console.log('----------------------------------------------------------------------------------------------');
                 res.send(actives);
