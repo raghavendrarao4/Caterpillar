@@ -121,7 +121,7 @@ vote(rNominator, rNominee, rEndorser, endorser, pCase, onNomination, isAccepted)
     .post('http://localhost:3000/registry/load', {from: registryAddress})
     .subscribe(
       (resp) => {
-        console.log('SUCCESS: ', resp.json());
+        console.log('SUCCESS: ', resp);
     },
     (error) => { 
       console.log('ERROR: ', error);
@@ -132,7 +132,8 @@ vote(rNominator, rNominee, rEndorser, endorser, pCase, onNomination, isAccepted)
 
   registerModel(model: string) {
     this.http
-      .post('http://localhost:3000/interpreter/models', { bpmn: model })
+      //.post('http://localhost:3000/interpreter/models', { bpmn: model })
+	  .post('http://localhost:3000/models', { bpmn: model })
       .subscribe(
         (resp) => {
         const res = resp.json();
@@ -172,6 +173,7 @@ vote(rNominator, rNominee, rEndorser, endorser, pCase, onNomination, isAccepted)
       .subscribe(resp => {
         this.processes = [];
         resp.json().forEach(element => {
+		console.log('updateModels: ' + this.processes.indexOf(element));
           if (this.processes.indexOf(element) < 0) {
             this.processes.push(element);
           }
