@@ -1,0 +1,177 @@
+--------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
+Caterpillar REST Endpoints --> Working
+--------------------------------------------------------------------------------------------------
+Branch - https://github.com/orlenyslp/Caterpillar/tree/dependabot/npm_and_yarn/caterpillar-full-(REST-API---backend)/caterpillar-core/copy-props-2.0.5/caterpillar-full%20(REST%20API%20-%20backend)/caterpillar-core
+
+C:\Users\raghavendra.rao.b>npm version
+{
+  npm: '6.14.15',
+  ares: '1.17.2',
+  brotli: '1.0.9',
+  cldr: '39.0',
+  icu: '69.1',
+  llhttp: '2.1.3',
+  modules: '83',
+  napi: '8',
+  nghttp2: '1.42.0',
+  node: '14.18.0',
+  openssl: '1.1.1l',
+  tz: '2021a',
+  unicode: '13.0',
+  uv: '1.42.0',
+  v8: '8.4.371.23-node.84',
+  zlib: '1.2.11'
+}
+
+Mongo DB 5.0.3
+Git 2.36.0
+
+
+1. Install Python - C:\Python\Python310\python.exe
+	1a. npm config set python "C:\Python\Python310\python.exe"
+2. Install VC++ build environment - https://github.com/nodejs/node-gyp#on-windows
+	2a. VS 2022 C++ x64/x86 build tools
+	2b. Desktop development with C++
+	2c. https://stackoverflow.com/questions/57541402/node-gyp-configure-got-gyp-err-find-vs --> MS VS build-tools problem
+	2d. npm install -g node-gyp@latest --> install node gyp npm package
+3. npm config set msvs_version 2017 --global
+4. npm config set msbuild_path "C:\Program Files\Microsoft Visual Studio\2022\Community\Msbuild\Current\Bin\MSBuild.exe"
+	npm config set msbuild_path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
+
+5. No overload matches this call.\n  Overload 1 of 3, '(name: string, schema?: Schema<any, Model<any, any, any>, undefined, {}>, collection?: string, skipInit?: boolean): Model<unknown, {}, {}>', gave the following error.\n    Argument of type '{ address: StringConstructor; solidityCode: StringConstructor; abi: StringConstructor; bytecode: StringConstructor; }' is not assignable to parameter of type 'Schema<any, Model<any, any, any>, undefined, {}>'.\n      Object literal may only specify known properties, and 'address' does not exist in type 'Schema<any, Model<any, any, any>,
+
+	- https://mongoosejs.com/docs/compatibility.html
+	- Uninstall & install compatible Mongo DB - https://www.mongodb.com/docs/v4.2/tutorial/install-mongodb-on-windows/
+
+--------------------------------------------------------------------------------------------------
+C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core>npm install
+
+> keccak@2.1.0 install C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\keccak> npm run rebuild || echo "Keccak bindings compilation fail. Pure JS implementation will be used."
+
+
+> keccak@2.1.0 rebuild C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\keccak> node-gyp rebuild
+
+
+C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\keccak>if not defined npm_config_node_gyp (node "C:\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild )  else (node "C:\nodejs\node_modules\npm\node_modules\node-gyp\bin\node-gyp.js" rebuild )
+Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.
+  addon.cc
+  win_delay_load_hook.cc
+  KeccakSpongeWidth1600.c
+  KeccakP-1600-inplace32BI.c
+     Creating library C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\keccak
+  \build\Release\keccak.lib and object C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\no
+  de_modules\keccak\build\Release\keccak.exp
+  keccak.vcxproj -> C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\keccak\b
+  uild\Release\\keccak.node
+
+> secp256k1@3.8.0 install C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\secp256k1
+> npm run rebuild || echo "Secp256k1 bindings compilation fail. Pure JS implementation will be used."
+
+
+> secp256k1@3.8.0 rebuild C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\secp256k1
+> node-gyp rebuild
+
+
+C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\secp256k1>if not defined npm_config_node_gyp (node "C:\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild )  else (node "C:\nodejs\node_modules\npm\node_modules\node-gyp\bin\node-gyp.js" rebuild )
+Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.
+  addon.cc
+  privatekey.cc
+  publickey.cc
+  signature.cc
+  ecdsa.cc
+  ecdh.cc
+  win_delay_load_hook.cc
+c:\eclipse\caterpillar\caterpillar-full (rest api - backend)\caterpillar-core\node_modules\secp256k1\src\secp256k1-src\
+src\scalar_8x32_impl.h(198): warning C4319: '~': zero extending 'const uint32_t' to 'uint64_t' of greater size (compili
+ng source file ..\src\privatekey.cc) [C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\nod
+e_modules\secp256k1\build\secp256k1.vcxproj]
+c:\eclipse\caterpillar\caterpillar-full (rest api - backend)\caterpillar-core\node_modules\secp256k1\src\secp256k1-src\
+src\scalar_8x32_impl.h(200): warning C4319: '~': zero extending 'const uint32_t' to 'uint64_t' of greater size (compili
+ng source file ..\src\privatekey.cc) [C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\nod
+e_modules\secp256k1\build\secp256k1.vcxproj]
+c:\eclipse\caterpillar\caterpillar-full (rest api - backend)\caterpillar-core\node_modules\secp256k1\src\secp256k1-src\
+src\scalar_8x32_impl.h(202): warning C4319: '~': zero extending 'const uint32_t' to 'uint64_t' of greater size (compili
+ng source file ..\src\privatekey.cc) [C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\nod
+e_modules\secp256k1\build\secp256k1.vcxproj]
+c:\eclipse\caterpillar\caterpillar-full (rest api - backend)\caterpillar-core\node_modules\secp256k1\src\secp256k1-src\
+src\scalar_8x32_impl.h(204): warning C4319: '~': zero extending 'const uint32_t' to 'uint64_t' of greater size (compili
+ng source file ..\src\privatekey.cc) [C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\nod
+e_modules\secp256k1\build\secp256k1.vcxproj]
+c:\eclipse\caterpillar\caterpillar-full (rest api - backend)\caterpillar-core\node_modules\secp256k1\src\secp256k1-src\
+src\scalar_8x32_impl.h(206): warning C4319: '~': zero extending 'const uint32_t' to 'uint64_t' of greater size (compili
+ng source file ..\src\privatekey.cc) [C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\nod
+e_modules\secp256k1\build\secp256k1.vcxproj]
+c:\eclipse\caterpillar\caterpillar-full (rest api - backend)\caterpillar-core\node_modules\secp256k1\src\secp256k1-src\
+src\scalar_8x32_impl.h(208): warning C4319: '~': zero extending 'const uint32_t' to 'uint64_t' of greater size (compili
+ng source file ..\src\privatekey.cc) [C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\nod
+e_modules\secp256k1\build\secp256k1.vcxproj]
+c:\eclipse\caterpillar\caterpillar-full (rest api - backend)\caterpillar-core\node_modules\secp256k1\src\secp256k1-src\
+src\scalar_8x32_impl.h(210): warning C4319: '~': zero extending 'const uint32_t' to 'uint64_t' of greater size (compili
+ng source file ..\src\privatekey.cc) [C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\nod
+e_modules\secp256k1\build\secp256k1.vcxproj]
+c:\eclipse\caterpillar\caterpillar-full (rest api - backend)\caterpillar-core\node_modules\secp256k1\src\secp256k1-src\
+src\scalar_8x32_impl.h(212): warning C4319: '~': zero extending 'const uint32_t' to 'uint64_t' of greater size (compili
+ng source file ..\src\privatekey.cc) [C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\nod
+e_modules\secp256k1\build\secp256k1.vcxproj]
+  secp256k1.c
+  lax_der_parsing.c
+  lax_der_privatekey_parsing.c
+     Creating library C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\secp25
+  6k1\build\Release\secp256k1.lib and object C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-c
+  ore\node_modules\secp256k1\build\Release\secp256k1.exp
+  secp256k1.vcxproj -> C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\secp2
+  56k1\build\Release\\secp256k1.node
+
+> websocket@1.0.31 install C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\websocket
+> (node-gyp rebuild 2> builderror.log) || (exit 0)
+
+
+C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\websocket>if not defined npm_config_node_gyp (node "C:\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin\\..\..\node_modules\node-gyp\bin\node-gyp.js" rebuild )  else (node "C:\nodejs\node_modules\npm\node_modules\node-gyp\bin\node-gyp.js" rebuild )
+Building the projects in this solution one at a time. To enable parallel build, please add the "/m" switch.
+  bufferutil.cc
+  win_delay_load_hook.cc
+     Creating library C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\websoc
+  ket\build\Release\bufferutil.lib and object C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-
+  core\node_modules\websocket\build\Release\bufferutil.exp
+  bufferutil.vcxproj -> C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\webs
+  ocket\build\Release\\bufferutil.node
+  validation.cc
+  win_delay_load_hook.cc
+     Creating library C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\websoc
+  ket\build\Release\validation.lib and object C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-
+  core\node_modules\websocket\build\Release\validation.exp
+  validation.vcxproj -> C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\webs
+  ocket\build\Release\\validation.node
+
+> nodemon@2.0.4 postinstall C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\gulp-nodemon\node_modules\nodemon
+> node bin/postinstall || exit 0
+
+
+> ejs@2.7.4 postinstall C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\ejs
+> node ./postinstall.js
+
+Thank you for installing EJS: built with the Jake JavaScript build tool (https://jakejs.com/)
+
+
+> web3@1.2.9 postinstall C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\node_modules\web3> node angular-patch.js
+
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.3 (node_modules\gulp-nodemon\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
+added 1045 packages from 754 contributors and audited 1048 packages in 162.421s
+
+14 packages are looking for funding
+  run `npm fund` for details
+
+found 101 vulnerabilities (1 low, 31 moderate, 53 high, 16 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
+  
+  
+C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core>gulp build
+[12:14:03] Using gulpfile C:\Eclipse\Caterpillar\caterpillar-full (REST API - backend)\caterpillar-core\gulpfile.js
+[12:14:03] Starting 'build'...
+[12:14:15] Finished 'build' after 12 s
+--------------------------------------------------------------------------------------------------

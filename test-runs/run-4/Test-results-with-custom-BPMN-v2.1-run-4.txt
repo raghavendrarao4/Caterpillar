@@ -1,0 +1,1757 @@
+OPTIONS /registry 204 1.176 ms - 0
+DEPLOYING PROCESS RUNTIME REGISTRY ...
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+contract IFunct {
+    // WorkList functions
+    function updateRuntimeRegistry(address _runtimeRegistry) public;
+    // Factory Functions
+    function setWorklist(address _worklist) public;
+    function startInstanceExecution(address processAddress) public;
+    function newInstance(address parent, address globalFactory) public returns(address);
+    function findParent() public view returns(address);
+}
+
+contract ProcessRegistry {
+
+    mapping (bytes32 => mapping (uint => bytes32)) private parent2ChildrenBundleId;
+    mapping (bytes32 => address) private factories;
+    mapping (bytes32 => bytes32) private policy;
+    mapping (bytes32 => bytes32) private taskRole;
+
+    mapping (address => bytes32) private instance2Bundle;
+    mapping (address => address) private instance2PolicyOp;
+    address[] private instances;
+
+    mapping (address => bytes32) private worklist2Bundle;
+
+    event NewInstanceCreatedFor(address parent, address processAddress);
+
+    function registerFactory(bytes32 bundleId, address factory) external {
+        factories[bundleId] = factory;
+    }
+
+    function registerWorklist(bytes32 bundleId, address worklist) external {
+        address factory = factories[bundleId];
+        require(factory != address(0));
+        worklist2Bundle[worklist] = bundleId;
+        IFunct(factory).setWorklist(worklist);
+        IFunct(worklist).updateRuntimeRegistry(this);
+    }
+
+    function findRuntimePolicy(address pCase) public view returns(address) {
+        return instance2PolicyOp[pCase];
+    }
+
+    function relateProcessToPolicy(bytes32 bundleId, bytes32 _policy, bytes32 _taskRole) external {
+        taskRole[bundleId] = _taskRole;
+        policy[bundleId] = _policy;
+    }
+
+
+    function addChildBundleId(bytes32 parentBundleId, bytes32 processBundleId, uint nodeIndex) external {
+        parent2ChildrenBundleId[parentBundleId][nodeIndex] = processBundleId;
+    }
+
+    function newInstanceFor(uint nodeIndex, address parent) public returns(address) {
+        return newBundleInstanceFor(parent2ChildrenBundleId[instance2Bundle[parent]][nodeIndex], parent, instance2PolicyOp[parent]);
+    }
+
+    function newBundleInstanceFor(bytes32 bundleId, address parent, address policyOpAddr) public returns(address) {
+        address factory = factories[bundleId];
+        require(factory != address(0));
+        address processAddress = IFunct(factory).newInstance(parent, this);
+        instance2Bundle[processAddress] = bundleId;
+        instance2PolicyOp[processAddress] = policyOpAddr;
+        instances.push(processAddress);
+        IFunct(factory).startInstanceExecution(processAddress);
+        emit NewInstanceCreatedFor(parent, processAddress);
+        return processAddress;
+    }
+
+    function allInstances() external view returns(address[]) {
+        return instances;
+    }
+
+    function bindingPolicyFor(address procInstance) external view returns(bytes32) {
+        bytes32 pId = instance2Bundle[procInstance];
+        address pAddr = procInstance;
+        while(policy[pId].length != 0) {
+            pAddr = IFunct(pAddr).findParent();
+            if(pAddr == 0)
+                break;
+            pId = instance2Bundle[pAddr];
+        }
+        return policy[pId];
+    }
+
+    function taskRoleMapFor(address procInstance) external view returns(bytes32) {
+        bytes32 pId = instance2Bundle[procInstance];
+        address pAddr = procInstance;
+        while(taskRole[pId].length != 0) {
+            pAddr = IFunct(pAddr).findParent();
+            if(pAddr == 0)
+                break;
+            pId = instance2Bundle[pAddr];
+        }
+        return taskRole[pId];
+    }
+
+    function bindingPolicyFromId(bytes32 procId) external view returns(bytes32) {
+        return policy[procId];
+    }
+
+    function taskRoleMapFromId(bytes32 procId) external view returns(bytes32) {
+        return taskRole[procId];
+    }
+
+    function bundleFor(address processInstance) external view returns(bytes32) {
+        return instance2Bundle[processInstance];
+    }
+
+    function childrenFor(bytes32 parent, uint nodeInd) external view returns(bytes32) {
+        return parent2ChildrenBundleId[parent][nodeInd];
+    }
+
+    function worklistBundleFor(address worklist) external view returns(bytes32) {
+        return worklist2Bundle[worklist];
+    }
+}
+....................................................................
+PROCESS RUNTIME REGISTRY COMPILED SUCCESSFULLY
+CREATING RUNTIME REGISTRY INSTANCE ...
+web3.eth.accounts[executionAccount]0x94d013c9e7377662d22e8731edff9a0a78273a02
+Process Registry DEPLOYED and RUNNING at 0xc877c233efb175cbe09a9a84ac9005f1588fbfb0
+GAS USED:  597883
+REPO ID:  63549fd5b4a4ba3408ef7c9a
+----------------------------------------------------------------------------------------------
+POST /registry 200 10874.675 ms - 105
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+QUERYING REGISTERED MODELS
+----------------------------------------------------------------------------------------------
+GET /models 304 6.070 ms - -
+OPTIONS /models 204 0.802 ms - 0
+GENERATING SMART CONTRACTS FROM PROCESS MODEL ...
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+import "AbstractFactory";
+import "AbstractProcess";
+import "AbstractRegistry";
+
+contract Process_0_Factory is AbstractFactory {
+    function newInstance(address parent, address processRegistry) public returns(address) {
+        Process_0_Contract newContract = new Process_0_Contract(parent, worklist, processRegistry);
+        return newContract;
+    }
+
+    function startInstanceExecution(address processAddress) public {
+        Process_0_Contract(processAddress).startExecution();
+    }
+}
+
+
+contract Process_0_Contract is AbstractProcess {
+
+    uint public marking = uint(2);
+    uint public startedActivities = 0;
+
+
+    // Process Variables
+
+    function Process_0_Contract(address _parent, address _worklist, address _processRegistry) public AbstractProcess(_parent, _worklist, _processRegistry) {
+    }
+
+    function startExecution() public {
+        require(marking == uint(2) && startedActivities == 0);
+        step(uint(2), 0);
+    }
+
+    function handleEvent(bytes32 code, bytes32 eventType, uint _instanceIndex, bool isInstanceCompleted) public {
+        // Process without calls to external contracts.
+        // No events to catch !!!
+    }
+
+    function killProcess() public {
+        (marking, startedActivities) = killProcess(0, marking, startedActivities);
+    }
+
+    function killProcess(uint processElementIndex, uint tmpMarking, uint tmpStartedActivities) internal returns(uint, uint) {
+        if(processElementIndex == 0)
+            tmpMarking = tmpStartedActivities = 0;
+        return (tmpMarking, tmpStartedActivities);
+    }
+
+    function broadcastSignal() public {
+        var (tmpMarking, tmpStartedActivities) = broadcastSignal(marking, startedActivities, 0);
+        step(tmpMarking, tmpStartedActivities);
+    }
+
+    function broadcastSignal(uint tmpMarking, uint tmpStartedActivities, uint sourceChild) internal returns(uint, uint) {
+        return (tmpMarking, tmpStartedActivities);
+    }
+
+
+
+
+    function step(uint tmpMarking, uint tmpStartedActivities) internal {
+        while (true) {
+            if (tmpMarking & uint(2) != 0) {
+                var result = 1200;                tmpMarking = tmpMarking & uint(~2) | uint(4);
+                continue;
+            }
+            if (tmpMarking & uint(4) != 0) {
+                tmpMarking &= uint(~4);
+                if (tmpMarking & uint(6) == 0 && tmpStartedActivities & uint(2) == 0) {
+                    (tmpMarking, tmpStartedActivities) = propagateEvent("EndEvent_01i0o4q", "Default", tmpMarking, tmpStartedActivities, uint(4));
+                }
+                continue;
+            }
+            break;
+        }
+        if(marking != 0 || startedActivities != 0) {
+            marking = tmpMarking;
+            startedActivities = tmpStartedActivities;
+        }
+    }
+
+    function getWorklistAddress() external view returns(address) {
+        return worklist;
+    }
+
+    function getInstanceIndex() external view returns(uint) {
+        return instanceIndex;
+    }
+
+}
+
+....................................................................
+CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+....................................................................
+STARTING PROCESS MODEL REGISTRATION ...
+....................................................................
+UPDATING COMPILATION ARTIFACTS IN REPOSITORY ...
+QUERYING REGISTERED MODELS
+Compilation artifacts of Process_0 updated in repository with id 6354a23bb4a4ba3408ef7c9b
+....................................................................
+RELATING PARENT TO NESTED CHILDREN IN REGISTRY  ...
+{ id: 6354a23bb4a4ba3408ef7c9b, name: 'Process_0' }
+----------------------------------------------------------------------------------------------
+GET /models 200 1683.172 ms - 6220
+Process_0 : 6354a23bb4a4ba3408ef7c9b => (0), 6354a23bb4a4ba3408ef7c9b
+....................................................................
+DEPLOYING FACTORIES AND UPDATING PROCESS-FACTORY RELATION IN REGISTRY ...
+Process_0_Factory running at address 0x56df7a9470253e2044bcecc397238d497faae154
+Process_0_Factory registered SUCCESSFULLY in Process Registry
+....................................................................
+....................................................................
+DEPLOYONG WORKLIST CONTRACTS AND UPDATING PROCESS REGISTRY ...
+----------------------------------------------------------------------------------------------
+POST /models 200 22984.484 ms - 6218
+QUERYING REGISTERED MODELS
+{ id: 6354a23bb4a4ba3408ef7c9b, name: 'Process_0' }
+----------------------------------------------------------------------------------------------
+GET /models 200 812.235 ms - 6220
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+POST /resources/policy 200 9.391 ms - 25
+OPTIONS /resources/policy 204 0.104 ms - 0
+GENERATING AND DEPLOYING BINDING POLICY CONTRACTS ...
+GENERATING SMART CONTRACTS FROM BINDING POLICY ...
+Success, the policy is consistent. Role precedence:
+0: User
+...............................................................
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+// Function assertVote will return 0 -> UNBOUND, 1 -> NOMINATED, 2 -> RELEASING, 3 -> BOUND
+contract BindingPolicy {
+
+    function isCaseCreator(uint roleIndex) public pure returns(bool);
+    function canNominate (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertNConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool);
+    function requireNEndorsement (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertNVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint);
+
+    function canRelease (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertRConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool);
+    function requireREndorsement (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertRVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint);
+}
+
+contract ControlFlow {
+    function findParent() public view returns(address);
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint);
+    function bundleFor(address pCase) external view returns(bytes32);
+}
+
+
+contract BindingAccessControl {
+
+    address private policyAdr;
+    address private taskRoleAdr;
+    address private registry;
+
+    struct BindingInfo {
+        uint nominator;
+        uint nominee;
+        uint endorsedBy;
+        uint rejectedBy;
+
+        // 0- UNBOUND, 1- RELEASING, 2- NOMINATED, 3- BOUND
+        uint bindingState;
+    }
+
+    mapping (address => uint) private actorIndex;
+    uint private actorCount = 1;
+
+    mapping (address => uint) private caseIndex;
+    uint private caseCount = 1;
+
+    // caseIndex => roleIndex => actorIndex
+    mapping (uint => mapping (uint => BindingInfo)) private roleBindingState;
+
+    // actorIndex => acceptedRoleIndexMask
+    mapping (uint => uint) private actorRoles;
+
+    constructor(address _registry, address _policy, address _taskRoleAdr) public {
+        policyAdr = _policy;
+        taskRoleAdr = _taskRoleAdr;
+        registry = _registry;
+    }
+
+    function roleState (uint role, address pCase) public view returns(uint) {
+        return roleBindingState[caseIndex[pCase]][role].bindingState;
+    }
+
+    function nominateCaseCreator (uint rNominee, address nominee, address pCase) public {
+
+        require(actorCount == 1 && BindingPolicy(policyAdr).isCaseCreator(rNominee));
+
+        uint creatorIndex = actorIndex[nominee] = actorCount++;
+        uint pCaseIndex = caseIndex[pCase] = caseCount++;
+
+        roleBindingState[pCaseIndex][rNominee] = BindingInfo(creatorIndex, creatorIndex, 0, 0, 3);
+        actorRoles[creatorIndex] = uint(1) << rNominee;
+
+    }
+
+    function nominate (uint rNominator, uint rNominee, address nominator, address nominee, address pCase) public {
+
+        // Verify that @processCase is a child in the process hierarchy where root is the process-case provided when nominated the process-creator.
+        // This verification can be done via the RuntimeRegistry in order to keep the consistency between control-flow, worklist and binding-control.
+
+        uint iNominee = actorIndex[nominee];
+        uint iCase = caseIndex[pCase];
+        uint nomineeMask = uint(1) << rNominee;
+        uint iNominator = actorIndex[nominator];
+
+        // no actor can be BOUND/NOMINATED in pCase, the noinee cannot hold the rNominee role
+        // nominator actor must be binded to a role unless self-nomination is allowed
+        // the role of the nominator is allowed to nominate in the binding policy.
+        // the requested nomination fulfill the conditions defined in the policy by the instructions IN / NOT IN
+        require(roleBindingState[iCase][rNominee].bindingState == 0 && actorRoles[iNominee] & nomineeMask == 0 &&
+                (actorRoles[iNominator] & (uint(1) << rNominator) != 0 || (iNominator == 0 && rNominator == rNominee)) &&
+                (BindingPolicy(policyAdr).canNominate(rNominator, rNominee)) &&
+                (BindingPolicy(policyAdr).assertNConstraint(rNominator, rNominee, actorRoles[iNominee])));
+
+        // At this point, all the conditions were fulfilled because otherwise an exception was thrown reverting the transaction. Thus the binding is allowed.
+
+        // Verifying that all the indexes (for actors and process-cases) were already assigned to an index.
+        if(iCase == 0)
+            iCase = caseIndex[pCase] = caseCount++;
+        if(iNominee == 0)
+            iNominee = actorIndex[nominee] = actorCount++;
+        if(iNominator == 0)
+            iNominator = iNominee;
+
+        // Binding the role and updating the state as NOMINATED(2) or BOUND(3) depending on the nomination require endorsement or not.
+        uint state = BindingPolicy(policyAdr).requireNEndorsement(rNominator, rNominee) ? 2 : 3;
+
+        roleBindingState[iCase][rNominee] = BindingInfo (iNominator, iNominee, 0, 0, state);
+        if(state == 3)
+            actorRoles[iNominee] |= nomineeMask;
+    }
+
+    function voteN (uint rNominator, uint rNominee, uint rEndorser, address endorser, address pCase, bool isAccepted) public returns(uint) {
+        //require(runtimeRegistry == msg.sender);
+
+        uint iCase = caseIndex[pCase];
+        BindingInfo memory roleVState = roleBindingState[iCase][rNominee];
+
+        // A nomination to endorse must be in NOMINATED state
+        // The endorser must be nominated before (state BOUND) unless the endorser is the nominee accepting the nomination.
+        require(roleVState.bindingState == 2 &&
+                (actorRoles[actorIndex[endorser]] & (uint(1) << rEndorser) != 0 || rEndorser == rNominee && roleVState.nominee == actorIndex[endorser]));
+
+        // This function is responsible to evaluate the endorsment.
+        // An exception reverting the transaction is thwown in case of any invalid operation (e.g wrong endorser).
+        // Thus, this function only returns if the endorsement is performed.
+        uint state = BindingPolicy(policyAdr).assertNVote(rNominator, rNominee, rEndorser, roleVState.endorsedBy, roleVState.rejectedBy, isAccepted);
+
+        // The storage is only updated if the endorsment is valid and thus performed.
+        roleBindingState[iCase][rNominee].bindingState = state;
+        updateVoteMask(iCase, rNominee, uint(1) << rEndorser, isAccepted);
+        if (state == 0 || state == 3) {
+            roleBindingState[iCase][rNominee].endorsedBy = roleBindingState[iCase][rNominee].rejectedBy = 0;
+            if (state == 3)
+                actorRoles[roleVState.nominee] |= ((uint(1) << rNominee));
+        }
+        return state;
+    }
+
+    function release (uint rNominator, uint rNominee, address nominator, address pCase) public {
+        //require(runtimeRegistry == msg.sender);
+
+        uint iCase = caseIndex[pCase];
+
+        BindingInfo memory roleRState = roleBindingState[iCase][rNominee];
+
+        // The endorser and the processCase address must be nominated before.
+        // Validating the rNomiator is allowed to release rNominee.
+        // Validating the release is not restricted by a binding constraint.
+        require(roleRState.bindingState == 3 && actorRoles[actorIndex[nominator]] & (uint(1) << rNominator) != 0 &&
+                (BindingPolicy(policyAdr).canRelease(rNominator, rNominee)) &&
+                (BindingPolicy(policyAdr).assertRConstraint(rNominator, rNominee, actorRoles[roleRState.nominee])));
+
+        // Unbinding the role and updating the state as UNBINDING or UNBINDED depending on the dismisses require endorsement or not.
+        if(!BindingPolicy(policyAdr).requireREndorsement(rNominator, rNominee)) {
+            roleBindingState[iCase][rNominee].bindingState = 0;
+            actorRoles[roleRState.nominee] &= ~(uint(1) << rNominee);
+        }
+        else
+           roleBindingState[iCase][rNominee].bindingState = 1;
+    }
+
+    function voteR (uint rNominator, uint rNominee, uint rEndorser, address endorser, address pCase, bool isAccepted) public returns(uint) {
+        // require(runtimeRegistry == msg.sender);
+
+        uint iCase = caseIndex[pCase];
+        BindingInfo memory roleVRState = roleBindingState[iCase][rNominee];
+
+        // A release to vote must be in RELEASING state
+        // The endorsed involved in the vote and the processCase address must be nominated before.
+        require(roleVRState.bindingState == 1 && actorRoles[actorIndex[endorser]] & (uint(1) << rEndorser) != 0);
+
+        // This function is responsible to evaluate the endorsment.
+        // An exception reverting the transaction is thwown in case of any invalid operation (e.g wrong endorser).
+        // Thus, that function only returns if the endorsement can be performed.
+        uint state = BindingPolicy(policyAdr).assertRVote(rNominator, rNominee, rEndorser, roleVRState.endorsedBy, roleVRState.rejectedBy, isAccepted);
+
+        roleBindingState[iCase][rNominee].bindingState = state;
+        updateVoteMask(iCase, rNominee, uint(1) << rEndorser, isAccepted);
+        if (state == 0 || state == 3) {
+            roleBindingState[iCase][rNominee].endorsedBy = roleBindingState[iCase][rNominee].rejectedBy = 0;
+            if (state == 0)
+                actorRoles[roleVRState.nominee] &= ~(uint(1) << rNominee);
+        }
+        return state;
+    }
+
+
+    function canPerform(address actor, address pCase, uint taskIndex) public view returns(bool) {
+        bytes32 pId = ControlFlow(registry).bundleFor(pCase);
+        uint tRole = ControlFlow(taskRoleAdr).getRoleFromTask(taskIndex, pId);
+        uint iCase = caseIndex[pCase];
+        while(roleBindingState[iCase][tRole].bindingState != 3) {
+            pCase = ControlFlow(pCase).findParent();
+            if(pCase == 0)
+                break;
+            iCase = caseIndex[pCase];
+        }
+        return actorIndex[actor] > 0 && roleBindingState[iCase][tRole].nominee == actorIndex[actor];
+    }
+
+    function updateVoteMask(uint iCase, uint rNominee, uint endorserMask, bool isAccepted) private {
+        if (isAccepted)
+            roleBindingState[iCase][rNominee].endorsedBy |= endorserMask;
+        else
+            roleBindingState[iCase][rNominee].rejectedBy |= endorserMask;
+    }
+}
+pragma solidity ^0.4.25;
+
+contract BindingPolicy_Contract {
+
+    function isCaseCreator(uint roleIndex) public pure returns(bool) {
+        return 2 & (uint(1) << roleIndex) == 2;
+    }
+
+    function canNominate (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nomineeMask = uint(1) << rNominee;
+        return false;
+    }
+
+    function assertNConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return true;
+    }
+
+    function requireNEndorsement (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return false;
+    }
+
+    function assertNVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint) {
+        uint endorserMask = uint(1) << rEndorser;
+        require((endorsedBy | rejectedBy) & endorserMask == 0);
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        endorsedBy |= endorserMask;
+        rejectedBy |= endorserMask;
+        return 2;
+    }
+
+    function canRelease (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nomineeMask = uint(1) << rNominee;
+        return false;
+    }
+
+    function assertRConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return true;
+    }
+
+    function requireREndorsement (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return false;
+    }
+
+    function assertRVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint) {
+        uint endorserMask = uint(1) << rEndorser;
+        require((endorsedBy | rejectedBy) & endorserMask == 0);
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        endorsedBy |= endorserMask;
+        rejectedBy |= endorserMask;
+        return 2;
+    }
+
+}
+....................................................................
+POLICY CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+Policy CREATED and RUNNING at 0xf6dcda4b9b4d1831959aba21a195b83e0d146c44
+GAS USED:  145207
+Policy Id:  6354a3b0b4a4ba3408ef7c9c
+Role's indexes:  Map { 'User' => 1 }
+.............................................
+----------------------------------------------------------------------------------------------
+POST /resources/policy 200 5843.970 ms - 105
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+OPTIONS /resources/task-role 204 0.096 ms - 0
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+contract TaskRoleContract_Contract {
+
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint) {
+        if (processId == '6354a23bb4a4ba3408ef7c9b') {
+            uint[1] memory I6354a23bb4a4ba3408ef7c9b = [uint(0)];
+            if(taskIndex < 1)
+                return I6354a23bb4a4ba3408ef7c9b[taskIndex];
+        }
+        return 0;
+    }
+}
+TaskRoleMap CREATED and RUNNING at 0x44bc60dec74bfa2a740b88c2cd2a8a0a03fd262c
+GAS USED:  115447
+Repo Id:  6354a489b4a4ba3408ef7c9d
+----------------------------------------------------------------------------------------------
+POST /resources/task-role 200 5129.662 ms - 105
+
+
+
+
+
+
+
+OPTIONS /models/6354a23bb4a4ba3408ef7c9b 204 0.405 ms - 0
+TRYING TO CREATE INSTANCE OF CONTRACT:  Process_0
+BindingAccessControl Contract DEPLOYED and RUNNING at 0x41c0d3bc6e55c8ecab48b9274f9a5b9c18fcfe83
+Gas Used:  1144688
+....................................................................
+Root Process Contract DEPLOYED and RUNNING !!! AT ADDRESS:  0xd6dbd49a73890ebe619079391b6463137af635a7
+GAS USED:  464920
+....................................................................
+Case-creator nominated
+----------------------------------------------------------------------------------------------
+POST /models/6354a23bb4a4ba3408ef7c9b 200 9876.909 ms - 239
+
+
+
+
+
+QUERYING ALL ACTIVE CONTRACTS
+{ id: '6354a23bb4a4ba3408ef7c9b',
+  name: 'Process_0',
+  address: '0xd6dbd49a73890ebe619079391b6463137af635a7' }
+GET /processes/ 200 1604.096 ms - 109
+
+
+
+
+
+QUERYING ACTIVATION FOR CONTRACT: 0xd6dbd49a73890ebe619079391b6463137af635a7
+CHECKING STARTED ELEMENTS
+No started elements ...
+----------------------------------------------------------------------------------------------
+GET /processes/0xd6dbd49a73890ebe619079391b6463137af635a7 200 3421.344 ms - 2903
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+GET /models 304 758.365 ms - -
+OPTIONS /models/6354a23bb4a4ba3408ef7c9b 204 0.168 ms - 0
+TRYING TO CREATE INSTANCE OF CONTRACT:  Process_0
+BindingAccessControl Contract DEPLOYED and RUNNING at 0x89316090cf7fb5e90b50d59dad9abedb8f27b516
+Gas Used:  1144688
+....................................................................
+Root Process Contract DEPLOYED and RUNNING !!! AT ADDRESS:  0x11ce610a312d59b3e868e4e5e83f6dc5ed3bdc03
+GAS USED:  449920
+....................................................................
+Case-creator nominated
+----------------------------------------------------------------------------------------------
+POST /models/6354a23bb4a4ba3408ef7c9b 200 10716.451 ms - 239
+QUERYING ALL ACTIVE CONTRACTS
+{ id: '6354a23bb4a4ba3408ef7c9b',
+  name: 'Process_0',
+  address: '0x11ce610a312d59b3e868e4e5e83f6dc5ed3bdc03' }
+{ id: '6354a23bb4a4ba3408ef7c9b',
+  name: 'Process_0',
+  address: '0xd6dbd49a73890ebe619079391b6463137af635a7' }
+GET /processes/ 200 2394.247 ms - 217
+QUERYING ACTIVATION FOR CONTRACT: 0x11ce610a312d59b3e868e4e5e83f6dc5ed3bdc03
+CHECKING STARTED ELEMENTS
+No started elements ...
+----------------------------------------------------------------------------------------------
+GET /processes/0x11ce610a312d59b3e868e4e5e83f6dc5ed3bdc03 200 3188.034 ms - 2903
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GENERATING SMART CONTRACTS FROM PROCESS MODEL ...
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+import "AbstractFactory";
+import "AbstractProcess";
+import "AbstractRegistry";
+
+contract Invoice_Handling_Factory is AbstractFactory {
+    function newInstance(address parent, address processRegistry) public returns(address) {
+        Invoice_Handling_Contract newContract = new Invoice_Handling_Contract(parent, worklist, processRegistry);
+        return newContract;
+    }
+
+    function startInstanceExecution(address processAddress) public {
+        Invoice_Handling_Contract(processAddress).startExecution();
+    }
+}
+
+
+contract Invoice_Handling_Contract is AbstractProcess {
+
+    uint public marking = uint(2);
+    uint public startedActivities = 0;
+
+
+    // Process Variables
+    bool accepted;
+    function Invoice_Handling_Contract(address _parent, address _worklist, address _processRegistry) public AbstractProcess(_parent, _worklist, _processRegistry) {
+    }
+
+    function startExecution() public {
+        require(marking == uint(2) && startedActivities == 0);
+        step(uint(2), 0);
+    }
+
+    function handleEvent(bytes32 code, bytes32 eventType, uint _instanceIndex, bool isInstanceCompleted) public {
+        // Process without calls to external contracts.
+        // No events to catch !!!
+    }
+
+    function killProcess() public {
+        (marking, startedActivities) = killProcess(0, marking, startedActivities);
+    }
+
+    function killProcess(uint processElementIndex, uint tmpMarking, uint tmpStartedActivities) internal returns(uint, uint) {
+        if(processElementIndex == 0)
+            tmpMarking = tmpStartedActivities = 0;
+        return (tmpMarking, tmpStartedActivities);
+    }
+
+    function broadcastSignal() public {
+        var (tmpMarking, tmpStartedActivities) = broadcastSignal(marking, startedActivities, 0);
+        step(tmpMarking, tmpStartedActivities);
+    }
+
+    function broadcastSignal(uint tmpMarking, uint tmpStartedActivities, uint sourceChild) internal returns(uint, uint) {
+        return (tmpMarking, tmpStartedActivities);
+    }
+
+
+    function Issue_Invoice_complete(uint elementIndex) external {
+        var (tmpMarking, tmpStartedActivities) = (marking, startedActivities);
+        if(elementIndex == uint(1)) {
+            require(msg.sender == worklist && tmpStartedActivities & uint(2) != 0);
+            step(tmpMarking | uint(4), tmpStartedActivities & uint(~2));
+            return;
+        }
+    }
+    function Approve_Invoice_complete(uint elementIndex, bool _accepted) external {
+        var (tmpMarking, tmpStartedActivities) = (marking, startedActivities);
+        if(elementIndex == uint(2)) {
+            require(msg.sender == worklist && tmpStartedActivities & uint(4) != 0);
+           {accepted = _accepted;}
+            step(tmpMarking | uint(16), tmpStartedActivities & uint(~4));
+            return;
+        }
+    }
+    function Fix_Invoice_complete(uint elementIndex) external {
+        var (tmpMarking, tmpStartedActivities) = (marking, startedActivities);
+        if(elementIndex == uint(6)) {
+            require(msg.sender == worklist && tmpStartedActivities & uint(64) != 0);
+            step(tmpMarking | uint(128), tmpStartedActivities & uint(~64));
+            return;
+        }
+    }
+
+
+    function step(uint tmpMarking, uint tmpStartedActivities) internal {
+        while (true) {
+            if (tmpMarking & uint(2) != 0) {
+                Invoice_Handling_AbstractWorlist(worklist).Issue_Invoice_start(1);
+                tmpMarking &= uint(~2);
+                tmpStartedActivities |= uint(2);
+                continue;
+            }
+            if (tmpMarking & uint(8) != 0) {
+                Invoice_Handling_AbstractWorlist(worklist).Approve_Invoice_start(2);
+                tmpMarking &= uint(~8);
+                tmpStartedActivities |= uint(4);
+                continue;
+            }
+            if (tmpMarking & uint(132) != 0) {
+                tmpMarking &= uint(~132);
+                tmpMarking |= uint(8);
+                continue;
+            }
+            if (tmpMarking & uint(16) != 0) {
+                tmpMarking &= uint(~16);
+if (accepted)                tmpMarking |= uint(32);
+else                 tmpMarking |= uint(64);
+                continue;
+            }
+            if (tmpMarking & uint(32) != 0) {
+                tmpMarking &= uint(~32);
+                if (tmpMarking & uint(254) == 0 && tmpStartedActivities & uint(70) == 0) {
+                    (tmpMarking, tmpStartedActivities) = propagateEvent("Invoice_Handling_Completed", "Default", tmpMarking, tmpStartedActivities, uint(32));
+                }
+                continue;
+            }
+            if (tmpMarking & uint(64) != 0) {
+                Invoice_Handling_AbstractWorlist(worklist).Fix_Invoice_start(6);
+                tmpMarking &= uint(~64);
+                tmpStartedActivities |= uint(64);
+                continue;
+            }
+            break;
+        }
+        if(marking != 0 || startedActivities != 0) {
+            marking = tmpMarking;
+            startedActivities = tmpStartedActivities;
+        }
+    }
+
+    function getWorklistAddress() external view returns(address) {
+        return worklist;
+    }
+
+    function getInstanceIndex() external view returns(uint) {
+        return instanceIndex;
+    }
+
+}
+pragma solidity ^0.4.25;
+
+import "AbstractWorklist";
+
+contract Invoice_Handling_AbstractWorlist {
+
+      function Issue_Invoice_start(uint) external;
+      function Approve_Invoice_start(uint) external;
+      function Fix_Invoice_start(uint) external;
+
+      function Issue_Invoice_complete(uint) external;
+      function Approve_Invoice_complete(uint, bool) external;
+      function Fix_Invoice_complete(uint) external;
+
+}
+
+contract Invoice_Handling_Worklist is AbstractWorklist {
+
+    // Events with the information to include in the Log when a workitem is registered
+    event Issue_Invoice_Requested(uint);
+    event Approve_Invoice_Requested(uint);
+    event Fix_Invoice_Requested(uint);
+
+    function Issue_Invoice_start(uint elementIndex) external {
+        workitems.push(Workitem(elementIndex, msg.sender));
+        Issue_Invoice_Requested(workitems.length - 1);
+    }
+    function Approve_Invoice_start(uint elementIndex) external {
+        workitems.push(Workitem(elementIndex, msg.sender));
+        Approve_Invoice_Requested(workitems.length - 1);
+    }
+    function Fix_Invoice_start(uint elementIndex) external {
+        workitems.push(Workitem(elementIndex, msg.sender));
+        Fix_Invoice_Requested(workitems.length - 1);
+    }
+
+    function Issue_Invoice(uint workitemId) external {
+        require(workitemId < workitems.length && workitems[workitemId].processInstanceAddr != address(0) &&
+        canPerform(msg.sender, workitems[workitemId].processInstanceAddr, workitems[workitemId].elementIndex));
+        Invoice_Handling_AbstractWorlist(workitems[workitemId].processInstanceAddr).Issue_Invoice_complete(workitems[workitemId].elementIndex);
+        workitems[workitemId].processInstanceAddr = address(0);
+    }
+    function Approve_Invoice(uint workitemId, bool _accepted) external {
+        require(workitemId < workitems.length && workitems[workitemId].processInstanceAddr != address(0) &&
+        canPerform(msg.sender, workitems[workitemId].processInstanceAddr, workitems[workitemId].elementIndex));
+        Invoice_Handling_AbstractWorlist(workitems[workitemId].processInstanceAddr).Approve_Invoice_complete(workitems[workitemId].elementIndex, _accepted);
+        workitems[workitemId].processInstanceAddr = address(0);
+    }
+    function Fix_Invoice(uint workitemId) external {
+        require(workitemId < workitems.length && workitems[workitemId].processInstanceAddr != address(0) &&
+        canPerform(msg.sender, workitems[workitemId].processInstanceAddr, workitems[workitemId].elementIndex));
+        Invoice_Handling_AbstractWorlist(workitems[workitemId].processInstanceAddr).Fix_Invoice_complete(workitems[workitemId].elementIndex);
+        workitems[workitemId].processInstanceAddr = address(0);
+    }
+
+}
+
+....................................................................
+CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+....................................................................
+STARTING PROCESS MODEL REGISTRATION ...
+....................................................................
+UPDATING COMPILATION ARTIFACTS IN REPOSITORY ...
+Compilation artifacts of Invoice_Handling updated in repository with id 6354acab3cb4eb3218e4aad1
+....................................................................
+RELATING PARENT TO NESTED CHILDREN IN REGISTRY  ...
+QUERYING REGISTERED MODELS
+{ id: 6354a23bb4a4ba3408ef7c9b, name: 'Process_0' }
+{ id: 6354acab3cb4eb3218e4aad1, name: 'Invoice_Handling' }
+----------------------------------------------------------------------------------------------
+GET /models 200 1756.086 ms - 23258
+Invoice_Handling : 6354acab3cb4eb3218e4aad1 => (0), 6354acab3cb4eb3218e4aad1
+....................................................................
+DEPLOYING FACTORIES AND UPDATING PROCESS-FACTORY RELATION IN REGISTRY ...
+Invoice_Handling_Factory running at address 0x9a53994a20701906c5735f2ccc41c75acceb4c17
+Invoice_Handling_Factory registered SUCCESSFULLY in Process Registry
+....................................................................
+....................................................................
+DEPLOYONG WORKLIST CONTRACTS AND UPDATING PROCESS REGISTRY ...
+Invoice_Handling_Worklist running at address 0x845428fcfa7b2c24e701e80347e2aa166bac8476
+
+Invoice_Handling_Worklist registered SUCCESSFULLY in Process Registry
+....................................................................
+----------------------------------------------------------------------------------------------
+POST /models 200 36828.943 ms - 17037
+QUERYING REGISTERED MODELS
+
+
+{ id: 6354a23bb4a4ba3408ef7c9b, name: 'Process_0' }
+{ id: 6354acab3cb4eb3218e4aad1, name: 'Invoice_Handling' }
+----------------------------------------------------------------------------------------------
+GET /models 200 1538.603 ms - 23258
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+OPTIONS /resources/policy 204 0.185 ms - 0
+GENERATING AND DEPLOYING BINDING POLICY CONTRACTS ...
+GENERATING SMART CONTRACTS FROM BINDING POLICY ...
+Success, the policy is consistent. Role precedence:
+0: Customer
+1: Supplier
+...............................................................
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+// Function assertVote will return 0 -> UNBOUND, 1 -> NOMINATED, 2 -> RELEASING, 3 -> BOUND
+contract BindingPolicy {
+
+    function isCaseCreator(uint roleIndex) public pure returns(bool);
+    function canNominate (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertNConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool);
+    function requireNEndorsement (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertNVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint);
+
+    function canRelease (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertRConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool);
+    function requireREndorsement (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertRVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint);
+}
+
+contract ControlFlow {
+    function findParent() public view returns(address);
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint);
+    function bundleFor(address pCase) external view returns(bytes32);
+}
+
+
+contract BindingAccessControl {
+
+    address private policyAdr;
+    address private taskRoleAdr;
+    address private registry;
+
+    struct BindingInfo {
+        uint nominator;
+        uint nominee;
+        uint endorsedBy;
+        uint rejectedBy;
+
+        // 0- UNBOUND, 1- RELEASING, 2- NOMINATED, 3- BOUND
+        uint bindingState;
+    }
+
+    mapping (address => uint) private actorIndex;
+    uint private actorCount = 1;
+
+    mapping (address => uint) private caseIndex;
+    uint private caseCount = 1;
+
+    // caseIndex => roleIndex => actorIndex
+    mapping (uint => mapping (uint => BindingInfo)) private roleBindingState;
+
+    // actorIndex => acceptedRoleIndexMask
+    mapping (uint => uint) private actorRoles;
+
+    constructor(address _registry, address _policy, address _taskRoleAdr) public {
+        policyAdr = _policy;
+        taskRoleAdr = _taskRoleAdr;
+        registry = _registry;
+    }
+
+    function roleState (uint role, address pCase) public view returns(uint) {
+        return roleBindingState[caseIndex[pCase]][role].bindingState;
+    }
+
+    function nominateCaseCreator (uint rNominee, address nominee, address pCase) public {
+
+        require(actorCount == 1 && BindingPolicy(policyAdr).isCaseCreator(rNominee));
+
+        uint creatorIndex = actorIndex[nominee] = actorCount++;
+        uint pCaseIndex = caseIndex[pCase] = caseCount++;
+
+        roleBindingState[pCaseIndex][rNominee] = BindingInfo(creatorIndex, creatorIndex, 0, 0, 3);
+        actorRoles[creatorIndex] = uint(1) << rNominee;
+
+    }
+
+    function nominate (uint rNominator, uint rNominee, address nominator, address nominee, address pCase) public {
+
+        // Verify that @processCase is a child in the process hierarchy where root is the process-case provided when nominated the process-creator.
+        // This verification can be done via the RuntimeRegistry in order to keep the consistency between control-flow, worklist and binding-control.
+
+        uint iNominee = actorIndex[nominee];
+        uint iCase = caseIndex[pCase];
+        uint nomineeMask = uint(1) << rNominee;
+        uint iNominator = actorIndex[nominator];
+
+        // no actor can be BOUND/NOMINATED in pCase, the noinee cannot hold the rNominee role
+        // nominator actor must be binded to a role unless self-nomination is allowed
+        // the role of the nominator is allowed to nominate in the binding policy.
+        // the requested nomination fulfill the conditions defined in the policy by the instructions IN / NOT IN
+        require(roleBindingState[iCase][rNominee].bindingState == 0 && actorRoles[iNominee] & nomineeMask == 0 &&
+                (actorRoles[iNominator] & (uint(1) << rNominator) != 0 || (iNominator == 0 && rNominator == rNominee)) &&
+                (BindingPolicy(policyAdr).canNominate(rNominator, rNominee)) &&
+                (BindingPolicy(policyAdr).assertNConstraint(rNominator, rNominee, actorRoles[iNominee])));
+
+        // At this point, all the conditions were fulfilled because otherwise an exception was thrown reverting the transaction. Thus the binding is allowed.
+
+        // Verifying that all the indexes (for actors and process-cases) were already assigned to an index.
+        if(iCase == 0)
+            iCase = caseIndex[pCase] = caseCount++;
+        if(iNominee == 0)
+            iNominee = actorIndex[nominee] = actorCount++;
+        if(iNominator == 0)
+            iNominator = iNominee;
+
+        // Binding the role and updating the state as NOMINATED(2) or BOUND(3) depending on the nomination require endorsement or not.
+        uint state = BindingPolicy(policyAdr).requireNEndorsement(rNominator, rNominee) ? 2 : 3;
+
+        roleBindingState[iCase][rNominee] = BindingInfo (iNominator, iNominee, 0, 0, state);
+        if(state == 3)
+            actorRoles[iNominee] |= nomineeMask;
+    }
+
+    function voteN (uint rNominator, uint rNominee, uint rEndorser, address endorser, address pCase, bool isAccepted) public returns(uint) {
+        //require(runtimeRegistry == msg.sender);
+
+        uint iCase = caseIndex[pCase];
+        BindingInfo memory roleVState = roleBindingState[iCase][rNominee];
+
+        // A nomination to endorse must be in NOMINATED state
+        // The endorser must be nominated before (state BOUND) unless the endorser is the nominee accepting the nomination.
+        require(roleVState.bindingState == 2 &&
+                (actorRoles[actorIndex[endorser]] & (uint(1) << rEndorser) != 0 || rEndorser == rNominee && roleVState.nominee == actorIndex[endorser]));
+
+        // This function is responsible to evaluate the endorsment.
+        // An exception reverting the transaction is thwown in case of any invalid operation (e.g wrong endorser).
+        // Thus, this function only returns if the endorsement is performed.
+        uint state = BindingPolicy(policyAdr).assertNVote(rNominator, rNominee, rEndorser, roleVState.endorsedBy, roleVState.rejectedBy, isAccepted);
+
+        // The storage is only updated if the endorsment is valid and thus performed.
+        roleBindingState[iCase][rNominee].bindingState = state;
+        updateVoteMask(iCase, rNominee, uint(1) << rEndorser, isAccepted);
+        if (state == 0 || state == 3) {
+            roleBindingState[iCase][rNominee].endorsedBy = roleBindingState[iCase][rNominee].rejectedBy = 0;
+            if (state == 3)
+                actorRoles[roleVState.nominee] |= ((uint(1) << rNominee));
+        }
+        return state;
+    }
+
+    function release (uint rNominator, uint rNominee, address nominator, address pCase) public {
+        //require(runtimeRegistry == msg.sender);
+
+        uint iCase = caseIndex[pCase];
+
+        BindingInfo memory roleRState = roleBindingState[iCase][rNominee];
+
+        // The endorser and the processCase address must be nominated before.
+        // Validating the rNomiator is allowed to release rNominee.
+        // Validating the release is not restricted by a binding constraint.
+        require(roleRState.bindingState == 3 && actorRoles[actorIndex[nominator]] & (uint(1) << rNominator) != 0 &&
+                (BindingPolicy(policyAdr).canRelease(rNominator, rNominee)) &&
+                (BindingPolicy(policyAdr).assertRConstraint(rNominator, rNominee, actorRoles[roleRState.nominee])));
+
+        // Unbinding the role and updating the state as UNBINDING or UNBINDED depending on the dismisses require endorsement or not.
+        if(!BindingPolicy(policyAdr).requireREndorsement(rNominator, rNominee)) {
+            roleBindingState[iCase][rNominee].bindingState = 0;
+            actorRoles[roleRState.nominee] &= ~(uint(1) << rNominee);
+        }
+        else
+           roleBindingState[iCase][rNominee].bindingState = 1;
+    }
+
+    function voteR (uint rNominator, uint rNominee, uint rEndorser, address endorser, address pCase, bool isAccepted) public returns(uint) {
+        // require(runtimeRegistry == msg.sender);
+
+        uint iCase = caseIndex[pCase];
+        BindingInfo memory roleVRState = roleBindingState[iCase][rNominee];
+
+        // A release to vote must be in RELEASING state
+        // The endorsed involved in the vote and the processCase address must be nominated before.
+        require(roleVRState.bindingState == 1 && actorRoles[actorIndex[endorser]] & (uint(1) << rEndorser) != 0);
+
+        // This function is responsible to evaluate the endorsment.
+        // An exception reverting the transaction is thwown in case of any invalid operation (e.g wrong endorser).
+        // Thus, that function only returns if the endorsement can be performed.
+        uint state = BindingPolicy(policyAdr).assertRVote(rNominator, rNominee, rEndorser, roleVRState.endorsedBy, roleVRState.rejectedBy, isAccepted);
+
+        roleBindingState[iCase][rNominee].bindingState = state;
+        updateVoteMask(iCase, rNominee, uint(1) << rEndorser, isAccepted);
+        if (state == 0 || state == 3) {
+            roleBindingState[iCase][rNominee].endorsedBy = roleBindingState[iCase][rNominee].rejectedBy = 0;
+            if (state == 0)
+                actorRoles[roleVRState.nominee] &= ~(uint(1) << rNominee);
+        }
+        return state;
+    }
+
+
+    function canPerform(address actor, address pCase, uint taskIndex) public view returns(bool) {
+        bytes32 pId = ControlFlow(registry).bundleFor(pCase);
+        uint tRole = ControlFlow(taskRoleAdr).getRoleFromTask(taskIndex, pId);
+        uint iCase = caseIndex[pCase];
+        while(roleBindingState[iCase][tRole].bindingState != 3) {
+            pCase = ControlFlow(pCase).findParent();
+            if(pCase == 0)
+                break;
+            iCase = caseIndex[pCase];
+        }
+        return actorIndex[actor] > 0 && roleBindingState[iCase][tRole].nominee == actorIndex[actor];
+    }
+
+    function updateVoteMask(uint iCase, uint rNominee, uint endorserMask, bool isAccepted) private {
+        if (isAccepted)
+            roleBindingState[iCase][rNominee].endorsedBy |= endorserMask;
+        else
+            roleBindingState[iCase][rNominee].rejectedBy |= endorserMask;
+    }
+}
+pragma solidity ^0.4.25;
+
+contract BindingPolicy_Contract {
+
+    function isCaseCreator(uint roleIndex) public pure returns(bool) {
+        return 2 & (uint(1) << roleIndex) == 2;
+    }
+
+    function canNominate (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nomineeMask = uint(1) << rNominee;
+        if (rNominator == 1)
+            return nomineeMask & 4 != 0;
+        return false;
+    }
+
+    function assertNConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return true;
+    }
+
+    function requireNEndorsement (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return false;
+    }
+
+    function assertNVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint) {
+        uint endorserMask = uint(1) << rEndorser;
+        require((endorsedBy | rejectedBy) & endorserMask == 0);
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        endorsedBy |= endorserMask;
+        rejectedBy |= endorserMask;
+        return 2;
+    }
+
+    function canRelease (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nomineeMask = uint(1) << rNominee;
+        return false;
+    }
+
+    function assertRConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return true;
+    }
+
+    function requireREndorsement (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return false;
+    }
+
+    function assertRVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint) {
+        uint endorserMask = uint(1) << rEndorser;
+        require((endorsedBy | rejectedBy) & endorserMask == 0);
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        endorsedBy |= endorserMask;
+        rejectedBy |= endorserMask;
+        return 2;
+    }
+
+}
+....................................................................
+POLICY CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+Policy CREATED and RUNNING at 0x6f59a3437a49defe7e08daa7a71a183a107bb66a
+GAS USED:  159859
+Policy Id:  6354ad393cb4eb3218e4aad2
+Role's indexes:  Map { 'Customer' => 1, 'Supplier' => 2 }
+.............................................
+----------------------------------------------------------------------------------------------
+POST /resources/policy 200 5469.452 ms - 105
+
+
+
+POST /models 200 30596.462 ms - 17037
+QUERYING REGISTERED MODELS
+{ id: 6354a23bb4a4ba3408ef7c9b, name: 'Process_0' }
+{ id: 6354acab3cb4eb3218e4aad1, name: 'Invoice_Handling' }
+{ id: 6354af683cb4eb3218e4aad5, name: 'Invoice_Handling' }
+
+
+
+....................................................................
+POLICY CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+Policy CREATED and RUNNING at 0xbb206e8350abcbdeaf704172da34b3ea79c993dd
+GAS USED:  311421
+Policy Id:  6354afbf3cb4eb3218e4aad6
+Role's indexes:  Map {
+  'Customer' => 1,
+  'Supplier' => 2,
+  'Candidate' => 3,
+  'Carrier' => 4,
+  'Invoicer' => 5,
+  'Invoicee' => 6 }
+.............................................
+----------------------------------------------------------------------------------------------
+POST /resources/policy 200 5658.925 ms - 105
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+OPTIONS /resources/task-role 204 0.238 ms - 0
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+contract TaskRoleContract_Contract {
+
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint) {
+        if (processId == '6354af683cb4eb3218e4aad5') {
+            uint[7] memory I6354af683cb4eb3218e4aad5 = [uint(0), 5, 6, 0, 0, 0, 5];
+            if(taskIndex < 7)
+                return I6354af683cb4eb3218e4aad5[taskIndex];
+        }
+        return 0;
+    }
+}
+TaskRoleMap CREATED and RUNNING at 0x07a4207eed2520c64d0b8f909c503e87db05af22
+GAS USED:  127429
+Repo Id:  6354aff83cb4eb3218e4aad7
+----------------------------------------------------------------------------------------------
+POST /resources/task-role 200 4931.390 ms - 105
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+OPTIONS /models/6354af683cb4eb3218e4aad5 204 0.230 ms - 0
+TRYING TO CREATE INSTANCE OF CONTRACT:  Invoice_Handling
+BindingAccessControl Contract DEPLOYED and RUNNING at 0xfdb03b6ab9827d01bb50ca2fee9a4fd257d28335
+Gas Used:  1144688
+....................................................................
+Root Process Contract DEPLOYED and RUNNING !!! AT ADDRESS:  0x1e31718629cb3d1d976391cf43aa8bdcd7876a1d
+GAS USED:  706502
+....................................................................
+Case-creator nominated
+----------------------------------------------------------------------------------------------
+POST /models/6354af683cb4eb3218e4aad5 200 10839.587 ms - 239
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+QUERYING ALL ACTIVE CONTRACTS
+{ id: '6354a23bb4a4ba3408ef7c9b',
+  name: 'Process_0',
+  address: '0xd6dbd49a73890ebe619079391b6463137af635a7' }
+{ id: '6354a23bb4a4ba3408ef7c9b',
+  name: 'Process_0',
+  address: '0x11ce610a312d59b3e868e4e5e83f6dc5ed3bdc03' }
+{ id: '6354af683cb4eb3218e4aad5',
+  name: 'Invoice_Handling',
+  address: '0x1e31718629cb3d1d976391cf43aa8bdcd7876a1d' }
+GET /processes/ 200 3627.138 ms - 332
+
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+QUERYING ACTIVATION FOR CONTRACT: 0x1e31718629cb3d1d976391cf43aa8bdcd7876a1d
+CHECKING STARTED ELEMENTS
+Element ID:  Task_0e5xumt
+Element Name:  Issue_Invoice
+Input Parameters:  []
+bundleId:  6354af683cb4eb3218e4aad5
+pCases:  [ '0x1e31718629cb3d1d976391cf43aa8bdcd7876a1d' ]
+hrefs:  [ '/workitems/0x25ec39a090cca2f765c6e121c804e7cc5128d5d7/0' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0x1e31718629cb3d1d976391cf43aa8bdcd7876a1d 200 4080.373 ms - 8695
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+OPTIONS /workitems/0x25ec39a090cca2f765c6e121c804e7cc5128d5d7/0 204 0.160 ms - 0
+WANT TO EXECUTE TASK: Issue_Invoice, ON WORKLIST: 0x25ec39a090cca2f765c6e121c804e7cc5128d5d7
+ERROR: Error: VM Exception while processing transaction: revert
+----------------------------------------------------------------------------------------------
+POST /workitems/0x25ec39a090cca2f765c6e121c804e7cc5128d5d7/0 400 2087.073 ms - 5
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+OPTIONS /resources/policy 204 0.326 ms - 0
+GENERATING AND DEPLOYING BINDING POLICY CONTRACTS ...
+GENERATING SMART CONTRACTS FROM BINDING POLICY ...
+Success, the policy is consistent. Role precedence:
+0: Invoicee
+1: Supplier
+...............................................................
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+// Function assertVote will return 0 -> UNBOUND, 1 -> NOMINATED, 2 -> RELEASING, 3 -> BOUND
+contract BindingPolicy {
+
+    function isCaseCreator(uint roleIndex) public pure returns(bool);
+    function canNominate (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertNConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool);
+    function requireNEndorsement (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertNVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint);
+
+    function canRelease (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertRConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool);
+    function requireREndorsement (uint rNominator, uint rNominee) public pure returns(bool);
+    function assertRVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint);
+}
+
+contract ControlFlow {
+    function findParent() public view returns(address);
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint);
+    function bundleFor(address pCase) external view returns(bytes32);
+}
+
+
+contract BindingAccessControl {
+
+    address private policyAdr;
+    address private taskRoleAdr;
+    address private registry;
+
+    struct BindingInfo {
+        uint nominator;
+        uint nominee;
+        uint endorsedBy;
+        uint rejectedBy;
+
+        // 0- UNBOUND, 1- RELEASING, 2- NOMINATED, 3- BOUND
+        uint bindingState;
+    }
+
+    mapping (address => uint) private actorIndex;
+    uint private actorCount = 1;
+
+    mapping (address => uint) private caseIndex;
+    uint private caseCount = 1;
+
+    // caseIndex => roleIndex => actorIndex
+    mapping (uint => mapping (uint => BindingInfo)) private roleBindingState;
+
+    // actorIndex => acceptedRoleIndexMask
+    mapping (uint => uint) private actorRoles;
+
+    constructor(address _registry, address _policy, address _taskRoleAdr) public {
+        policyAdr = _policy;
+        taskRoleAdr = _taskRoleAdr;
+        registry = _registry;
+    }
+
+    function roleState (uint role, address pCase) public view returns(uint) {
+        return roleBindingState[caseIndex[pCase]][role].bindingState;
+    }
+
+    function nominateCaseCreator (uint rNominee, address nominee, address pCase) public {
+
+        require(actorCount == 1 && BindingPolicy(policyAdr).isCaseCreator(rNominee));
+
+        uint creatorIndex = actorIndex[nominee] = actorCount++;
+        uint pCaseIndex = caseIndex[pCase] = caseCount++;
+
+        roleBindingState[pCaseIndex][rNominee] = BindingInfo(creatorIndex, creatorIndex, 0, 0, 3);
+        actorRoles[creatorIndex] = uint(1) << rNominee;
+
+    }
+
+    function nominate (uint rNominator, uint rNominee, address nominator, address nominee, address pCase) public {
+
+        // Verify that @processCase is a child in the process hierarchy where root is the process-case provided when nominated the process-creator.
+        // This verification can be done via the RuntimeRegistry in order to keep the consistency between control-flow, worklist and binding-control.
+
+        uint iNominee = actorIndex[nominee];
+        uint iCase = caseIndex[pCase];
+        uint nomineeMask = uint(1) << rNominee;
+        uint iNominator = actorIndex[nominator];
+
+        // no actor can be BOUND/NOMINATED in pCase, the noinee cannot hold the rNominee role
+        // nominator actor must be binded to a role unless self-nomination is allowed
+        // the role of the nominator is allowed to nominate in the binding policy.
+        // the requested nomination fulfill the conditions defined in the policy by the instructions IN / NOT IN
+        require(roleBindingState[iCase][rNominee].bindingState == 0 && actorRoles[iNominee] & nomineeMask == 0 &&
+                (actorRoles[iNominator] & (uint(1) << rNominator) != 0 || (iNominator == 0 && rNominator == rNominee)) &&
+                (BindingPolicy(policyAdr).canNominate(rNominator, rNominee)) &&
+                (BindingPolicy(policyAdr).assertNConstraint(rNominator, rNominee, actorRoles[iNominee])));
+
+        // At this point, all the conditions were fulfilled because otherwise an exception was thrown reverting the transaction. Thus the binding is allowed.
+
+        // Verifying that all the indexes (for actors and process-cases) were already assigned to an index.
+        if(iCase == 0)
+            iCase = caseIndex[pCase] = caseCount++;
+        if(iNominee == 0)
+            iNominee = actorIndex[nominee] = actorCount++;
+        if(iNominator == 0)
+            iNominator = iNominee;
+
+        // Binding the role and updating the state as NOMINATED(2) or BOUND(3) depending on the nomination require endorsement or not.
+        uint state = BindingPolicy(policyAdr).requireNEndorsement(rNominator, rNominee) ? 2 : 3;
+
+        roleBindingState[iCase][rNominee] = BindingInfo (iNominator, iNominee, 0, 0, state);
+        if(state == 3)
+            actorRoles[iNominee] |= nomineeMask;
+    }
+
+    function voteN (uint rNominator, uint rNominee, uint rEndorser, address endorser, address pCase, bool isAccepted) public returns(uint) {
+        //require(runtimeRegistry == msg.sender);
+
+        uint iCase = caseIndex[pCase];
+        BindingInfo memory roleVState = roleBindingState[iCase][rNominee];
+
+        // A nomination to endorse must be in NOMINATED state
+        // The endorser must be nominated before (state BOUND) unless the endorser is the nominee accepting the nomination.
+        require(roleVState.bindingState == 2 &&
+                (actorRoles[actorIndex[endorser]] & (uint(1) << rEndorser) != 0 || rEndorser == rNominee && roleVState.nominee == actorIndex[endorser]));
+
+        // This function is responsible to evaluate the endorsment.
+        // An exception reverting the transaction is thwown in case of any invalid operation (e.g wrong endorser).
+        // Thus, this function only returns if the endorsement is performed.
+        uint state = BindingPolicy(policyAdr).assertNVote(rNominator, rNominee, rEndorser, roleVState.endorsedBy, roleVState.rejectedBy, isAccepted);
+
+        // The storage is only updated if the endorsment is valid and thus performed.
+        roleBindingState[iCase][rNominee].bindingState = state;
+        updateVoteMask(iCase, rNominee, uint(1) << rEndorser, isAccepted);
+        if (state == 0 || state == 3) {
+            roleBindingState[iCase][rNominee].endorsedBy = roleBindingState[iCase][rNominee].rejectedBy = 0;
+            if (state == 3)
+                actorRoles[roleVState.nominee] |= ((uint(1) << rNominee));
+        }
+        return state;
+    }
+
+    function release (uint rNominator, uint rNominee, address nominator, address pCase) public {
+        //require(runtimeRegistry == msg.sender);
+
+        uint iCase = caseIndex[pCase];
+
+        BindingInfo memory roleRState = roleBindingState[iCase][rNominee];
+
+        // The endorser and the processCase address must be nominated before.
+        // Validating the rNomiator is allowed to release rNominee.
+        // Validating the release is not restricted by a binding constraint.
+        require(roleRState.bindingState == 3 && actorRoles[actorIndex[nominator]] & (uint(1) << rNominator) != 0 &&
+                (BindingPolicy(policyAdr).canRelease(rNominator, rNominee)) &&
+                (BindingPolicy(policyAdr).assertRConstraint(rNominator, rNominee, actorRoles[roleRState.nominee])));
+
+        // Unbinding the role and updating the state as UNBINDING or UNBINDED depending on the dismisses require endorsement or not.
+        if(!BindingPolicy(policyAdr).requireREndorsement(rNominator, rNominee)) {
+            roleBindingState[iCase][rNominee].bindingState = 0;
+            actorRoles[roleRState.nominee] &= ~(uint(1) << rNominee);
+        }
+        else
+           roleBindingState[iCase][rNominee].bindingState = 1;
+    }
+
+    function voteR (uint rNominator, uint rNominee, uint rEndorser, address endorser, address pCase, bool isAccepted) public returns(uint) {
+        // require(runtimeRegistry == msg.sender);
+
+        uint iCase = caseIndex[pCase];
+        BindingInfo memory roleVRState = roleBindingState[iCase][rNominee];
+
+        // A release to vote must be in RELEASING state
+        // The endorsed involved in the vote and the processCase address must be nominated before.
+        require(roleVRState.bindingState == 1 && actorRoles[actorIndex[endorser]] & (uint(1) << rEndorser) != 0);
+
+        // This function is responsible to evaluate the endorsment.
+        // An exception reverting the transaction is thwown in case of any invalid operation (e.g wrong endorser).
+        // Thus, that function only returns if the endorsement can be performed.
+        uint state = BindingPolicy(policyAdr).assertRVote(rNominator, rNominee, rEndorser, roleVRState.endorsedBy, roleVRState.rejectedBy, isAccepted);
+
+        roleBindingState[iCase][rNominee].bindingState = state;
+        updateVoteMask(iCase, rNominee, uint(1) << rEndorser, isAccepted);
+        if (state == 0 || state == 3) {
+            roleBindingState[iCase][rNominee].endorsedBy = roleBindingState[iCase][rNominee].rejectedBy = 0;
+            if (state == 0)
+                actorRoles[roleVRState.nominee] &= ~(uint(1) << rNominee);
+        }
+        return state;
+    }
+
+
+    function canPerform(address actor, address pCase, uint taskIndex) public view returns(bool) {
+        bytes32 pId = ControlFlow(registry).bundleFor(pCase);
+        uint tRole = ControlFlow(taskRoleAdr).getRoleFromTask(taskIndex, pId);
+        uint iCase = caseIndex[pCase];
+        while(roleBindingState[iCase][tRole].bindingState != 3) {
+            pCase = ControlFlow(pCase).findParent();
+            if(pCase == 0)
+                break;
+            iCase = caseIndex[pCase];
+        }
+        return actorIndex[actor] > 0 && roleBindingState[iCase][tRole].nominee == actorIndex[actor];
+    }
+
+    function updateVoteMask(uint iCase, uint rNominee, uint endorserMask, bool isAccepted) private {
+        if (isAccepted)
+            roleBindingState[iCase][rNominee].endorsedBy |= endorserMask;
+        else
+            roleBindingState[iCase][rNominee].rejectedBy |= endorserMask;
+    }
+}
+pragma solidity ^0.4.25;
+
+contract BindingPolicy_Contract {
+
+    function isCaseCreator(uint roleIndex) public pure returns(bool) {
+        return 2 & (uint(1) << roleIndex) == 2;
+    }
+
+    function canNominate (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nomineeMask = uint(1) << rNominee;
+        if (rNominator == 1)
+            return nomineeMask & 4 != 0;
+        return false;
+    }
+
+    function assertNConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return true;
+    }
+
+    function requireNEndorsement (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return false;
+    }
+
+    function assertNVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint) {
+        uint endorserMask = uint(1) << rEndorser;
+        require((endorsedBy | rejectedBy) & endorserMask == 0);
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        endorsedBy |= endorserMask;
+        rejectedBy |= endorserMask;
+        return 2;
+    }
+
+    function canRelease (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nomineeMask = uint(1) << rNominee;
+        return false;
+    }
+
+    function assertRConstraint (uint rNominator, uint rNominee, uint nomineeRoles) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return true;
+    }
+
+    function requireREndorsement (uint rNominator, uint rNominee) public pure returns(bool) {
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        return false;
+    }
+
+    function assertRVote (uint rNominator, uint rNominee, uint rEndorser, uint endorsedBy, uint rejectedBy, bool isAccepted) public pure returns(uint) {
+        uint endorserMask = uint(1) << rEndorser;
+        require((endorsedBy | rejectedBy) & endorserMask == 0);
+        uint nominatorNomineeMask = (uint(1) << rNominator) | (uint(1) << rNominee);
+        endorsedBy |= endorserMask;
+        rejectedBy |= endorserMask;
+        return 2;
+    }
+
+}
+....................................................................
+POLICY CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+Policy CREATED and RUNNING at 0xd3ddcf0229a1f1df9a869e426b067709cacc3aac
+GAS USED:  159859
+Policy Id:  6354b3733cb4eb3218e4aad8
+Role's indexes:  Map { 'Invoicee' => 1, 'Supplier' => 2 }
+.............................................
+----------------------------------------------------------------------------------------------
+POST /resources/policy 200 5422.430 ms - 105
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+....................................................................
+POLICY CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+Policy CREATED and RUNNING at 0x47b043ba2bd50a538d5e170ebfaa04a27af6ea76
+GAS USED:  260228
+Policy Id:  6354b5693cb4eb3218e4aad9
+Role's indexes:  Map { 'Invoicer' => 1, 'Supplier' => 2, 'Invoicee' => 3 }
+.............................................
+----------------------------------------------------------------------------------------------
+POST /resources/policy 200 3966.389 ms - 105
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+OPTIONS /resources/task-role 204 0.226 ms - 0
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+contract TaskRoleContract_Contract {
+
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint) {
+        if (processId == '6354af683cb4eb3218e4aad5') {
+            uint[7] memory I6354af683cb4eb3218e4aad5 = [uint(0), 1, 3, 0, 0, 0, 1];
+            if(taskIndex < 7)
+                return I6354af683cb4eb3218e4aad5[taskIndex];
+        }
+        return 0;
+    }
+}
+TaskRoleMap CREATED and RUNNING at 0x1026e1949092a0b2531eb1e0553a9a856db60397
+GAS USED:  127429
+Repo Id:  6354b59c3cb4eb3218e4aada
+----------------------------------------------------------------------------------------------
+POST /resources/task-role 200 3726.438 ms - 105
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+OPTIONS /models/6354af683cb4eb3218e4aad5 204 0.245 ms - 0
+TRYING TO CREATE INSTANCE OF CONTRACT:  Invoice_Handling
+BindingAccessControl Contract DEPLOYED and RUNNING at 0xee33fb9ae8eb88f547b39799757156f10f8afedd
+Gas Used:  1144688
+....................................................................
+Root Process Contract DEPLOYED and RUNNING !!! AT ADDRESS:  0x0c77cdb7e70908b5bb7e42f8071c42d80d05b6ce
+GAS USED:  691502
+....................................................................
+Case-creator nominated
+----------------------------------------------------------------------------------------------
+POST /models/6354af683cb4eb3218e4aad5 200 7859.985 ms - 239
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+QUERYING ACTIVATION FOR CONTRACT: 0x0c77cdb7e70908b5bb7e42f8071c42d80d05b6ce
+CHECKING STARTED ELEMENTS
+Element ID:  Task_0e5xumt
+Element Name:  Issue_Invoice
+Input Parameters:  []
+bundleId:  6354af683cb4eb3218e4aad5
+pCases:  [ '0x0c77cdb7e70908b5bb7e42f8071c42d80d05b6ce' ]
+hrefs:  [ '/workitems/0x25ec39a090cca2f765c6e121c804e7cc5128d5d7/2' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0x0c77cdb7e70908b5bb7e42f8071c42d80d05b6ce 200 2822.820 ms - 8695
+OPTIONS /workitems/0x25ec39a090cca2f765c6e121c804e7cc5128d5d7/2 204 0.138 ms - 0
+WANT TO EXECUTE TASK: Issue_Invoice, ON WORKLIST: 0x25ec39a090cca2f765c6e121c804e7cc5128d5d7
+TRANSACTION: 0x5d8bf853f1f9c2c6265b97d0d0956212f72daedff6f5c0d01e122dd6bec55e07, PENDING !!!
+----------------------------------------------------------------------------------------------
+POST /workitems/0x25ec39a090cca2f765c6e121c804e7cc5128d5d7/2 200 1627.582 ms - 88
+QUERYING ACTIVATION FOR CONTRACT: 0x0c77cdb7e70908b5bb7e42f8071c42d80d05b6ce
+CHECKING STARTED ELEMENTS
+Element ID:  Task_1j0spgi
+Element Name:  Approve_Invoice
+Input Parameters:  [ { name: '_accepted', type: 'bool' } ]
+bundleId:  6354af683cb4eb3218e4aad5
+pCases:  [ '0x0c77cdb7e70908b5bb7e42f8071c42d80d05b6ce' ]
+hrefs:  [ '/workitems/0x25ec39a090cca2f765c6e121c804e7cc5128d5d7/3' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0x0c77cdb7e70908b5bb7e42f8071c42d80d05b6ce 200 4050.117 ms - 8731
+
+
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+
+
+
+
+

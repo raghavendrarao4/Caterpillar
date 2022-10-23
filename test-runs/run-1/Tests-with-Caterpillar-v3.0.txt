@@ -1,0 +1,271 @@
+----------------------------------------------------------------------
+1. https://itnext.io/tutorial-node-12-lts-gulp-4-visual-studio-vs2019-85af5179f193
+2. Download node js v8.11.0 - https://nodejs.org/en/blog/release/v8.11.0/
+		npm version
+		{ npm: '5.6.0',
+		  ares: '1.10.1-DEV',
+		  cldr: '32.0',
+		  http_parser: '2.8.0',
+		  icu: '60.1',
+		  modules: '57',
+		  nghttp2: '1.25.0',
+		  node: '8.11.0',
+		  openssl: '1.0.2o',
+		  tz: '2017c',
+		  unicode: '10.0',
+		  uv: '1.19.1',
+		  v8: '6.2.414.50',
+		  zlib: '1.2.11' }
+	
+3.	npm config get python - C:\Python\Python310\python.exe
+	npm config set msvs_version 2017
+
+4. npm i node-gyp -- global
+
+		> husky@4.0.10 preuninstall C:\Eclipse\Caterpillar\v3.0\caterpillar-core\node_modules\ganache-cli\node_modules\ganache-core\node_modules\husky
+		> node husky uninstall
+
+		Husky requires Node 10, skipping Git hooks installation.
+		+ node-gyp@9.3.0
+		+ global@4.4.0
+		removed 2031 packages and updated 2 packages in 78.878s
+
+5. npm install -g ganache-cli
+		ganache-cli --version
+		Ganache CLI v6.12.2 (ganache-core: 2.13.2)
+
+		npm WARN deprecated ganache-cli@6.12.2: ganache-cli is now ganache; visit https://trfl.io/g7 for details
+		C:\Users\raghavendra.rao.b\AppData\Roaming\npm\ganache-cli -> C:\Users\raghavendra.rao.b\AppData\Roaming\npm\node_modules\ganache-cli\cli.js
+
+		> keccak@3.0.1 install C:\Users\raghavendra.rao.b\AppData\Roaming\npm\node_modules\ganache-cli\node_modules\keccak
+		> node-gyp-build || exit 0
+
+
+		> secp256k1@4.0.2 install C:\Users\raghavendra.rao.b\AppData\Roaming\npm\node_modules\ganache-cli\node_modules\secp256k1
+		> node-gyp-build || exit 0
+
+		+ ganache-cli@6.12.2
+		added 101 packages in 26.66s
+
+5. npm install gulp-cli -g
+		npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+		npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+		C:\Users\raghavendra.rao.b\AppData\Roaming\npm\gulp -> C:\Users\raghavendra.rao.b\AppData\Roaming\npm\node_modules\gulp-cli\bin\gulp.js
+
+		> es5-ext@0.10.62 postinstall C:\Users\raghavendra.rao.b\AppData\Roaming\npm\node_modules\gulp-cli\node_modules\es5-ext
+		>  node -e "try{require('./_postinstall')}catch(e){}" || exit 0
+
+		+ gulp-cli@2.3.0
+		added 254 packages in 35.86s
+		
+
+6. BPMN stringify-online https://www.xhcode.com/xml-stringify-online.html
+		
+----------------------------------------------------------------------
+
+C:\Eclipse\Caterpillar\v3.0\caterpillar-core>npm install
+
+npm WARN deprecated jade@1.11.0: Jade has been renamed to pug, please install the latest version of pug instead of jade
+npm WARN deprecated gulp-tsb@2.0.7: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+npm WARN deprecated gulp-util@3.0.8: gulp-util is deprecated - replace it, following the guidelines at https://medium.com/gulpjs/gulp-util-ca3b1f9f9ac5
+npm WARN deprecated chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+npm WARN deprecated json3@3.3.2: Please use the native JSON object instead of JSON 3
+npm WARN deprecated mkdirp@0.5.1: Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)
+npm WARN deprecated bson@1.0.9: Fixed a critical issue with BSON serialization documented in CVE-2019-2391, see https://bit.ly/2KcpXdo for more details
+npm WARN deprecated constantinople@3.0.2: Please update to at least constantinople 3.1.1
+npm WARN deprecated transformers@2.1.0: Deprecated, use jstransformer
+npm WARN deprecated fsevents@1.2.13: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+npm WARN deprecated request@2.81.0: request has been deprecated, see https://github.com/request/request/issues/3142
+npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
+npm WARN deprecated natives@1.1.6: This module relies on Node.js's internals and will break at some point. Do not use it, and update to graceful-fs@4.x.
+npm WARN deprecated hawk@3.1.3: This module moved to @hapi/hawk. Please make sure to switch over as this distribution is no longer supported and may contain bugs and critical security issues.
+npm WARN deprecated har-validator@4.2.1: this library is no longer supported
+npm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+npm WARN deprecated hoek@2.16.3: This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).
+npm WARN deprecated boom@2.10.1: This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).
+npm WARN deprecated sntp@1.0.9: This module moved to @hapi/sntp. Please make sure to switch over as this distribution is no longer supported and may contain bugs and critical security issues.
+npm WARN deprecated cryptiles@2.0.5: This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).
+npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+npm WARN deprecated minimatch@0.2.14: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
+npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+npm WARN deprecated graceful-fs@1.2.3: please upgrade to graceful-fs 4 for compatibility with current and future versions of Node.js
+
+> husky@4.0.10 preuninstall C:\Eclipse\Caterpillar\v3.0\caterpillar-core\node_modules\ganache-cli\node_modules\ganache-core\node_modules\husky
+> node husky uninstall
+
+Husky requires Node 10, skipping Git hooks installation.
+
+> keccak@3.0.2 install C:\Eclipse\Caterpillar\v3.0\caterpillar-core\node_modules\keccak
+> node-gyp-build || exit 0
+
+
+> secp256k1@4.0.3 install C:\Eclipse\Caterpillar\v3.0\caterpillar-core\node_modules\secp256k1
+> node-gyp-build || exit 0
+
+
+> es5-ext@0.10.62 postinstall C:\Eclipse\Caterpillar\v3.0\caterpillar-core\node_modules\es5-ext
+>  node -e "try{require('./_postinstall')}catch(e){}" || exit 0
+
+
+> ejs@2.7.4 postinstall C:\Eclipse\Caterpillar\v3.0\caterpillar-core\node_modules\ejs
+> node ./postinstall.js
+
+Thank you for installing EJS: built with the Jake JavaScript build tool (https://jakejs.com/)
+
+
+> nodemon@1.19.4 postinstall C:\Eclipse\Caterpillar\v3.0\caterpillar-core\node_modules\nodemon
+> node bin/postinstall || exit 0
+
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@~2.3.2 (node_modules\chokidar\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.2.7 (node_modules\gulp-nodemon\node_modules\chokidar\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@~2.3.2 (node_modules\gulp-nodemon\node_modules\nodemon\node_modules\chokidar\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.2.7 (node_modules\nodemon\node_modules\chokidar\node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+npm WARN ws@8.2.3 requires a peer of bufferutil@^4.0.1 but none is installed. You must install peer dependencies yourself.
+npm WARN ws@8.2.3 requires a peer of utf-8-validate@^5.0.2 but none is installed. You must install peer dependencies yourself.
+
+added 902 packages, removed 1846 packages, updated 1 package and moved 190 packages in 205.2s
+
+----------------------------------------------------------------------
+GET /models 200 12.173 ms - 2
+....................................................................
+PROCESS RUNTIME REGISTRY COMPILED SUCCESSFULLY
+CREATING RUNTIME REGISTRY INSTANCE ...
+Process Registry DEPLOYED and RUNNING at 0x96440d81c3c6a4822573ab38f789725f6441ead6
+GAS USED:  597883
+REPO ID:  634ad81bdd162d14f8861539
+----------------------------------------------------------------------------------------------
+
+
+
+....................................................................
+CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+....................................................................
+STARTING PROCESS MODEL REGISTRATION ...
+....................................................................
+UPDATING COMPILATION ARTIFACTS IN REPOSITORY ...
+Compilation artifacts of Invoice_Handling updated in repository with id 634bd596b8d97f39e861c038
+....................................................................
+RELATING PARENT TO NESTED CHILDREN IN REGISTRY  ...
+Invoice_Handling : 634bd596b8d97f39e861c038 => (0), 634bd596b8d97f39e861c038
+....................................................................
+DEPLOYING FACTORIES AND UPDATING PROCESS-FACTORY RELATION IN REGISTRY ...
+Invoice_Handling_Factory running at address 0x757cc48304d070dc68eadcedbc936227949db385
+Invoice_Handling_Factory registered SUCCESSFULLY in Process Registry
+....................................................................
+....................................................................
+DEPLOYONG WORKLIST CONTRACTS AND UPDATING PROCESS REGISTRY ...
+Invoice_Handling_Worklist running at address 0xca73a0bc1ee74bd4551c0d1a591e75ed4a93a5b7
+Invoice_Handling_Worklist registered SUCCESSFULLY in Process Registry
+....................................................................
+----------------------------------------------------------------------------------------------
+
+....................................................................
+CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+....................................................................
+STARTING PROCESS MODEL REGISTRATION ...
+....................................................................
+UPDATING COMPILATION ARTIFACTS IN REPOSITORY ...
+Compilation artifacts of Invoice_Handling updated in repository with id 634bdb824ccf2b2dc434940c
+....................................................................
+RELATING PARENT TO NESTED CHILDREN IN REGISTRY  ...
+QUERYING REGISTERED MODELS
+----------------------------------------------------------------------------------------------
+GET /models 304 1781.169 ms - -
+Invoice_Handling : 634bdb824ccf2b2dc434940c => (0), 634bdb824ccf2b2dc434940c
+....................................................................
+DEPLOYING FACTORIES AND UPDATING PROCESS-FACTORY RELATION IN REGISTRY ...
+Invoice_Handling_Factory running at address 0xec547454f00664aa5c8407cdaaef9b986ce65a89
+Invoice_Handling_Factory registered SUCCESSFULLY in Process Registry
+....................................................................
+....................................................................
+DEPLOYONG WORKLIST CONTRACTS AND UPDATING PROCESS REGISTRY ...
+Invoice_Handling_Worklist running at address 0x89c6c2172ddd522ad8be7af3feac0d9ce60b3109
+Invoice_Handling_Worklist registered SUCCESSFULLY in Process Registry
+....................................................................
+....................................................................
+
+
+
+
+
+
+{address: '0x9cc6ffd0d475997dd605bf37d896c4947d8f14e4', gas: 311421, repoId: '634d31f3b9d8f12c486b4b20'}
+
+GENERATING AND DEPLOYING BINDING POLICY CONTRACTS ...
+GENERATING SMART CONTRACTS FROM BINDING POLICY ...
+Success, the policy is consistent. Role precedence:
+0: Customer
+1: Supplier
+2: Candidate
+3: Carrier
+4: Invoicer Invoicee
+...............................................................
+....................................................................
+POLICY CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+Policy CREATED and RUNNING at 0x9cc6ffd0d475997dd605bf37d896c4947d8f14e4
+GAS USED:  311421
+Policy Id:  634d31f3b9d8f12c486b4b20
+Role's indexes:  Map {
+  'Customer' => 1,
+  'Supplier' => 2,
+  'Candidate' => 3,
+  'Carrier' => 4,
+  'Invoicer' => 5,
+  'Invoicee' => 6 }
+.............................................
+----------------------------------------------------------------------------------------------
+
+
+
+OPTIONS /resources/task-role 204 0.526 ms - 0
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+contract TaskRoleContract_Contract {
+
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint) {
+        if (processId == '634bdb824ccf2b2dc434940c') {
+            uint[7] memory I634bdb824ccf2b2dc434940c = [uint(0), 5, 6, 0, 0, 0, 5];
+            if(taskIndex < 7)
+                return I634bdb824ccf2b2dc434940c[taskIndex];
+        }
+        return 0;
+    }
+}
+TaskRoleMap CREATED and RUNNING at 0xd304fbfd69cbe011a74bda063ce6b2d633b612d3
+GAS USED:  127417
+Repo Id:  634d3389b9d8f12c486b4b21
+----------------------------------------------------------------------------------------------
+
+
+OPTIONS /resources/task-role 204 0.243 ms - 0
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+contract TaskRoleContract_Contract {
+
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint) {
+        if (processId == '634bd596b8d97f39e861c038') {
+            uint[7] memory I634bd596b8d97f39e861c038 = [uint(0), 5, 6, 0, 0, 0, 5];
+            if(taskIndex < 7)
+                return I634bd596b8d97f39e861c038[taskIndex];
+        }
+        return 0;
+    }
+}
+TaskRoleMap CREATED and RUNNING at 0x166a159ed7f5729b702fe749da955025b827e578
+GAS USED:  127429
+Repo Id:  634d33eab9d8f12c486b4b22
+----------------------------------------------------------------------------------------------
+POST /resources/task-role 200 6031.878 ms - 105
+
+
+

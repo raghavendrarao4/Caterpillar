@@ -1,0 +1,5 @@
+{ Invoicer is case-creator;
+  Invoicer nominates Supplier;
+  Under Carrier_Invoicing, Invoicer nominates Invoicee endorsed-by Supplier;
+  Under Supplier_Invoicing, Invoicer nominates Invoicee endorsed-by Invoicer} 
+{}
