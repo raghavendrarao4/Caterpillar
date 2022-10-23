@@ -1,0 +1,125 @@
+....................................................................
+CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+....................................................................
+STARTING PROCESS MODEL REGISTRATION ...
+....................................................................
+UPDATING COMPILATION ARTIFACTS IN REPOSITORY ...
+Compilation artifacts of Process_2 updated in repository with id 635544bdbb015f3d98432661
+....................................................................
+RELATING PARENT TO NESTED CHILDREN IN REGISTRY  ...
+Process_2 : 635544bdbb015f3d98432661 => (0), 635544bdbb015f3d98432661
+....................................................................
+DEPLOYING FACTORIES AND UPDATING PROCESS-FACTORY RELATION IN REGISTRY ...
+Process_2_Factory running at address 0xe740a9528ea61db83b4799fe91cf4e68bc9f8628
+Process_2_Factory registered SUCCESSFULLY in Process Registry
+....................................................................
+....................................................................
+DEPLOYONG WORKLIST CONTRACTS AND UPDATING PROCESS REGISTRY ...
+Process_2_Worklist running at address 0xa8031e0680375b778d745bd800b1af47de115bc2
+Process_2_Worklist registered SUCCESSFULLY in Process Registry
+....................................................................
+----------------------------------------------------------------------------------------------
+POST /models 200 19055.156 ms - 12152
+QUERYING REGISTERED MODELS
+{ id: 63552c90bb015f3d9843265b, name: 'Invoice_Handling' }
+{ id: 63553a93bb015f3d9843265e, name: 'Invoice_Handling' }
+{ id: 635544bdbb015f3d98432661, name: 'Process_2' }
+----------------------------------------------------------------------------------------------
+GET /models 200 1547.044 ms - 46228
+
+
+
+....................................................................
+POLICY CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+Policy CREATED and RUNNING at 0x62296594b00c98b78328b75c8b0d7baa388383d8
+GAS USED:  145207
+Policy Id:  635545a1bb015f3d98432662
+Role's indexes:  Map { 'Customer' => 1 }
+.............................................
+----------------------------------------------------------------------------------------------
+POST /resources/policy 200 3290.914 ms - 105
+
+
+
+
+OPTIONS /resources/task-role 204 0.187 ms - 0
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+contract TaskRoleContract_Contract {
+
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint) {
+        if (processId == '635544bdbb015f3d98432661') {
+            uint[5] memory I635544bdbb015f3d98432661 = [uint(0), 0, 0, 0, 1];
+            if(taskIndex < 5)
+                return I635544bdbb015f3d98432661[taskIndex];
+        }
+        return 0;
+    }
+}
+TaskRoleMap CREATED and RUNNING at 0xa1cab636dbb4dac1879126fc37b05e30e3b5578a
+GAS USED:  124345
+Repo Id:  6355462cbb015f3d98432663
+----------------------------------------------------------------------------------------------
+POST /resources/task-role 200 3508.445 ms - 105
+
+
+
+
+OPTIONS /models/635544bdbb015f3d98432661 204 0.152 ms - 0
+TRYING TO CREATE INSTANCE OF CONTRACT:  Process_2
+BindingAccessControl Contract DEPLOYED and RUNNING at 0xcb9059e73993f33d170179ce2650c5ffd97598ef
+Gas Used:  1144688
+....................................................................
+Root Process Contract DEPLOYED and RUNNING !!! AT ADDRESS:  0xe3de50b38a100fb3d4d6ebcef3109b922e54e4e0
+GAS USED:  561165
+....................................................................
+Case-creator nominated
+----------------------------------------------------------------------------------------------
+POST /models/635544bdbb015f3d98432661 200 7570.085 ms - 239
+
+
+
+
+
+QUERYING ALL ACTIVE CONTRACTS
+{ id: '63552c90bb015f3d9843265b',
+  name: 'Invoice_Handling',
+  address: '0x8a1939b5b68784e04a9d8f8972934827ce65d493' }
+{ id: '63552c90bb015f3d9843265b',
+  name: 'Invoice_Handling',
+  address: '0xed71607399a2064591c5605cfd2c833fd75c3b69' }
+{ id: '63553a93bb015f3d9843265e',
+  name: 'Invoice_Handling',
+  address: '0x604deb6fc931b340ebe733ca21ef77bfa7a20516' }
+{ id: '635544bdbb015f3d98432661',
+  name: 'Process_2',
+  address: '0xe3de50b38a100fb3d4d6ebcef3109b922e54e4e0' }
+GET /processes/ 200 2534.245 ms - 454
+
+
+
+
+
+
+QUERYING ACTIVATION FOR CONTRACT: 0xe3de50b38a100fb3d4d6ebcef3109b922e54e4e0
+CHECKING STARTED ELEMENTS
+No started elements ...
+----------------------------------------------------------------------------------------------
+GET /processes/0xe3de50b38a100fb3d4d6ebcef3109b922e54e4e0 200 1864.737 ms - 6424
+QUERYING REGISTERED MODELS
+{ id: 63552c90bb015f3d9843265b, name: 'Invoice_Handling' }
+{ id: 63553a93bb015f3d9843265e, name: 'Invoice_Handling' }
+{ id: 635544bdbb015f3d98432661, name: 'Process_2' }
+----------------------------------------------------------------------------------------------
+GET /models 304 1626.589 ms - -
+
+
+
+
+
+
+
+

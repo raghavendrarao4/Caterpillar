@@ -1,0 +1,498 @@
+....................................................................
+PROCESS RUNTIME REGISTRY COMPILED SUCCESSFULLY
+CREATING RUNTIME REGISTRY INSTANCE ...
+web3.eth.accounts[executionAccount]0x3596f64b6e222e19f5a2afe2ae574a74efe2d150
+Process Registry DEPLOYED and RUNNING at 0xb364c8c2de296b26bb6d7149eb89173d0e0df5f6
+GAS USED:  597883
+REPO ID:  63552c08bb015f3d9843265a
+----------------------------------------------------------------------------------------------
+POST /registry 200 5746.459 ms - 105
+
+....................................................................
+CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+....................................................................
+STARTING PROCESS MODEL REGISTRATION ...
+....................................................................
+UPDATING COMPILATION ARTIFACTS IN REPOSITORY ...
+QUERYING REGISTERED MODELS
+Compilation artifacts of Invoice_Handling updated in repository with id 63552c90bb015f3d9843265b
+....................................................................
+RELATING PARENT TO NESTED CHILDREN IN REGISTRY  ...
+{ id: 63552c90bb015f3d9843265b, name: 'Invoice_Handling' }
+----------------------------------------------------------------------------------------------
+GET /models 200 1073.462 ms - 17037
+Invoice_Handling : 63552c90bb015f3d9843265b => (0), 63552c90bb015f3d9843265b
+....................................................................
+DEPLOYING FACTORIES AND UPDATING PROCESS-FACTORY RELATION IN REGISTRY ...
+Invoice_Handling_Factory running at address 0x9272635a8d64353877898c5ee06dd8d65ccbc205
+Invoice_Handling_Factory registered SUCCESSFULLY in Process Registry
+....................................................................
+....................................................................
+DEPLOYONG WORKLIST CONTRACTS AND UPDATING PROCESS REGISTRY ...
+Invoice_Handling_Worklist running at address 0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32
+Invoice_Handling_Worklist registered SUCCESSFULLY in Process Registry
+....................................................................
+----------------------------------------------------------------------------------------------
+POST /models 200 21883.102 ms - 17035
+QUERYING REGISTERED MODELS
+{ id: 63552c90bb015f3d9843265b, name: 'Invoice_Handling' }
+----------------------------------------------------------------------------------------------
+GET /models 200 1425.285 ms - 17037
+
+
+
+
+
+....................................................................
+POLICY CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+Policy CREATED and RUNNING at 0x33121f614acf923e80b77f63527dc76491a6e2de
+GAS USED:  235622
+Policy Id:  63552d5dbb015f3d9843265c
+Role's indexes:  Map { 'Invoicer' => 1, 'Invoicee' => 2, 'Supplier' => 3 }
+.............................................
+----------------------------------------------------------------------------------------------
+POST /resources/policy 200 3832.261 ms - 105
+
+
+
+
+OPTIONS /resources/task-role 204 0.091 ms - 0
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+contract TaskRoleContract_Contract {
+
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint) {
+        if (processId == '63552c90bb015f3d9843265b') {
+            uint[7] memory I63552c90bb015f3d9843265b = [uint(0), 1, 1, 0, 0, 0, 1];
+            if(taskIndex < 7)
+                return I63552c90bb015f3d9843265b[taskIndex];
+        }
+        return 0;
+    }
+}
+TaskRoleMap CREATED and RUNNING at 0x69b0ab83bbe50553ae2670bce54d7182f9530cc5
+GAS USED:  127429
+Repo Id:  63552dd3bb015f3d9843265d
+----------------------------------------------------------------------------------------------
+POST /resources/task-role 200 3556.147 ms - 105
+
+
+
+
+
+
+
+
+OPTIONS /models/63552c90bb015f3d9843265b 204 0.261 ms - 0
+TRYING TO CREATE INSTANCE OF CONTRACT:  Invoice_Handling
+BindingAccessControl Contract DEPLOYED and RUNNING at 0x0884977a432be6800dac076a606834c822fcb8f2
+Gas Used:  1144688
+....................................................................
+Root Process Contract DEPLOYED and RUNNING !!! AT ADDRESS:  0x8a1939b5b68784e04a9d8f8972934827ce65d493
+GAS USED:  721502
+....................................................................
+Case-creator nominated
+----------------------------------------------------------------------------------------------
+POST /models/63552c90bb015f3d9843265b 200 7036.902 ms - 239
+
+
+
+
+
+----------------------------------------------------------------------------------------------
+Invoicer is BOUND
+GET /resources/Invoicer/0x8a1939b5b68784e04a9d8f8972934827ce65d493 200 1657.078 ms - 17
+
+
+
+
+OPTIONS /resources/nominate 204 0.187 ms - 0
+Invoicer[0xc17188Ef2FA87ADF5c5ADaC37419811b99A9F629] is nominating Invoicee[0x3faa6F32099760613f3B237a2b7feff1DeB70Baf]
+Process Case: 0x8a1939b5b68784e04a9d8f8972934827ce65d493
+SUCCESS: 0xc17188Ef2FA87ADF5c5ADaC37419811b99A9F629 nominated 0x3faa6F32099760613f3B237a2b7feff1DeB70Baf
+Transaction Hash: 0xb636b5d5787ca5bbced1a50247fb33d0b00fc10d761b5535f859e048bcaa1496
+----------------------------------------------------------------------------------------------
+POST /resources/nominate 200 1378.802 ms - 88
+
+
+----------------------------------------------------------------------------------------------
+Invoicee is NOMINATED
+GET /resources/Invoicee/0x8a1939b5b68784e04a9d8f8972934827ce65d493 200 1627.383 ms - 21
+
+
+
+
+QUERYING ALL ACTIVE CONTRACTS
+{ id: '63552c90bb015f3d9843265b',
+  name: 'Invoice_Handling',
+  address: '0x8a1939b5b68784e04a9d8f8972934827ce65d493' }
+GET /processes/ 304 1167.294 ms - -
+QUERYING ACTIVATION FOR CONTRACT: 0x8a1939b5b68784e04a9d8f8972934827ce65d493
+CHECKING STARTED ELEMENTS
+Element ID:  Task_0e5xumt
+Element Name:  Issue_Invoice
+Input Parameters:  []
+bundleId:  63552c90bb015f3d9843265b
+pCases:  [ '0x8a1939b5b68784e04a9d8f8972934827ce65d493' ]
+hrefs:  [ '/workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/0' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0x8a1939b5b68784e04a9d8f8972934827ce65d493 200 2729.865 ms - 8693
+
+
+
+
+OPTIONS /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/0 204 0.085 ms - 0
+WANT TO EXECUTE TASK: Issue_Invoice, ON WORKLIST: 0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32
+TRANSACTION: 0x069d69527f7894585618f43e81d8ea0967a0096750df20fe3bbef9a09cf75cdc, PENDING !!!
+----------------------------------------------------------------------------------------------
+POST /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/0 200 1753.490 ms - 88
+QUERYING ACTIVATION FOR CONTRACT: 0x8a1939b5b68784e04a9d8f8972934827ce65d493
+CHECKING STARTED ELEMENTS
+Element ID:  Task_1j0spgi
+Element Name:  Approve_Invoice
+Input Parameters:  [ { name: '_accepted', type: 'bool' } ]
+bundleId:  63552c90bb015f3d9843265b
+pCases:  [ '0x8a1939b5b68784e04a9d8f8972934827ce65d493' ]
+hrefs:  [ '/workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/1' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0x8a1939b5b68784e04a9d8f8972934827ce65d493 200 3338.428 ms - 8729
+
+
+
+
+POST /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/1 400 1203.227 ms - 5
+OPTIONS /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/1 204 0.112 ms - 0
+WANT TO EXECUTE TASK: Approve_Invoice, ON WORKLIST: 0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32
+TRANSACTION: 0x86269870755eb3045357fd975009ebaa6b8fd701ae613b75d1e6ae5b04ebc912, PENDING !!!
+----------------------------------------------------------------------------------------------
+POST /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/1 200 1384.388 ms - 88
+QUERYING ACTIVATION FOR CONTRACT: 0x8a1939b5b68784e04a9d8f8972934827ce65d493
+CHECKING STARTED ELEMENTS
+No started elements ...
+----------------------------------------------------------------------------------------------
+GET /processes/0x8a1939b5b68784e04a9d8f8972934827ce65d493 200 2966.053 ms - 8400
+
+
+
+GET /models 304 585.998 ms - -
+OPTIONS /models/63552c90bb015f3d9843265b 204 0.110 ms - 0
+TRYING TO CREATE INSTANCE OF CONTRACT:  Invoice_Handling
+BindingAccessControl Contract DEPLOYED and RUNNING at 0x40ccf942e2cb1a721021bfc7daa282fc85757010
+Gas Used:  1144688
+....................................................................
+Root Process Contract DEPLOYED and RUNNING !!! AT ADDRESS:  0xed71607399a2064591c5605cfd2c833fd75c3b69
+GAS USED:  691502
+....................................................................
+Case-creator nominated
+----------------------------------------------------------------------------------------------
+POST /models/63552c90bb015f3d9843265b 200 11906.618 ms - 239
+
+
+
+
+  address: '0x8a1939b5b68784e04a9d8f8972934827ce65d493' }
+GET /processes/ 200 1529.047 ms - 231
+QUERYING ACTIVATION FOR CONTRACT: 0xed71607399a2064591c5605cfd2c833fd75c3b69
+CHECKING STARTED ELEMENTS
+Element ID:  Task_0e5xumt
+Element Name:  Issue_Invoice
+Input Parameters:  []
+bundleId:  63552c90bb015f3d9843265b
+pCases:  [ '0xed71607399a2064591c5605cfd2c833fd75c3b69' ]
+hrefs:  [ '/workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/2' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0xed71607399a2064591c5605cfd2c833fd75c3b69 200 2507.867 ms - 8693
+OPTIONS /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/2 204 0.133 ms - 0
+WANT TO EXECUTE TASK: Issue_Invoice, ON WORKLIST: 0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32
+TRANSACTION: 0x0b32951c4b81b4c477017ead8ab9bc85883c69609a236afaceb74db4e54339b1, PENDING !!!
+----------------------------------------------------------------------------------------------
+POST /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/2 200 1651.041 ms - 88
+QUERYING ACTIVATION FOR CONTRACT: 0xed71607399a2064591c5605cfd2c833fd75c3b69
+CHECKING STARTED ELEMENTS
+Element ID:  Task_1j0spgi
+Element Name:  Approve_Invoice
+Input Parameters:  [ { name: '_accepted', type: 'bool' } ]
+bundleId:  63552c90bb015f3d9843265b
+pCases:  [ '0xed71607399a2064591c5605cfd2c833fd75c3b69' ]
+hrefs:  [ '/workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/3' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0xed71607399a2064591c5605cfd2c833fd75c3b69 200 3469.380 ms - 8729
+
+
+
+
+OPTIONS /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/3 204 0.204 ms - 0
+WANT TO EXECUTE TASK: Approve_Invoice, ON WORKLIST: 0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32
+TRANSACTION: 0xb2fc952416c00b5e22a79fa533598fdee94cd6fa4305a94a35954b1475bf9bc6, PENDING !!!
+----------------------------------------------------------------------------------------------
+POST /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/3 200 1772.257 ms - 88
+QUERYING ACTIVATION FOR CONTRACT: 0xed71607399a2064591c5605cfd2c833fd75c3b69
+CHECKING STARTED ELEMENTS
+Element ID:  Task_0m7b8xz
+Element Name:  Fix_Invoice
+Input Parameters:  []
+bundleId:  63552c90bb015f3d9843265b
+pCases:  [ '0xed71607399a2064591c5605cfd2c833fd75c3b69' ]
+hrefs:  [ '/workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/4' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0xed71607399a2064591c5605cfd2c833fd75c3b69 200 6490.116 ms - 8691
+
+
+
+
+OPTIONS /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/4 204 0.077 ms - 0
+WANT TO EXECUTE TASK: Fix_Invoice, ON WORKLIST: 0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32
+TRANSACTION: 0xf26f66052ceb867ab77c0a7b62d0438334e51b005cc62cd2bfb7c48f9addb2db, PENDING !!!
+----------------------------------------------------------------------------------------------
+POST /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/4 200 1542.001 ms - 88
+QUERYING ACTIVATION FOR CONTRACT: 0xed71607399a2064591c5605cfd2c833fd75c3b69
+CHECKING STARTED ELEMENTS
+Element ID:  Task_1j0spgi
+Element Name:  Approve_Invoice
+Input Parameters:  [ { name: '_accepted', type: 'bool' } ]
+bundleId:  63552c90bb015f3d9843265b
+pCases:  [ '0xed71607399a2064591c5605cfd2c833fd75c3b69' ]
+hrefs:  [ '/workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/5' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0xed71607399a2064591c5605cfd2c833fd75c3b69 200 3556.555 ms - 8729
+
+
+
+
+
+OPTIONS /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/5 204 0.223 ms - 0
+WANT TO EXECUTE TASK: Approve_Invoice, ON WORKLIST: 0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32
+TRANSACTION: 0x9fb84ab1958e7c1d533832e2a5bebe9b593fe5dab972012f208227650f646da6, PENDING !!!
+----------------------------------------------------------------------------------------------
+POST /workitems/0x9b8086d06b01b9a971b7fb7085c48dc68f4cfd32/5 200 1476.307 ms - 88
+QUERYING ACTIVATION FOR CONTRACT: 0xed71607399a2064591c5605cfd2c833fd75c3b69
+CHECKING STARTED ELEMENTS
+No started elements ...
+----------------------------------------------------------------------------------------------
+GET /processes/0xed71607399a2064591c5605cfd2c833fd75c3b69 200 3034.393 ms - 8400
+
+
+
+----------------------------------------------------------------------------------------------
+Instance-3
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+
+....................................................................
+CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+....................................................................
+STARTING PROCESS MODEL REGISTRATION ...
+....................................................................
+UPDATING COMPILATION ARTIFACTS IN REPOSITORY ...
+QUERYING REGISTERED MODELS
+Compilation artifacts of Invoice_Handling updated in repository with id 63553a93bb015f3d9843265e
+....................................................................
+RELATING PARENT TO NESTED CHILDREN IN REGISTRY  ...
+{ id: 63552c90bb015f3d9843265b, name: 'Invoice_Handling' }
+{ id: 63553a93bb015f3d9843265e, name: 'Invoice_Handling' }
+----------------------------------------------------------------------------------------------
+GET /models 200 1538.003 ms - 34075
+Invoice_Handling : 63553a93bb015f3d9843265e => (0), 63553a93bb015f3d9843265e
+....................................................................
+DEPLOYING FACTORIES AND UPDATING PROCESS-FACTORY RELATION IN REGISTRY ...
+Invoice_Handling_Factory running at address 0x5f5092ebaa21cca6c9071fa4a45beca70bb95c23
+Invoice_Handling_Factory registered SUCCESSFULLY in Process Registry
+....................................................................
+....................................................................
+DEPLOYONG WORKLIST CONTRACTS AND UPDATING PROCESS REGISTRY ...
+Invoice_Handling_Worklist running at address 0x3d65b362780cc7ed78874e8463a388a3b922c3c4
+Invoice_Handling_Worklist registered SUCCESSFULLY in Process Registry
+....................................................................
+----------------------------------------------------------------------------------------------
+POST /models 200 20046.555 ms - 17037
+QUERYING REGISTERED MODELS
+{ id: 63552c90bb015f3d9843265b, name: 'Invoice_Handling' }
+{ id: 63553a93bb015f3d9843265e, name: 'Invoice_Handling' }
+----------------------------------------------------------------------------------------------
+GET /models 200 1087.269 ms - 34075
+OPTIONS /resources/policy 204 0.317 ms - 0
+GENERATING AND DEPLOYING BINDING POLICY CONTRACTS ...
+GENERATING SMART CONTRACTS FROM BINDING POLICY ...
+Success, the policy is consistent. Role precedence:
+0: Invoicer
+1: Invoicee
+...............................................................
+
+
+....................................................................
+POLICY CONTRACTS GENERATED AND COMPILED SUCCESSFULLY
+Policy CREATED and RUNNING at 0x487888b0046379d40d1fa60dc203129a6b20160c
+GAS USED:  159859
+Policy Id:  63553b1ebb015f3d9843265f
+Role's indexes:  Map { 'Invoicer' => 1, 'Invoicee' => 2 }
+.............................................
+----------------------------------------------------------------------------------------------
+POST /resources/policy 200 4129.487 ms - 105
+
+
+
+
+
+OPTIONS /resources/task-role 204 0.278 ms - 0
+=============================================
+SOLIDITY CODE
+=============================================
+pragma solidity ^0.4.25;
+
+contract TaskRoleContract_Contract {
+
+    function getRoleFromTask(uint taskIndex, bytes32 processId) public pure returns(uint) {
+        if (processId == '63553a93bb015f3d9843265e') {
+            uint[7] memory I63553a93bb015f3d9843265e = [uint(0), 1, 2, 0, 0, 0, 1];
+            if(taskIndex < 7)
+                return I63553a93bb015f3d9843265e[taskIndex];
+        }
+        return 0;
+    }
+}
+TaskRoleMap CREATED and RUNNING at 0x893522bc08abd0da509ffb9f69a6fd95463b485f
+GAS USED:  127429
+Repo Id:  63553be6bb015f3d98432660
+----------------------------------------------------------------------------------------------
+POST /resources/task-role 200 3302.032 ms - 105
+
+
+
+
+
+OPTIONS /models/63553a93bb015f3d9843265e 204 0.095 ms - 0
+TRYING TO CREATE INSTANCE OF CONTRACT:  Invoice_Handling
+BindingAccessControl Contract DEPLOYED and RUNNING at 0x2b888e06724f7b6c7ac3161b7c4a657e159c1d28
+Gas Used:  1144688
+....................................................................
+Root Process Contract DEPLOYED and RUNNING !!! AT ADDRESS:  0x604deb6fc931b340ebe733ca21ef77bfa7a20516
+GAS USED:  706502
+....................................................................
+Case-creator nominated
+----------------------------------------------------------------------------------------------
+POST /models/63553a93bb015f3d9843265e 200 7593.375 ms - 239
+
+
+
+
+----------------------------------------------------------------------------------------------
+Invoicer is BOUND
+GET /resources/Invoicer/0x604deb6fc931b340ebe733ca21ef77bfa7a20516 200 1616.079 ms - 17
+
+
+
+
+
+OPTIONS /resources/nominate 204 0.134 ms - 0
+Invoicer[0x75B7123b62214ea36173EC3c4A7Df432D6F255a8] is nominating Invoicee[0x197bFB9f14aF82b9C507bd370DE13D4df70C5F39]
+Process Case: 0x604deb6fc931b340ebe733ca21ef77bfa7a20516
+SUCCESS: 0x75B7123b62214ea36173EC3c4A7Df432D6F255a8 nominated 0x197bFB9f14aF82b9C507bd370DE13D4df70C5F39
+Transaction Hash: 0x50e5e58a4e573e4b94e34522f1e37ee1bda16352601bba3cf13366d2f3745498
+----------------------------------------------------------------------------------------------
+POST /resources/nominate 200 1539.932 ms - 88
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------
+Invoicer is BOUND
+GET /resources/Invoicer/0x604deb6fc931b340ebe733ca21ef77bfa7a20516 304 1579.363 ms - -
+----------------------------------------------------------------------------------------------
+Invoicee is BOUND
+GET /resources/Invoicee/0x604deb6fc931b340ebe733ca21ef77bfa7a20516 200 1511.960 ms - 17
+QUERYING ALL ACTIVE CONTRACTS
+{ id: '63552c90bb015f3d9843265b',
+  name: 'Invoice_Handling',
+  address: '0x8a1939b5b68784e04a9d8f8972934827ce65d493' }
+{ id: '63552c90bb015f3d9843265b',
+  name: 'Invoice_Handling',
+  address: '0xed71607399a2064591c5605cfd2c833fd75c3b69' }
+{ id: '63553a93bb015f3d9843265e',
+  name: 'Invoice_Handling',
+  address: '0x604deb6fc931b340ebe733ca21ef77bfa7a20516' }
+GET /processes/ 200 2440.312 ms - 346
+
+
+
+
+
+
+QUERYING ACTIVATION FOR CONTRACT: 0x604deb6fc931b340ebe733ca21ef77bfa7a20516
+CHECKING STARTED ELEMENTS
+Element ID:  Task_0e5xumt
+Element Name:  Issue_Invoice
+Input Parameters:  []
+bundleId:  63553a93bb015f3d9843265e
+pCases:  [ '0x604deb6fc931b340ebe733ca21ef77bfa7a20516' ]
+hrefs:  [ '/workitems/0x3d65b362780cc7ed78874e8463a388a3b922c3c4/0' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0x604deb6fc931b340ebe733ca21ef77bfa7a20516 200 2643.803 ms - 8695
+
+
+
+
+
+
+
+OPTIONS /workitems/0x3d65b362780cc7ed78874e8463a388a3b922c3c4/0 204 0.234 ms - 0
+WANT TO EXECUTE TASK: Issue_Invoice, ON WORKLIST: 0x3d65b362780cc7ed78874e8463a388a3b922c3c4
+TRANSACTION: 0xd3a06f95d93231da8b669064fac8a48ec356e79df8c1afdef73e5639b120eeae, PENDING !!!
+----------------------------------------------------------------------------------------------
+POST /workitems/0x3d65b362780cc7ed78874e8463a388a3b922c3c4/0 200 1610.826 ms - 88
+QUERYING ACTIVATION FOR CONTRACT: 0x604deb6fc931b340ebe733ca21ef77bfa7a20516
+CHECKING STARTED ELEMENTS
+Element ID:  Task_1j0spgi
+Element Name:  Approve_Invoice
+Input Parameters:  [ { name: '_accepted', type: 'bool' } ]
+bundleId:  63553a93bb015f3d9843265e
+pCases:  [ '0x604deb6fc931b340ebe733ca21ef77bfa7a20516' ]
+hrefs:  [ '/workitems/0x3d65b362780cc7ed78874e8463a388a3b922c3c4/1' ]
+...............................................................
+----------------------------------------------------------------------------------------------
+GET /processes/0x604deb6fc931b340ebe733ca21ef77bfa7a20516 200 3477.238 ms - 8731
+
+
+
+
+
+
+
+OPTIONS /workitems/0x3d65b362780cc7ed78874e8463a388a3b922c3c4/1 204 0.120 ms - 0
+WANT TO EXECUTE TASK: Approve_Invoice, ON WORKLIST: 0x3d65b362780cc7ed78874e8463a388a3b922c3c4
+TRANSACTION: 0x3d5201f87d0bfe73b61f3ffd8b2e3667142a75ea6321fa5e9f240639f5d927a3, PENDING !!!
+----------------------------------------------------------------------------------------------
+POST /workitems/0x3d65b362780cc7ed78874e8463a388a3b922c3c4/1 200 1461.126 ms - 88
+QUERYING ACTIVATION FOR CONTRACT: 0x604deb6fc931b340ebe733ca21ef77bfa7a20516
+CHECKING STARTED ELEMENTS
+No started elements ...
+----------------------------------------------------------------------------------------------
+GET /processes/0x604deb6fc931b340ebe733ca21ef77bfa7a20516 200 2786.274 ms - 8402
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
