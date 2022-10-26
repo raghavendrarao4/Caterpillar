@@ -1,0 +1,222 @@
+ganache-cli --gasPrice=100000000000 --gasLimit=6721975
+
+Available Accounts
+==================
+(0) 0xdD2E950D4e51A6D104Aacf34a0a874c5f286FcA2 (100 ETH)
+(1) 0xd5E68231566783eBB514E5Bc2159ec0d97E859D2 (100 ETH)
+(2) 0xa93D197Fdc79541CDF00fEA708317e23b8B690D9 (100 ETH) invoicer case-creator
+(3) 0xC6Bc936aaBdEB63D4F86b9226a07a63b61AEd17b (100 ETH) invoicee
+(4) 0xFF5245e1A699FA26A92d2a79661CAA90121fD10B (100 ETH)
+(5) 0x9fB53446D3271536f32B435542DAF6502E1496Aa (100 ETH)
+(6) 0x30222D56EcE7E066d6fDf48c4c4cfc1B6F9208Cd (100 ETH)
+(7) 0xa2bD21eee874736e82960A6D9314820F5782b257 (100 ETH)
+(8) 0xE4e5cCD21AC198B883842A22C9450fE07D5aF73B (100 ETH)
+(9) 0x76E198970Bcc02ABEE503e0B26146b2acDbDfDEC (100 ETH)
+
+Private Keys
+==================
+(0) 0xdf9631da96bd916f1510909700b457e3fe94ff635ed2a17f92443c34759b85b2
+(1) 0xa9c015fa010972514831e08d27e8009c177463ef94068549a904603405f5d6e3
+(2) 0x4c5e942c42facd235140b10d91833da086fbc8b4856835bc4a65d67cecadeab1
+(3) 0x0f25f43cebee6de8e58cecddf4ba379243ec6a75f84ba303919972e5bcfe3bec
+(4) 0xcb978c2707f35d19c6dccb01272a4a24963f2ab1e4a66b29690fe827703ad6f1
+(5) 0x6f83d0b59f2104ebd25e61d4fd0105cbc85f8b6a1efdfc0275299604a0ef6d0a
+(6) 0x7de4cffbb6761c31c504342938326af96f8dc346919a1de6200eeb28dcc5a816
+(7) 0x9153969247ec0b955fae11b7cc61fc2fac10eb04b84418c03be682480cb0a0c6
+(8) 0x90a524502c12c45df474aa405dc03d03166d5ec47924013d52a03f5bb2dd51a2
+(9) 0x6a942808539b1aa467c791b337b956c1e309c6908f827d17e4a81c0ff90a6625
+
+HD Wallet
+==================
+Mnemonic:      very transfer payment cross isolate electric engage crop connect reduce speak icon
+Base HD Path:  m/44'/60'/0'/0/{account_index}
+
+Gas Price
+==================
+100000000000
+
+Gas Limit
+==================
+6721975
+
+Call Gas Limit
+==================
+9007199254740991
+
+Listening on 127.0.0.1:8545
+
+
+
+eth_accounts
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xe0aeaaf0ee13ca6d0016ec66e369fabf7c17e0bcbb9b464d12c01e15f80dd5ef
+  Contract created: 0xd804424d7b0f265a2ce590a73b1c909757d68c10
+  Gas usage: 985032
+  Block Number: 1
+  Block Time: Tue Oct 25 2022 07:15:18 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getCode
+
+
+eth_accounts
+eth_gasPrice
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x85141da298e93abb557345809173540d2ced825c7dafebe8c26f5038ced95cb3
+  Gas usage: 42449
+  Block Number: 2
+  Block Time: Tue Oct 25 2022 08:10:51 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_sendTransaction
+
+  Transaction: 0xe249e7c120e3e91dd609ef9053506327459bf980a85d63a0f0ad60107d51e941
+  Contract created: 0x22ccbc8122533f8b52e81cca00f6c1c3d9f5d7a2
+  Gas usage: 598227
+  Block Number: 3
+  Block Time: Tue Oct 25 2022 08:10:51 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getCode
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x97d0b5f659870b263bc19de1ac65b358f1be5f3361e61339f7543b25cb2f8695
+  Gas usage: 83941
+  Block Number: 4
+  Block Time: Tue Oct 25 2022 08:10:52 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_sendTransaction
+
+  Transaction: 0xb9e7b5bb4a8fc4264409a397a7d61c0a0e61c302a34927b087b85874fa480002
+  Contract created: 0x2db5a6c370ff1abc7ac30de6baefa626593e662a
+  Gas usage: 563441
+  Block Number: 5
+  Block Time: Tue Oct 25 2022 08:10:52 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getCode
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x3a8c44c2d6ed506477a4f3710e0568a34adbebb6946e2fe9790802afa700deab
+  Gas usage: 88537
+  Block Number: 6
+  Block Time: Tue Oct 25 2022 08:10:52 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+
+
+eth_accounts
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xe5efbb42f3e0b0fcd17a332431c406f6337eca864f5d3ddcf60486455ab013bf
+  Contract created: 0x0ee4cf77bbc01ca357dbd065458f1209db9fe402
+  Gas usage: 171847
+  Block Number: 7
+  Block Time: Tue Oct 25 2022 10:25:50 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_getCode
+eth_sendTransaction
+
+  Transaction: 0x94bed770925b53c93f8b80949b5b1c8346eccfbe36dfa82918571caa6f71a5c8
+  Contract created: 0xaab3c157f137501724af05658076dfb02c54081b
+  Gas usage: 171847
+  Block Number: 8
+  Block Time: Tue Oct 25 2022 10:26:55 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_getCode
+
+
+
+eth_accounts
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xef759f86f78138583e0762195ec15fc6caf6375ff908183a819e4ab193344204
+  Contract created: 0xa328e6271017b48686dd95ae21e728583f592cab
+  Gas usage: 111121
+  Block Number: 9
+  Block Time: Tue Oct 25 2022 16:34:02 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_getCode
+
+
+eth_accounts
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xc651d17d86ccdf732510462b477f52ebd03409d7429c31e910f043b65709776d
+  Contract created: 0x398e51003f9868bb39c302ccf86cbbbe26a381f7
+  Gas usage: 1238058
+  Block Number: 10
+  Block Time: Tue Oct 25 2022 18:49:56 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_getCode
+
+
+
+eth_accounts
+eth_gasPrice
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xdd437920ffc8bde086a60e0119776dd07237b140f5270c10e8f6ed49c9f04395
+  Gas usage: 737819
+  Block Number: 11
+  Block Time: Tue Oct 25 2022 21:59:02 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getLogs
+eth_subscribe
+eth_getTransactionReceipt
+eth_unsubscribe
+
+
+eth_accounts
+eth_gasPrice
+eth_accounts
+eth_gasPrice
+eth_call
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x0a6d5d56766824999b5d02a0bd959c6a534eff5dbbbe5fe99b30f08dda1c049f
+  Gas usage: 159782
+  Block Number: 12
+  Block Time: Tue Oct 25 2022 22:24:14 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+
+eth_call
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x435870c94b39c686f6ec741c9f3a1e14ef6f6194b860fd092fcbc08b10fecf8d
+  Gas usage: 146816
+  Block Number: 13
+  Block Time: Tue Oct 25 2022 22:33:06 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+

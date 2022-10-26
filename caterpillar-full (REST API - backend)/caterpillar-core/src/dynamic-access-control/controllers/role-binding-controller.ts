@@ -31,6 +31,7 @@ export let parseAndDeployTaskRoleMap = (
   response: Response
 ) => {
   printl(21, request.body.roleTaskPairs);
+  
   policyParsingService
     .generateRoleTaskContract(
       JSON.parse(request.body.roleTaskPairs),

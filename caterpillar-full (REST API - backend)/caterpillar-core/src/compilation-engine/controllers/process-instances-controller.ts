@@ -89,7 +89,7 @@ export let queryProcessState = (request: Request, response: Response) => {
 };
 
 export let executeWorkitem = (request: Request, response: Response) => {
-  printl(4, [request.params.wi, request.params.wlAddress]);
+  printl(4, [request.params.wiIndex, request.params.wlAddress]);
   runtimeRegistryService
     .validateRegistry(request.body.registryAddress, this.runtimeRegistry)
     .then((runtimeRegistry) => {
@@ -98,6 +98,7 @@ export let executeWorkitem = (request: Request, response: Response) => {
         request.params.wlAddress,
         parseInt(request.params.wiIndex),
         request.body.inputParameters,
+		request.body.roleAddress,
         this.runtimeRegistry
       );
     })

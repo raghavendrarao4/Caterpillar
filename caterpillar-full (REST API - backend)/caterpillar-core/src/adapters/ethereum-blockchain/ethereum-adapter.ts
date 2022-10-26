@@ -163,6 +163,7 @@ export let execContractFunctionAsync = (
   return new Promise<any>((resolve, reject) => {
     try {
       let encodedFunction = encodeFunctionCall(functionInfo, contractAbi, args);
+	  
       web3.eth
         .sendTransaction({
           from: accountInfo.from,
@@ -256,6 +257,23 @@ export let defaultDeployment = () => {
     Promise.all([web3.eth.getAccounts(), web3.eth.getGasPrice()]).then(
       (res) => {
         resolve(new AccountInfo(res[0][0], web3.utils.toHex(4700000), res[1]));
+      }
+    );
+  });
+};
+
+
+export let taskRoleAccountInfo = (roleAddress: string) => {
+  return new Promise<AccountInfo>((resolve, reject) => {
+	  
+    Promise.all([web3.eth.getAccounts(), web3.eth.getGasPrice()]).then(
+      (res) => {
+		  for (let i = 0; i < res[0].length; i++) {
+			 if(res[0][i] === roleAddress) {
+				 resolve(new AccountInfo(res[0][i], web3.utils.toHex(4700000), res[1]));
+				 break;
+			 }
+		  }
       }
     );
   });

@@ -300,6 +300,8 @@ export let generateRoleTaskContract = (
       /////////////////////////////////////////////
       ///     SMART CONTRACT GENERATION        ///
       ////////////////////////////////////////////
+	  
+	  console.log("inside generateRoleTaskContract...");
       
       let processData = new Map<string, Array<any>>();
       processData.set(contractName, roleTaskPairs);

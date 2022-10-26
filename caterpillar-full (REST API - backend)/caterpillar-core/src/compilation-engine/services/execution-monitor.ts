@@ -17,6 +17,7 @@ import * as mongoDBAdapper from "../../adapters/mongo-db/mongo-db-adapter";
 import { RepoType } from "../../adapters/mongo-db/repo-types";
 
 let defaultAccount: AccountInfo;
+let taskroleAccount: AccountInfo;
 
 export let createProcessInstance = async (
   processId: string,
@@ -230,19 +231,24 @@ export let executeWorkitem = async (
   wlAddress: string,
   wiIndex: number,
   inputParameters: Array<any>,
+  roleAddress: string,
   runtimeRegistry: ContractInfo
 ) => {
   try {
     if (!ethereumAdapter.isValidBlockchainAddress(wlAddress))
       return Promise.reject(`Invalid Worklist Instance Address ${wlAddress}`);
 
-    let defaultAccount = await ethereumAdapter.defaultDeployment();
-
+    if (!ethereumAdapter.isValidBlockchainAddress(roleAddress))
+      return Promise.reject(`Invalid Task Role Address ${roleAddress}`);
+  
+    //let defaultAccount = await ethereumAdapter.defaultDeployment();
+	let taskroleAccount = await ethereumAdapter.taskRoleAccountInfo(roleAddress);
+	
     let pId = await ethereumAdapter.callContractFunction(
       runtimeRegistry.address,
       runtimeRegistry.abi,
       new FunctionInfo("worklistBundleFor", ["address"], "bytes32"),
-      defaultAccount,
+      taskroleAccount,
       [wlAddress]
     );
 
@@ -257,7 +263,7 @@ export let executeWorkitem = async (
       wlAddress,
       worklistAbi,
       new FunctionInfo("elementIndexFor", ["uint256"], "uint256"),
-      defaultAccount,
+      taskroleAccount,
       [wiIndex]
     );
 
@@ -276,7 +282,7 @@ export let executeWorkitem = async (
       wlAddress,
       worklistAbi,
       new FunctionInfo(taskInfo.name, ["uint256", "bool"]),
-      defaultAccount,
+      taskroleAccount,
       inputParameters
     );
 
@@ -285,10 +291,11 @@ export let executeWorkitem = async (
       worklistAbi: worklistAbi,
       taskName: taskInfo.name,
     };
+	
   } catch (error) {
     return Promise.reject(
       new PromiseError(
-        `Error Executing Workitme from Worklist at address ${wlAddress}`,
+        `Error Executing Workitem from Worklist at address ${wlAddress}`,
         error,
         [new Component("execution-monitor", "executeWorkitem")]
       )

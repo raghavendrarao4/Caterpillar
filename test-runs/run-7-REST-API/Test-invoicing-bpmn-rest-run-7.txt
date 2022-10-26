@@ -1,0 +1,548 @@
+{
+"ID": "6358c4b3cbbedf3a9c0fe65f"
+}
+
+REQUESTED: Compile and Deploy smart contract for Runtime Registry
+SUCCESS: Runtime Registry Metadata updated in Process Repository
+ ID: 6358c4b3cbbedf3a9c0fe65f
+----------------------------------------------------------------
+POST /registries 201 686.986 ms - 33
+
+0xE19E1ad4aCe8705f1B0534C77146150F42173B95
+0xE19E1ad4aCe8705f1B0534C77146150F42173B95
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+{
+  "registryAddress" : "0xE19E1ad4aCe8705f1B0534C77146150F42173B95",
+  "bpmn": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><bpmn:definitions xmlns:bpmn=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:di=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:dc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" id=\"Definitions_1\" targetNamespace=\"http://bpmn.io/schema/bpmn\" exporter=\"Camunda Modeler\" exporterVersion=\"1.6.0\"><bpmn:process id=\"Invoice_Handling\" name=\"Invoice_Handling\" isExecutable=\"false\"><bpmn:documentation>bool accepted;</bpmn:documentation><bpmn:startEvent id=\"StartEvent_1\" name=\"Invoice Handling Started\"><bpmn:outgoing>SequenceFlow_0ep6zut</bpmn:outgoing></bpmn:startEvent><bpmn:sequenceFlow id=\"SequenceFlow_0ep6zut\" sourceRef=\"StartEvent_1\" targetRef=\"Task_0e5xumt\" /><bpmn:userTask id=\"Task_0e5xumt\" name=\"Issue Invoice\"><bpmn:documentation>@ Invoicer @</bpmn:documentation><bpmn:incoming>SequenceFlow_0ep6zut</bpmn:incoming><bpmn:outgoing>SequenceFlow_0oiwqsu</bpmn:outgoing></bpmn:userTask><bpmn:sequenceFlow id=\"SequenceFlow_0oiwqsu\" sourceRef=\"Task_0e5xumt\" targetRef=\"ExclusiveGateway_0bvmb9p\" /><bpmn:userTask id=\"Task_1j0spgi\" name=\"Approve Invoice\"><bpmn:documentation><![CDATA[@ Invoicee @() : (bool _accepted) -> {accepted = _accepted;}]]></bpmn:documentation><bpmn:incoming>SequenceFlow_1w3n1g7</bpmn:incoming><bpmn:outgoing>SequenceFlow_09h00sj</bpmn:outgoing></bpmn:userTask><bpmn:exclusiveGateway id=\"ExclusiveGateway_0bvmb9p\"><bpmn:incoming>SequenceFlow_0oiwqsu</bpmn:incoming><bpmn:incoming>SequenceFlow_07vj39u</bpmn:incoming><bpmn:outgoing>SequenceFlow_1w3n1g7</bpmn:outgoing></bpmn:exclusiveGateway><bpmn:sequenceFlow id=\"SequenceFlow_1w3n1g7\" sourceRef=\"ExclusiveGateway_0bvmb9p\" targetRef=\"Task_1j0spgi\" /><bpmn:exclusiveGateway id=\"ExclusiveGateway_18klyzt\" name=\"Is Invoice Accepted?\"><bpmn:incoming>SequenceFlow_09h00sj</bpmn:incoming><bpmn:outgoing>SequenceFlow_0927rr5</bpmn:outgoing><bpmn:outgoing>SequenceFlow_006j8eo</bpmn:outgoing></bpmn:exclusiveGateway><bpmn:sequenceFlow id=\"SequenceFlow_09h00sj\" sourceRef=\"Task_1j0spgi\" targetRef=\"ExclusiveGateway_18klyzt\" /><bpmn:endEvent id=\"EndEvent_063of2z\" name=\"Invoice Handling Completed\"><bpmn:incoming>SequenceFlow_0927rr5</bpmn:incoming></bpmn:endEvent><bpmn:sequenceFlow id=\"SequenceFlow_0927rr5\" name=\"Yes\" sourceRef=\"ExclusiveGateway_18klyzt\" targetRef=\"EndEvent_063of2z\"><bpmn:conditionExpression xsi:type=\"bpmn:tFormalExpression\">accepted</bpmn:conditionExpression></bpmn:sequenceFlow><bpmn:sequenceFlow id=\"SequenceFlow_006j8eo\" name=\"No\" sourceRef=\"ExclusiveGateway_18klyzt\" targetRef=\"Task_0m7b8xz\"><bpmn:conditionExpression xsi:type=\"bpmn:tFormalExpression\">!accepted</bpmn:conditionExpression></bpmn:sequenceFlow><bpmn:sequenceFlow id=\"SequenceFlow_07vj39u\" sourceRef=\"Task_0m7b8xz\" targetRef=\"ExclusiveGateway_0bvmb9p\" /><bpmn:userTask id=\"Task_0m7b8xz\" name=\"Fix Invoice\"><bpmn:documentation>@ Invoicer @</bpmn:documentation><bpmn:incoming>SequenceFlow_006j8eo</bpmn:incoming><bpmn:outgoing>SequenceFlow_07vj39u</bpmn:outgoing></bpmn:userTask></bpmn:process><bpmndi:BPMNDiagram id=\"BPMNDiagram_1\"><bpmndi:BPMNPlane id=\"BPMNPlane_1\" bpmnElement=\"Invoice_Handling\"><bpmndi:BPMNShape id=\"_BPMNShape_StartEvent_2\" bpmnElement=\"StartEvent_1\"><dc:Bounds x=\"215\" y=\"105\" width=\"36\" height=\"36\" /><bpmndi:BPMNLabel><dc:Bounds x=\"191\" y=\"141\" width=\"83\" height=\"24\" /></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id=\"SequenceFlow_0ep6zut_di\" bpmnElement=\"SequenceFlow_0ep6zut\"><di:waypoint xsi:type=\"dc:Point\" x=\"251\" y=\"123\" /><di:waypoint xsi:type=\"dc:Point\" x=\"285\" y=\"123\" /><bpmndi:BPMNLabel><dc:Bounds x=\"268\" y=\"108\" width=\"0\" height=\"0\" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id=\"UserTask_06i5cy1_di\" bpmnElement=\"Task_0e5xumt\"><dc:Bounds x=\"285\" y=\"83\" width=\"100\" height=\"80\" /></bpmndi:BPMNShape><bpmndi:BPMNEdge id=\"SequenceFlow_0oiwqsu_di\" bpmnElement=\"SequenceFlow_0oiwqsu\"><di:waypoint xsi:type=\"dc:Point\" x=\"385\" y=\"123\" /><di:waypoint xsi:type=\"dc:Point\" x=\"419\" y=\"123\" /><bpmndi:BPMNLabel><dc:Bounds x=\"402\" y=\"108\" width=\"0\" height=\"0\" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id=\"UserTask_1igus1e_di\" bpmnElement=\"Task_1j0spgi\"><dc:Bounds x=\"498\" y=\"83\" width=\"100\" height=\"80\" /></bpmndi:BPMNShape><bpmndi:BPMNShape id=\"ExclusiveGateway_0bvmb9p_di\" bpmnElement=\"ExclusiveGateway_0bvmb9p\" isMarkerVisible=\"true\"><dc:Bounds x=\"419\" y=\"98\" width=\"50\" height=\"50\" /><bpmndi:BPMNLabel><dc:Bounds x=\"444\" y=\"148\" width=\"0\" height=\"0\" /></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id=\"SequenceFlow_1w3n1g7_di\" bpmnElement=\"SequenceFlow_1w3n1g7\"><di:waypoint xsi:type=\"dc:Point\" x=\"469\" y=\"123\" /><di:waypoint xsi:type=\"dc:Point\" x=\"498\" y=\"123\" /><bpmndi:BPMNLabel><dc:Bounds x=\"484\" y=\"108\" width=\"0\" height=\"0\" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id=\"ExclusiveGateway_18klyzt_di\" bpmnElement=\"ExclusiveGateway_18klyzt\" isMarkerVisible=\"true\"><dc:Bounds x=\"629\" y=\"98\" width=\"50\" height=\"50\" /><bpmndi:BPMNLabel><dc:Bounds x=\"627\" y=\"62\" width=\"53\" height=\"24\" /></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id=\"SequenceFlow_09h00sj_di\" bpmnElement=\"SequenceFlow_09h00sj\"><di:waypoint xsi:type=\"dc:Point\" x=\"598\" y=\"123\" /><di:waypoint xsi:type=\"dc:Point\" x=\"629\" y=\"123\" /><bpmndi:BPMNLabel><dc:Bounds x=\"614\" y=\"108\" width=\"0\" height=\"0\" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id=\"EndEvent_063of2z_di\" bpmnElement=\"EndEvent_063of2z\"><dc:Bounds x=\"718\" y=\"105\" width=\"36\" height=\"36\" /><bpmndi:BPMNLabel><dc:Bounds x=\"694\" y=\"141\" width=\"83\" height=\"24\" /></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id=\"SequenceFlow_0927rr5_di\" bpmnElement=\"SequenceFlow_0927rr5\"><di:waypoint xsi:type=\"dc:Point\" x=\"679\" y=\"123\" /><di:waypoint xsi:type=\"dc:Point\" x=\"718\" y=\"123\" /><bpmndi:BPMNLabel><dc:Bounds x=\"683\" y=\"101\" width=\"18\" height=\"12\" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id=\"SequenceFlow_006j8eo_di\" bpmnElement=\"SequenceFlow_006j8eo\"><di:waypoint xsi:type=\"dc:Point\" x=\"654\" y=\"148\" /><di:waypoint xsi:type=\"dc:Point\" x=\"654\" y=\"213\" /><di:waypoint xsi:type=\"dc:Point\" x=\"597\" y=\"213\" /><bpmndi:BPMNLabel><dc:Bounds x=\"634\" y=\"175\" width=\"14\" height=\"12\" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id=\"SequenceFlow_07vj39u_di\" bpmnElement=\"SequenceFlow_07vj39u\"><di:waypoint xsi:type=\"dc:Point\" x=\"497\" y=\"213\" /><di:waypoint xsi:type=\"dc:Point\" x=\"444\" y=\"213\" /><di:waypoint xsi:type=\"dc:Point\" x=\"444\" y=\"148\" /><bpmndi:BPMNLabel><dc:Bounds x=\"471\" y=\"198\" width=\"0\" height=\"0\" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id=\"UserTask_0mjla0b_di\" bpmnElement=\"Task_0m7b8xz\"><dc:Bounds x=\"497\" y=\"173\" width=\"100\" height=\"80\" /></bpmndi:BPMNShape></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></bpmn:definitions>"
+}
+
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Compile and deploy process model named undefined
+Parsing Process Model ...
+Smart Contracts Generated From Process Model
+----------------------------------------------------------------
+SUBMITED: Compile smart contracts ...
+SUCCESS: Smart contracts compiled
+{
+  contractName: 'Invoice_HandlingWorkflow',
+  solidityCode: 'pragma solidity >= 0.4.25 < 0.7.0;\n' +
+    'import "IWorkflow";\r\n' +
+    'import "IRegistry";\r\n' +
+    'import "IFactory";\r\n' +
+    '\r\n' +
+    'contract Invoice_HandlingFactory is IFactory {\r\n' +
+    '    function newInstance(address parent, address processRegistry) public virtual override returns(address) {\r\n' +
+    '        Invoice_HandlingWorkflow newContract = new Invoice_HandlingWorkflow(parent, worklist, processRegistry);\r\n' +
+    '        return address(newContract);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function startInstanceExecution(address processAddress) public virtual override {\r\n' +
+    '        Invoice_HandlingWorkflow(processAddress).startExecution();\r\n' +
+    '    }\r\n' +
+    '}\r\n' +
+    '\r\n' +
+    '\r\n' +
+    'contract Invoice_HandlingWorkflow is IWorkflow {\r\n' +
+    '\r\n' +
+    '    uint public marking = uint(2);\r\n' +
+    '    uint public startedActivities = 0;\r\n' +
+    '\r\n' +
+    '\r\n' +
+    '    // Process Variables\r\n' +
+    '    bool accepted;\r\n' +
+    '    constructor(address _parent, address _worklist, address _processRegistry) IWorkflow(_parent, _worklist, _processRegistry) public {\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function startExecution() public virtual override {\r\n' +
+    '        require(marking == uint(2) && startedActivities == 0);\r\n' +
+    '        step(uint(2), 0);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function handleEvent(bytes32 code, bytes32 eventType, uint _instanceIndex, bool isInstanceCompleted) public virtual override {\r\n' +
+    '        // Process without calls to external contracts.\r\n' +
+    '        // No events to catch !!!\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function killProcess() public virtual override {\r\n' +
+    '        (marking, startedActivities) = killProcess(0, marking, startedActivities);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function killProcess(uint processElementIndex, uint tmpMarking, uint tmpStartedActivities) internal virtual override returns(uint, uint) {\r\n' +
+    '        if(processElementIndex == 0)\r\n' +
+    '            tmpMarking = tmpStartedActivities = 0;\r\n' +
+    '        return (tmpMarking, tmpStartedActivities);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function broadcastSignal() public virtual override {\r\n' +
+    '        (uint256 tmpMarking, uint256 tmpStartedActivities) = broadcastSignal(marking, startedActivities, 0);\r\n' +
+    '        step(tmpMarking, tmpStartedActivities);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function broadcastSignal(uint tmpMarking, uint tmpStartedActivities, uint sourceChild) internal virtual override returns(uint, uint) {\r\n' +
+    '        return (tmpMarking, tmpStartedActivities);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '\r\n' +
+    '    function Issue_InvoiceComplete(uint elementIndex) external {\r\n' +
+    '        (uint256 tmpMarking, uint256 tmpStartedActivities) = (marking, startedActivities);\r\n' +
+    '        if(elementIndex == uint(1)) {\r\n' +
+    '            require(msg.sender == worklist && tmpStartedActivities & uint(2) != 0);\r\n' +
+    '            step(tmpMarking | uint(4), tmpStartedActivities & uint(~2));\r\n' +
+    '            return;\r\n' +
+    '        }\r\n' +
+    '    }\r\n' +
+    '    function Approve_InvoiceComplete(uint elementIndex, bool _accepted) external {\r\n' +
+    '        (uint256 tmpMarking, uint256 tmpStartedActivities) = (marking, startedActivities);\r\n' +
+    '        if(elementIndex == uint(2)) {\r\n' +
+    '            require(msg.sender == worklist && tmpStartedActivities & uint(4) != 0);\r\n' +
+    '           {accepted = _accepted;}\r\n' +
+    '            step(tmpMarking | uint(16), tmpStartedActivities & uint(~4));\r\n' +
+    '            return;\r\n' +
+    '        }\r\n' +
+    '    }\r\n' +
+    '    function Fix_InvoiceComplete(uint elementIndex) external {\r\n' +
+    '        (uint256 tmpMarking, uint256 tmpStartedActivities) = (marking, startedActivities);\r\n' +
+    '        if(elementIndex == uint(6)) {\r\n' +
+    '            require(msg.sender == worklist && tmpStartedActivities & uint(64) != 0);\r\n' +
+    '            step(tmpMarking | uint(128), tmpStartedActivities & uint(~64));\r\n' +
+    '            return;\r\n' +
+    '        }\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '\r\n' +
+    '    function step(uint tmpMarking, uint tmpStartedActivities) internal {\r\n' +
+    '        while (true) {\r\n' +
+    '            if (tmpMarking & uint(2) != 0) {\r\n' +
+    '                Invoice_HandlingIWorklist(worklist).Issue_InvoiceStart(1);\r\n' +
+    '                tmpMarking &= uint(~2);\r\n' +
+    '                tmpStartedActivities |= uint(2);\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(8) != 0) {\r\n' +
+    '                Invoice_HandlingIWorklist(worklist).Approve_InvoiceStart(2);\r\n' +
+    '                tmpMarking &= uint(~8);\r\n' +
+    '                tmpStartedActivities |= uint(4);\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(132) != 0) {\r\n' +
+    '                tmpMarking &= uint(~132);\r\n' +
+    '                tmpMarking |= uint(8);\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(16) != 0) {\r\n' +
+    '                tmpMarking &= uint(~16);\r\n' +
+    'if (accepted)                tmpMarking |= uint(32);\r\n' +
+    'else                 tmpMarking |= uint(64);\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(32) != 0) {\r\n' +
+    '                tmpMarking &= uint(~32);\r\n' +
+    '                if (tmpMarking & uint(254) == 0 && tmpStartedActivities & uint(70) == 0) {\r\n' +
+    '                    (tmpMarking, tmpStartedActivities) = propagateEvent("Invoice_Handling_Completed", "Default", tmpMarking, tmpStartedActivities, uint(32));\r\n' +
+    '                }\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(64) != 0) {\r\n' +
+    '                Invoice_HandlingIWorklist(worklist).Fix_InvoiceStart(6);\r\n' +
+    '                tmpMarking &= uint(~64);\r\n' +
+    '                tmpStartedActivities |= uint(64);\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            break;\r\n' +
+    '        }\r\n' +
+    '        if(marking != 0 || startedActivities != 0) {\r\n' +
+    '            marking = tmpMarking;\r\n' +
+    '            startedActivities = tmpStartedActivities;\r\n' +
+    '        }\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function getWorklistAddress() external view returns(address) {\r\n' +
+    '        return worklist;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function getInstanceIndex() external view returns(uint) {\r\n' +
+    '        return instanceIndex;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '}\r\n' +
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+    '\r\n' +
+    'import "IWorklist";\r\n' +
+    '\r\n' +
+    'abstract contract Invoice_HandlingIWorklist {\r\n' +
+    '\r\n' +
+    '      function Issue_InvoiceStart(uint) external virtual;\r\n' +
+    '      function Approve_InvoiceStart(uint) external virtual;\r\n' +
+    '      function Fix_InvoiceStart(uint) external virtual;\r\n' +
+    '  \r\n' +
+    '      function Issue_InvoiceComplete(uint) external virtual;\r\n' +
+    '      function Approve_InvoiceComplete(uint, bool) external virtual;\r\n' +
+    '      function Fix_InvoiceComplete(uint) external virtual;\r\n' +
+    '  \r\n' +
+    '}\r\n' +
+    '\r\n' +
+    'contract Invoice_HandlingWorklist is IWorklist {\r\n' +
+    '\r\n' +
+    '    // Events with the information to include in the Log when a workitem is registered\r\n' +
+    '    event Issue_InvoiceRequested(uint);\r\n' +
+    '    event Approve_InvoiceRequested(uint);\r\n' +
+    '    event Fix_InvoiceRequested(uint);\r\n' +
+    '\r\n' +
+    '    event TaskExecutionCompleted(address worklist, uint workItem);\r\n' +
+    '\r\n' +
+    '\r\n' +
+    '    function Issue_InvoiceStart(uint elementIndex) external {\r\n' +
+    '        workitems.push(Workitem(elementIndex, msg.sender));\r\n' +
+    '        emit Issue_InvoiceRequested(workitems.length - 1);\r\n' +
+    '    }\r\n' +
+    '    function Approve_InvoiceStart(uint elementIndex) external {\r\n' +
+    '        workitems.push(Workitem(elementIndex, msg.sender));\r\n' +
+    '        emit Approve_InvoiceRequested(workitems.length - 1);\r\n' +
+    '    }\r\n' +
+    '    function Fix_InvoiceStart(uint elementIndex) external {\r\n' +
+    '        workitems.push(Workitem(elementIndex, msg.sender));\r\n' +
+    '        emit Fix_InvoiceRequested(workitems.length - 1);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function Issue_Invoice(uint workitemId) external {\r\n' +
+    '        require(workitemId < workitems.length && workitems[workitemId].processInstanceAddr != address(0));\r\n' +
+    '        Invoice_HandlingIWorklist(workitems[workitemId].processInstanceAddr).Issue_InvoiceComplete(workitems[workitemId].elementIndex);\r\n' +
+    '        workitems[workitemId].processInstanceAddr = address(0);\r\n' +
+    '        emit TaskExecutionCompleted(address(this), workitemId);\r\n' +
+    '    }\r\n' +
+    '    function Approve_Invoice(uint workitemId, bool _accepted) external {\r\n' +
+    '        require(workitemId < workitems.length && workitems[workitemId].processInstanceAddr != address(0));\r\n' +
+    '        Invoice_HandlingIWorklist(workitems[workitemId].processInstanceAddr).Approve_InvoiceComplete(workitems[workitemId].elementIndex, _accepted);\r\n' +
+    '        workitems[workitemId].processInstanceAddr = address(0);\r\n' +
+    '        emit TaskExecutionCompleted(address(this), workitemId);\r\n' +
+    '    }\r\n' +
+    '    function Fix_Invoice(uint workitemId) external {\r\n' +
+    '        require(workitemId < workitems.length && workitems[workitemId].processInstanceAddr != address(0));\r\n' +
+    '        Invoice_HandlingIWorklist(workitems[workitemId].processInstanceAddr).Fix_InvoiceComplete(workitems[workitemId].elementIndex);\r\n' +
+    '        workitems[workitemId].processInstanceAddr = address(0);\r\n' +
+    '        emit TaskExecutionCompleted(address(this), workitemId);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '}\r\n',
+  codeDependencies: [
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      'abstract contract IFactory {\r\n' +
+      '    address internal worklist = address(0);\r\n' +
+      '\r\n' +
+      '    function setWorklist(address _worklist) public {\r\n' +
+      '        worklist = _worklist;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function newInstance(address parent, address globalFactory) public virtual returns(address);\r\n' +
+      '    function startInstanceExecution(address processAddress) public virtual;\r\n' +
+      '}\r\n',
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      'abstract contract IWorkflow {\r\n' +
+      '    address internal parent;\r\n' +
+      '    address internal worklist;\r\n' +
+      '    uint internal instanceIndex;\r\n' +
+      '    address internal processRegistry;\r\n' +
+      '\r\n' +
+      '    constructor(address _parent, address _worklist, address _processRegistry) public {\r\n' +
+      '        parent = _parent;\r\n' +
+      '        worklist = _worklist;\r\n' +
+      '        processRegistry = _processRegistry;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function setInstanceIndex(uint _instanceIndex) public {\r\n' +
+      '        require(msg.sender == parent);\r\n' +
+      '        instanceIndex = _instanceIndex;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function findParent() public view returns(address) {\r\n' +
+      '        return parent;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function handleEvent(bytes32 code, bytes32 eventType, uint _instanceIndex, bool isInstanceCompleted) public virtual;\r\n' +
+      '    function killProcess() public virtual;\r\n' +
+      '    function startExecution() public virtual;\r\n' +
+      '    function broadcastSignal() public virtual;\r\n' +
+      '\r\n' +
+      '    function killProcess(uint processElementIndex, uint marking, uint startedActivities) internal virtual returns(uint, uint);\r\n' +
+      '    function broadcastSignal(uint tmpMarking, uint tmpStartedActivities, uint sourceChild) internal virtual returns(uint, uint);\r\n' +
+      '\r\n' +
+      '    function propagateEvent(bytes32 code, bytes32 eventType, uint tmpMarking, uint tmpStartedActivities, uint sourceChild) internal returns(uint, uint) {\r\n' +
+      '        if (eventType == "Error" || eventType == "Terminate")\r\n' +
+      '            (tmpMarking, tmpStartedActivities) = killProcess(0, tmpMarking, tmpStartedActivities);\r\n' +
+      '        else if (eventType == "Signal")\r\n' +
+      '            (tmpMarking, tmpStartedActivities) = broadcastSignal(tmpMarking, tmpStartedActivities, sourceChild);\r\n' +
+      '        if (parent != address(0))\r\n' +
+      '            IWorkflow(parent).handleEvent(code, eventType, instanceIndex, tmpMarking | tmpStartedActivities == 0);\r\n' +
+      '        return (tmpMarking, tmpStartedActivities);\r\n' +
+      '    }\r\n' +
+      '}\r\n',
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      'abstract contract IRFunct {\r\n' +
+      '    function findRuntimePolicy(address pCase) public virtual view returns(address);\r\n' +
+      '    function canPerform(address actor, address pCase, uint taskIndex) public virtual view returns(bool);\r\n' +
+      '}\r\n' +
+      '\r\n' +
+      'contract IWorklist {\r\n' +
+      '\r\n' +
+      '    struct Workitem {\r\n' +
+      '        uint elementIndex;\r\n' +
+      '        address processInstanceAddr;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    Workitem[] internal workitems;\r\n' +
+      '    address internal runtimeRegistry;\r\n' +
+      '\r\n' +
+      '    function updateRuntimeRegistry(address _runtimeRegistry) public {\r\n' +
+      '        runtimeRegistry = _runtimeRegistry;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function workItemsFor(uint elementIndex, address processInstance) external view returns(uint) {\r\n' +
+      '        uint reqIndex = 0;\r\n' +
+      '        for (uint i = 0; i < workitems.length; i++) {\r\n' +
+      '            if (workitems[i].elementIndex == elementIndex && workitems[i].processInstanceAddr == processInstance)\r\n' +
+      '                reqIndex |= uint(1) << i;\r\n' +
+      '        }\r\n' +
+      '        return reqIndex;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function processInstanceFor(uint workitemId) public view returns(address) {\r\n' +
+      '        require(workitemId < workitems.length);\r\n' +
+      '        return workitems[workitemId].processInstanceAddr;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function elementIndexFor(uint workitemId) public view returns(uint) {\r\n' +
+      '        require(workitemId < workitems.length);\r\n' +
+      '        return workitems[workitemId].elementIndex;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function canPerform(address actor, address pCase, uint elementIndex) internal view returns(bool) {\r\n' +
+      '        return IRFunct(IRFunct(runtimeRegistry).findRuntimePolicy(pCase)).canPerform(actor, pCase, elementIndex);\r\n' +
+      '    }\r\n' +
+      '}',
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      'abstract contract IRegistry {\r\n' +
+      '    function newInstanceFor(uint nodeIndex, address parent) public virtual returns(address);\r\n' +
+      '}\r\n'
+  ],
+  compilationMetadata: [
+    {
+      contractName: 'Invoice_HandlingFactory',
+      abi: '[{"inputs":[{"internalType":"address","name":"parent","type":"address"},{"internalType":"address","name":"processRegistry","type":"address"}],"name":"newInstance","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_worklist","type":"address"}],"name":"setWorklist","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"processAddress","type":"address"}],"name":"startInstanceExecution","outputs":[],"stateMutability":"nonpayable","type":"function"}]',
+      bytecode: '6080604052600080546001600160a01b031916905534801561002057600080fd5b506109d5806100306000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806316ec41f1146100465780634491bdbe1461006e578063a0e3402414610094575b600080fd5b61006c6004803603602081101561005c57600080fd5b50356001600160a01b03166100de565b005b61006c6004803603602081101561008457600080fd5b50356001600160a01b0316610134565b6100c2600480360360408110156100aa57600080fd5b506001600160a01b0381358116916020013516610156565b604080516001600160a01b039092168252519081900360200190f35b806001600160a01b0316639d820b6c6040518163ffffffff1660e01b8152600401600060405180830381600087803b15801561011957600080fd5b505af115801561012d573d6000803e3d6000fd5b5050505050565b600080546001600160a01b0319166001600160a01b0392909216919091179055565b60008054604051829185916001600160a01b03909116908590610178906101c0565b6001600160a01b03938416815291831660208301529091166040808301919091525190819003606001906000f0801580156101b7573d6000803e3d6000fd5b50949350505050565b6107d2806101ce8339019056fe60806040526002600455600060055534801561001a57600080fd5b506040516107d23803806107d28339818101604052606081101561003d57600080fd5b5080516020820151604090920151600080546001600160a01b039384166001600160a01b0319918216179091556001805494841694821694909417909355600380549290911691909216179055610739806100996000396000f3fe608060405234801561001057600080fd5b50600436106100cf5760003560e01c80637b193c451161008c578063b1325a1411610066578063b1325a1414610198578063da1b4fd6146101bc578063e6ee588d146101c4578063ff6363a8146101cc576100cf565b80637b193c45146101425780638050ed741461015f5780639d820b6c14610190576100cf565b806307c1d5a7146100d45780631d0c54d6146100f35780635578d78c1461010d578063647950c51461012a5780636917151a1461013257806379a42d061461013a575b600080fd5b6100f1600480360360208110156100ea57600080fd5b50356101f1565b005b6100fb610243565b60408051918252519081900360200190f35b6100f16004803603602081101561012357600080fd5b5035610249565b6100f161028e565b6100fb6102b3565b6100f16102b9565b6100f16004803603602081101561015857600080fd5b50356102d1565b6100f16004803603608081101561017557600080fd5b508035906020810135906040810135906060013515156102ed565b6100f16102f3565b6101a061031c565b604080516001600160a01b039092168252519081900360200190f35b6101a061032b565b6100fb61033a565b6100f1600480360360408110156101e257600080fd5b50803590602001351515610340565b600454600554600183141561023d576001546001600160a01b03163314801561021c57506002811615155b61022557600080fd5b61023660048317600219831661039a565b5050610240565b50505b50565b60045481565b600454600554600683141561023d576001546001600160a01b03163314801561027457506040811615155b61027d57600080fd5b61023660808317604019831661039a565b6000806102a160045460055460006105ea565b915091506102af828261039a565b5050565b60055481565b6102c960006004546005546105ef565b600555600455565b6000546001600160a01b031633146102e857600080fd5b600255565b50505050565b60026004541480156103055750600554155b61030e57600080fd5b61031a6002600061039a565b565b6000546001600160a01b031690565b6001546001600160a01b031690565b60025490565b60045460055460028414156102ed576001546001600160a01b03163314801561036b57506004811615155b61037457600080fd5b6006805460ff191684151517905561039360108317600419831661039a565b50506102af565b600282161561041857600180546040805163314e277560e11b81526004810193909352516001600160a01b039091169163629c4eea91602480830192600092919082900301818387803b1580156103f057600080fd5b505af1158015610404573d6000803e3d6000fd5b50505060021992909216915060021761039a565b60088216156104965760015460408051633501d3c160e11b81526002600482015290516001600160a01b0390921691636a03a7829160248082019260009290919082900301818387803b15801561046e57600080fd5b505af1158015610482573d6000803e3d6000fd5b50505060081992909216915060041761039a565b60848216156104b1576084198216915060088217915061039a565b60108216156104e457600654601019929092169160ff16156104d8576020821791506104df565b6040821791505b61039a565b602082161561054b5760201982169160de16158015610504575060468116155b156104df576105417f496e766f6963655f48616e646c696e675f436f6d706c6574656400000000000066111959985d5b1d60ca1b84846020610609565b909250905061039a565b60408216156105c95760015460408051636ac7c92b60e01b81526006600482015290516001600160a01b0390921691636ac7c92b9160248082019260009290919082900301818387803b1580156105a157600080fd5b505af11580156105b5573d6000803e3d6000fd5b50505060401992909216915060401761039a565b6004541515806105da575060055415155b156102af57600491909155600555565b509091565b600080846105ff57600092508293505b5091939092509050565b600080856422b93937b960d91b148061062d575085685465726d696e61746560b81b145b156106485761063e600086866105ef565b909550935061066a565b856514da59db985b60d21b141561066a576106648585856105ea565b90955093505b6000546001600160a01b0316156106f65760008054600254604080516320143b5d60e21b8152600481018c9052602481018b90526044810192909252888817156064830152516001600160a01b0390921692638050ed749260848084019382900301818387803b1580156106dd57600080fd5b505af11580156106f1573d6000803e3d6000fd5b505050505b509295919450909250505056fea2646970667358221220a614bbb596f81e85e632949595d53324504c92070fed35a6ba92da8e552dc84964736f6c634300060a0033a2646970667358221220188d3ffa9e42b060d4b3b176c07d5d444af48797580bc4a5b05c86219d8f842464736f6c634300060a0033'
+    },
+    {
+      contractName: 'Invoice_HandlingIWorklist',
+      abi: '[{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bool","name":"","type":"bool"}],"name":"Approve_InvoiceComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"Approve_InvoiceStart","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"Fix_InvoiceComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"Fix_InvoiceStart","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"Issue_InvoiceComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"Issue_InvoiceStart","outputs":[],"stateMutability":"nonpayable","type":"function"}]',
+      bytecode: ''
+    },
+    {
+      contractName: 'Invoice_HandlingWorkflow',
+      abi: '[{"inputs":[{"internalType":"address","name":"_parent","type":"address"},{"internalType":"address","name":"_worklist","type":"address"},{"internalType":"address","name":"_processRegistry","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"},{"internalType":"bool","name":"_accepted","type":"bool"}],"name":"Approve_InvoiceComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"}],"name":"Fix_InvoiceComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"}],"name":"Issue_InvoiceComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"broadcastSignal","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"findParent","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getInstanceIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getWorklistAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"code","type":"bytes32"},{"internalType":"bytes32","name":"eventType","type":"bytes32"},{"internalType":"uint256","name":"_instanceIndex","type":"uint256"},{"internalType":"bool","name":"isInstanceCompleted","type":"bool"}],"name":"handleEvent","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"killProcess","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"marking","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_instanceIndex","type":"uint256"}],"name":"setInstanceIndex","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"startExecution","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"startedActivities","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]',
+      bytecode: '60806040526002600455600060055534801561001a57600080fd5b506040516107d23803806107d28339818101604052606081101561003d57600080fd5b5080516020820151604090920151600080546001600160a01b039384166001600160a01b0319918216179091556001805494841694821694909417909355600380549290911691909216179055610739806100996000396000f3fe608060405234801561001057600080fd5b50600436106100cf5760003560e01c80637b193c451161008c578063b1325a1411610066578063b1325a1414610198578063da1b4fd6146101bc578063e6ee588d146101c4578063ff6363a8146101cc576100cf565b80637b193c45146101425780638050ed741461015f5780639d820b6c14610190576100cf565b806307c1d5a7146100d45780631d0c54d6146100f35780635578d78c1461010d578063647950c51461012a5780636917151a1461013257806379a42d061461013a575b600080fd5b6100f1600480360360208110156100ea57600080fd5b50356101f1565b005b6100fb610243565b60408051918252519081900360200190f35b6100f16004803603602081101561012357600080fd5b5035610249565b6100f161028e565b6100fb6102b3565b6100f16102b9565b6100f16004803603602081101561015857600080fd5b50356102d1565b6100f16004803603608081101561017557600080fd5b508035906020810135906040810135906060013515156102ed565b6100f16102f3565b6101a061031c565b604080516001600160a01b039092168252519081900360200190f35b6101a061032b565b6100fb61033a565b6100f1600480360360408110156101e257600080fd5b50803590602001351515610340565b600454600554600183141561023d576001546001600160a01b03163314801561021c57506002811615155b61022557600080fd5b61023660048317600219831661039a565b5050610240565b50505b50565b60045481565b600454600554600683141561023d576001546001600160a01b03163314801561027457506040811615155b61027d57600080fd5b61023660808317604019831661039a565b6000806102a160045460055460006105ea565b915091506102af828261039a565b5050565b60055481565b6102c960006004546005546105ef565b600555600455565b6000546001600160a01b031633146102e857600080fd5b600255565b50505050565b60026004541480156103055750600554155b61030e57600080fd5b61031a6002600061039a565b565b6000546001600160a01b031690565b6001546001600160a01b031690565b60025490565b60045460055460028414156102ed576001546001600160a01b03163314801561036b57506004811615155b61037457600080fd5b6006805460ff191684151517905561039360108317600419831661039a565b50506102af565b600282161561041857600180546040805163314e277560e11b81526004810193909352516001600160a01b039091169163629c4eea91602480830192600092919082900301818387803b1580156103f057600080fd5b505af1158015610404573d6000803e3d6000fd5b50505060021992909216915060021761039a565b60088216156104965760015460408051633501d3c160e11b81526002600482015290516001600160a01b0390921691636a03a7829160248082019260009290919082900301818387803b15801561046e57600080fd5b505af1158015610482573d6000803e3d6000fd5b50505060081992909216915060041761039a565b60848216156104b1576084198216915060088217915061039a565b60108216156104e457600654601019929092169160ff16156104d8576020821791506104df565b6040821791505b61039a565b602082161561054b5760201982169160de16158015610504575060468116155b156104df576105417f496e766f6963655f48616e646c696e675f436f6d706c6574656400000000000066111959985d5b1d60ca1b84846020610609565b909250905061039a565b60408216156105c95760015460408051636ac7c92b60e01b81526006600482015290516001600160a01b0390921691636ac7c92b9160248082019260009290919082900301818387803b1580156105a157600080fd5b505af11580156105b5573d6000803e3d6000fd5b50505060401992909216915060401761039a565b6004541515806105da575060055415155b156102af57600491909155600555565b509091565b600080846105ff57600092508293505b5091939092509050565b600080856422b93937b960d91b148061062d575085685465726d696e61746560b81b145b156106485761063e600086866105ef565b909550935061066a565b856514da59db985b60d21b141561066a576106648585856105ea565b90955093505b6000546001600160a01b0316156106f65760008054600254604080516320143b5d60e21b8152600481018c9052602481018b90526044810192909252888817156064830152516001600160a01b0390921692638050ed749260848084019382900301818387803b1580156106dd57600080fd5b505af11580156106f1573d6000803e3d6000fd5b505050505b509295919450909250505056fea2646970667358221220a614bbb596f81e85e632949595d53324504c92070fed35a6ba92da8e552dc84964736f6c634300060a0033'
+    },
+    {
+      contractName: 'Invoice_HandlingWorklist',
+      abi: '[{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"","type":"uint256"}],"name":"Approve_InvoiceRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"","type":"uint256"}],"name":"Fix_InvoiceRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"","type":"uint256"}],"name":"Issue_InvoiceRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"worklist","type":"address"},{"indexed":false,"internalType":"uint256","name":"workItem","type":"uint256"}],"name":"TaskExecutionCompleted","type":"event"},{"inputs":[{"internalType":"uint256","name":"workitemId","type":"uint256"},{"internalType":"bool","name":"_accepted","type":"bool"}],"name":"Approve_Invoice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"}],"name":"Approve_InvoiceStart","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"workitemId","type":"uint256"}],"name":"Fix_Invoice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"}],"name":"Fix_InvoiceStart","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"workitemId","type":"uint256"}],"name":"Issue_Invoice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"}],"name":"Issue_InvoiceStart","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"workitemId","type":"uint256"}],"name":"elementIndexFor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"workitemId","type":"uint256"}],"name":"processInstanceFor","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_runtimeRegistry","type":"address"}],"name":"updateRuntimeRegistry","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"},{"internalType":"address","name":"processInstance","type":"address"}],"name":"workItemsFor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]',
+      bytecode: '608060405234801561001057600080fd5b5061093c806100206000396000f3fe608060405234801561001057600080fd5b506004361061009e5760003560e01c80636a03a782116100665780636a03a7821461017b5780636ac7c92b1461019857806397805b82146101b5578063b11b7c66146101d2578063ce1613e4146101ef5761009e565b806313342b59146100a3578063151a3735146100c2578063229ac27b146101005780635a6c644d14610139578063629c4eea1461015e575b600080fd5b6100c0600480360360208110156100b957600080fd5b5035610215565b005b6100ee600480360360408110156100d857600080fd5b50803590602001356001600160a01b031661037e565b60408051918252519081900360200190f35b61011d6004803603602081101561011657600080fd5b503561040a565b604080516001600160a01b039092168252519081900360200190f35b6100c06004803603604081101561014f57600080fd5b50803590602001351515610449565b6100c06004803603602081101561017457600080fd5b50356105bd565b6100c06004803603602081101561019157600080fd5b503561068a565b6100c0600480360360208110156101ae57600080fd5b5035610757565b6100c0600480360360208110156101cb57600080fd5b5035610824565b6100ee600480360360208110156101e857600080fd5b50356108af565b6100c06004803603602081101561020557600080fd5b50356001600160a01b03166108e4565b60005481108015610259575060006001600160a01b03166000828154811061023957fe5b60009182526020909120600160029092020101546001600160a01b031614155b61026257600080fd5b6000818154811061026f57fe5b6000918252602082206001600290920201015481546001600160a01b0390911691635578d78c91849081106102a057fe5b9060005260206000209060020201600001546040518263ffffffff1660e01b815260040180828152602001915050600060405180830381600087803b1580156102e857600080fd5b505af11580156102fc573d6000803e3d6000fd5b50505050600080828154811061030e57fe5b60009182526020918290206002919091020160010180546001600160a01b0319166001600160a01b0393909316929092179091556040805130815291820183905280517ff8956fa7f0240308d94432302af68e4943f349d4ec58bd94970fbae78f95a5b49281900390910190a150565b600080805b60005481101561040257846000828154811061039b57fe5b9060005260206000209060020201600001541480156103eb5750836001600160a01b0316600082815481106103cc57fe5b60009182526020909120600160029092020101546001600160a01b0316145b156103fa57806001901b821791505b600101610383565b509392505050565b60008054821061041957600080fd5b6000828154811061042657fe5b60009182526020909120600290910201600101546001600160a01b031692915050565b6000548210801561048d575060006001600160a01b03166000838154811061046d57fe5b60009182526020909120600160029092020101546001600160a01b031614155b61049657600080fd5b600082815481106104a357fe5b6000918252602082206001600290920201015481546001600160a01b039091169163ff6363a891859081106104d457fe5b60009182526020822060029091020154604080516001600160e01b031960e086901b16815260048101929092528515156024830152516044808301939282900301818387803b15801561052657600080fd5b505af115801561053a573d6000803e3d6000fd5b50505050600080838154811061054c57fe5b60009182526020918290206002919091020160010180546001600160a01b0319166001600160a01b0393909316929092179091556040805130815291820184905280517ff8956fa7f0240308d94432302af68e4943f349d4ec58bd94970fbae78f95a5b49281900390910190a15050565b6040805180820182528281523360208083019182526000805460018101825581805293517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56360029095029485015591517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56490930180546001600160a01b0319166001600160a01b039094169390931790925554825160001991909101815291517f9021e40672c2312272f70fa5ce99a5f7109dc828932f8352d345d87bfd5857bb9281900390910190a150565b6040805180820182528281523360208083019182526000805460018101825581805293517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56360029095029485015591517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56490930180546001600160a01b0319166001600160a01b039094169390931790925554825160001991909101815291517f0da1977f6677caa4a973a9f11d11e47f7d508ebbaa3a02b44e78ea90f5ef96419281900390910190a150565b6040805180820182528281523360208083019182526000805460018101825581805293517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56360029095029485015591517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56490930180546001600160a01b0319166001600160a01b039094169390931790925554825160001991909101815291517fe239136486fd09cb0a8208ba2dd1f7e8c26ec08b4001d7661a7f29a5e90fdca39281900390910190a150565b60005481108015610868575060006001600160a01b03166000828154811061084857fe5b60009182526020909120600160029092020101546001600160a01b031614155b61087157600080fd5b6000818154811061087e57fe5b6000918252602082206001600290920201015481546001600160a01b03909116916307c1d5a791849081106102a057fe5b6000805482106108be57600080fd5b600082815481106108cb57fe5b9060005260206000209060020201600001549050919050565b600180546001600160a01b0319166001600160a01b039290921691909117905556fea26469706673582212204ba7eb952384c1e89e0a82d7816d56ab1cb480d212359c9ee8537ce7e2e264df64736f6c634300060a0033'
+    }
+  ]
+}
+----------------------------------------------------------------
+SUBMITED: Update compilation metadata in process repository ...
+SUCCESS: Metadata of contract Invoice_HandlingWorkflow updated in process repository
+ ID: 6358cf50cbbedf3a9c0fe660
+----------------------------------------------------------------
+SUBMITED: Update process hierarchical relationships in runtime registry ...
+SUCCESS: Relation Parent(6358cf50cbbedf3a9c0fe660)-Child(6358cf50cbbedf3a9c0fe660) updated
+ Cost: 42449 gas units
+----------------------------------------------------------------
+SUBMITED: Deploy and register factory contracts ...
+SUCCESS: Factory Invoice_HandlingFactory deployed
+ Address: 0xC12CbA1aeeC464b8A183768DD3c61E81599a63Dd)
+ Cost: 598227 gas units
+----------------------------------------------------------------
+SUCCESS: Runtime registry updated with: Factory Invoice_HandlingFactory
+ Cost: 83953 gas units
+----------------------------------------------------------------
+SUBMITED: Deploy and register worklist contracts ...
+SUCCESS: Worklist Invoice_HandlingWorklist deployed
+ Address: 0x96f0c9F2dAd183a12504b52e9E3A22c5cC848Ba2)
+ Cost: 563441 gas units
+----------------------------------------------------------------
+SUCCESS: Runtime registry updated with: Worklist Invoice_HandlingWorklist
+ Cost: 88537 gas units
+----------------------------------------------------------------
+POST /models 201 1561.190 ms - 39
+
+
+{
+"bundleID": "6358cf50cbbedf3a9c0fe660"
+}
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+REQUESTED: Compile and deploy role binding policy
+{ Invoicer is case-creator; Invoicer nominates Invoicee } { }
+Success: the policy is consistent
+ Role Precedence:
+   0: Invoicer
+   1: Invoicee
+----------------------------------------------------------------
+SUBMITTED: new instance of BindingPolicyContract submitted
+   Transaction Hash: 0x0c86c565cf0359bdf611b7c8d891c58c047d75236ae59bc46280116e26c8ad19
+----------------------------------------------------------------
+POST /rb-policy 202 334.026 ms - 68
+SUCCESS: BindingPolicyContract deployed succesfully
+   Transaction Hash: 0x0c86c565cf0359bdf611b7c8d891c58c047d75236ae59bc46280116e26c8ad19
+   Address: 0x10F3D979fab16B4DBECB9b6f24752f7F8dDc66dC
+   Cost: 171847 gas
+   Repository ID: 6358d160cbbedf3a9c0fe661
+   
+0x0c86c565cf0359bdf611b7c8d891c58c047d75236ae59bc46280116e26c8ad19
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Compile and deploy role-task map
+   Map: ["6358d160cbbedf3a9c0fe661", "6358cf50cbbedf3a9c0fe660"]
+inside generateRoleTaskContract...
+SUBMITTED: new instance of task_role_mapContract submitted
+   Transaction Hash: 0x1546a25b4c12ed2aa112c71684ee688ea11aa06f1ad305bbd7d2a2b2478e8eef
+----------------------------------------------------------------
+POST /task-role-map 202 158.058 ms - 68
+SUCCESS: task_role_mapContract deployed succesfully
+   Transaction Hash: 0x1546a25b4c12ed2aa112c71684ee688ea11aa06f1ad305bbd7d2a2b2478e8eef
+   Address: 0x675D86b1b1FACDEF3160D54999d17DC25d798835
+   Cost: 111553 gas
+   Repository ID: 6358d3eecbbedf3a9c0fe662
+
+0x1546a25b4c12ed2aa112c71684ee688ea11aa06f1ad305bbd7d2a2b2478e8eef   
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Compile and Deploy smart contract for DynamicAccessControl
+SUBMITTED: new instance of BindingAccessControl submitted
+   Transaction Hash: 0x27e6069caefb7f4462207aab7a824487b85a720d8ba96a7c598cf9b2c99c5896
+----------------------------------------------------------------
+POST /access-control 202 478.815 ms - 68
+SUCCESS: BindingAccessControl deployed succesfully
+   Transaction Hash: 0x27e6069caefb7f4462207aab7a824487b85a720d8ba96a7c598cf9b2c99c5896
+   Address: 0x4b212d9eb2dE3d7EfabAe6E8333c9F0D1646814D
+   Cost: 1238058 gas
+   Repository ID: 6358d51fcbbedf3a9c0fe663
+
+0x27e6069caefb7f4462207aab7a824487b85a720d8ba96a7c598cf9b2c99c5896
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Create new instance of process ID 6358cf50cbbedf3a9c0fe660
+POST /models/6358cf50cbbedf3a9c0fe660/processes 202 558.482 ms - 88
+New Instance of contract 6358cf50cbbedf3a9c0fe660 (ID: 6358cf50cbbedf3a9c0fe660) Created
+  TransactionHash: 0xbc01a78d5a2c96f97a6728a1820d1b4a59b0202927db66caad498acd59ece83b
+  Address: 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+  GasUsed: 737831 units
+
+{
+"transactionHash": "0xbc01a78d5a2c96f97a6728a1820d1b4a59b0202927db66caad498acd59ece83b"
+}
+
+0x7A9750873dc53448f766923E8499853dC3bd0d4e
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Query instances (blockchain addresses) of process ID 6358cf50cbbedf3a9c0fe660
+SUCCESS: Instances of Process with ID 6358cf50cbbedf3a9c0fe660 Retrieved Successfully.
+ Addressess: 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+----------------------------------------------------------------
+GET /models/6358cf50cbbedf3a9c0fe660/processes 200 266.932 ms - 46
+REQUESTED: Query state of process instance running at 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+Started Workitems (Enabled Tasks) Info:
+[
+  {
+    elementId: 'Task_0e5xumt',
+    elementName: 'Issue_Invoice',
+    input: [],
+    bundleId: '6358cf50cbbedf3a9c0fe660',
+    processAddress: '0x7A9750873dc53448f766923E8499853dC3bd0d4e',
+    pCases: [ '0x7A9750873dc53448f766923E8499853dC3bd0d4e' ],
+    hrefs: [
+      '/worklists/0x96f0c9F2dAd183a12504b52e9E3A22c5cC848Ba2/workitems/0'
+    ]
+  }
+]
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+GET /processes/0x7A9750873dc53448f766923E8499853dC3bd0d4e 200 378.783 ms - 305
+REQUESTED: Query Addresses of policy-related contracts for process instance runing at 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+SUCCESS: Addresses of policy-related contracts linked to process instance at 0x7A9750873dc53448f766923E8499853dC3bd0d4e recovered
+   Access Control Address: 0x4b212d9eb2dE3d7EfabAe6E8333c9F0D1646814D
+   Binding Policy Address: 0x10F3D979fab16B4DBECB9b6f24752f7F8dDc66dC
+   Role-Task Map Address:  0x675D86b1b1FACDEF3160D54999d17DC25d798835
+----------------------------------------------------------------
+GET /rb-opertation/0x7A9750873dc53448f766923E8499853dC3bd0d4e 200 356.791 ms - 182
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate-case-creator for process instance at 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+PATCH /rb-opertation/0x7A9750873dc53448f766923E8499853dC3bd0d4e/nominate-creator 202 642.076 ms - 88
+SUCCESS: Runtime Operation nominateCaseCreator executed
+   TransactionHash: 0x4df5d43e56cc1ad465beb42635a71f0436acc6d69f53d5a53a08628d936d23a0
+   Cost: 159794
+   Input Paramaters:
+     rNominee: Invoicer
+     nominee: 0x6ACdB36bE16B9587D54E199997A9E41639736df9
+     pCase: 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate for process instance at 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+PATCH /rb-opertation/0x7A9750873dc53448f766923E8499853dC3bd0d4e/nominate 202 504.166 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0x458fd35639d9e8b4acb1cbf225229ba896d1cb4d8b92949d912aff474a9be254
+   Cost: 146828
+   Input Paramaters:
+     rNominator: Invoicer
+     rNominee: Invoicee
+     nominator: 0x6ACdB36bE16B9587D54E199997A9E41639736df9
+     nominee: 0x28AA9244909137cf4b90Fc3Bf0453852Ad419437
+     pCase: 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+
+{"transactionHash":"0x458fd35639d9e8b4acb1cbf225229ba896d1cb4d8b92949d912aff474a9be254"}	 
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of role Invoicer for process instance at 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+SUCCESS: State of role Invoicer  retrieved
+ State: BOUND
+----------------------------------------------------------------
+GET /rb-opertation/0x7A9750873dc53448f766923E8499853dC3bd0d4e/state 200 290.993 ms - 35
+REQUESTED: Query state of role Invoicee for process instance at 0x7A9750873dc53448f766923E8499853dC3bd0d4e
+SUCCESS: State of role Invoicee  retrieved
+ State: BOUND
+----------------------------------------------------------------
+GET /rb-opertation/0x7A9750873dc53448f766923E8499853dC3bd0d4e/state 200 255.434 ms - 35
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
