@@ -1,0 +1,661 @@
+REQUESTED: Compile and Deploy smart contract for Runtime Registry
+SUCCESS: Runtime Registry Metadata updated in Process Repository
+ ID: 6359df5815d45a2a4c963b29
+----------------------------------------------------------------
+POST /registries 201 1128.740 ms - 33
+
+{
+"ID": "6359df5815d45a2a4c963b29"
+}
+
+0xef59F6787a2BC57d324DA3b5823F6b3b8C25D930
+
+----------------------------------------------------------------
+
+REQUESTED: Create new instance of BPMN Interpreter
+SUCCESS: BPMNInterpreter deployed successfully
+ Address: 0x346FE2127C7E151e0b64FF27884597B431aC0d53
+ Cost: 2887950 gas units
+----------------------------------------------------------------
+POST /interpreter 201 2156.810 ms - 207
+
+{"smartContractName":"BPMNInterpreter","gasCost":2887950,"transactionHash":"0xf115f1552653f13766fc38f1400507a4ba4472c5cc4e3a22575c22e13c0f8db8","contractAddress":"0x346FE2127C7E151e0b64FF27884597B431aC0d53"}
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Compile and deploy process model named Invoice_Handling
+IData and IFactory contracts generated and compiled succesfully
+Starting contract deployments and registration
+SUCCESS: Transaction 0xac14294955b6ae7551413ca1b49e8157aa08f4bb3d36a9abe8e6adb6ba54bd58 for deploying BPMNINterpreter accepted
+ Contract Address 0xA8C01865675F2A7664A358900ce2E5F6E3Da8078
+ Cost 2887950 gas units
+----------------------------------------------------------------
+SUCCESS: BPMNINterpreter running at 0xA8C01865675F2A7664A358900ce2E5F6E3Da8078 updated in repositpry
+  ID: 6359e2be15d45a2a4c963b2a
+----------------------------------------------------------------
+SUCCESS: Transaction 0x2ff7139f45f8f232037f8f3b16347cf44fef430fc72c80b09f7a135227bd79ec for deploying IFlow accepted
+ Contract Address 0x3811010f9eb8065d6058dA1e79924F042BcA5369
+ Cost 715554 gas units
+----------------------------------------------------------------
+SUCCESS: IData metadata from Invoice_Handling updated in repositpry
+  ID: 6359e2be15d45a2a4c963b2b
+----------------------------------------------------------------
+SUCCESS: IFlow running at 0x3811010f9eb8065d6058dA1e79924F042BcA5369 updated in repositpry
+  ID: 6359e2be15d45a2a4c963b2c
+----------------------------------------------------------------
+Deployment transactions sent
+{
+  interpreterTHash: '0xac14294955b6ae7551413ca1b49e8157aa08f4bb3d36a9abe8e6adb6ba54bd58',
+  iFlowTHashes: [
+    '0x2ff7139f45f8f232037f8f3b16347cf44fef430fc72c80b09f7a135227bd79ec'
+  ],
+  iFactoryTHashes: [
+    '0x1acb72e39e96649e58f8a8d7ba07692012ef928adfbe7ec3e4384ab4d8824c38'
+  ]
+}
+POST /interpreter/models 201 4067.697 ms - 79650
+SUCCESS: Transaction 0x1acb72e39e96649e58f8a8d7ba07692012ef928adfbe7ec3e4384ab4d8824c38 for deploying IFactory accepted
+ Contract Address 0x6de894509B70202019402f9B72119Be01bcaAc4a
+ Cost 459523 gas units
+----------------------------------------------------------------
+SUCCESS: IFactory running at 0x6de894509B70202019402f9B72119Be01bcaAc4a updated in repositpry
+  ID: 6359e2bf15d45a2a4c963b2d
+----------------------------------------------------------------
+Process Invoice_Handling updated in repositpry
+  ID: 6359e2bf15d45a2a4c963b2e
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 1,
+  eName: 'Invoice_Handling_Started',
+  typeInfo: '1060',
+  postC: '2',
+  next: [],
+  preC: '0'
+}
+ Cost: 148099 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 2,
+  eName: 'Issue_Invoice',
+  typeInfo: '2057',
+  postC: '4',
+  next: [ 4 ],
+  preC: '2'
+}
+ Cost: 125709 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 3,
+  eName: 'Approve_Invoice',
+  typeInfo: '2057',
+  postC: '16',
+  next: [ 5 ],
+  preC: '8'
+}
+ Cost: 125733 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 4,
+  eName: 'ExclusiveGateway_0bvmb9p',
+  typeInfo: '26',
+  postC: '8',
+  next: [],
+  preC: '132'
+}
+ Cost: 86359 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 5,
+  eName: 'Is_Invoice_Accepted?',
+  typeInfo: '18',
+  postC: '96',
+  next: [ 6 ],
+  preC: '16'
+}
+ Cost: 125781 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 6,
+  eName: 'Invoice_Handling_Completed',
+  typeInfo: '1548',
+  postC: '0',
+  next: [],
+  preC: '32'
+}
+ Cost: 113114 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 7,
+  eName: 'Fix_Invoice',
+  typeInfo: '2057',
+  postC: '128',
+  next: [ 4 ],
+  preC: '64'
+}
+ Cost: 125685 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setFactoryInst
+'0x6de894509B70202019402f9B72119Be01bcaAc4a'
+ Cost: 42616 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setInterpreterInst
+'0xA8C01865675F2A7664A358900ce2E5F6E3Da8078'
+ Cost: 42594 gas
+----------------------------------------------------------------
+SUCCESS: Executed function RuntimeRegistry.registerIFlow
+[
+  '6359e2bf15d45a2a4c963b2e',
+  '0x3811010f9eb8065d6058dA1e79924F042BcA5369'
+]
+ Cost: 83013 gas
+-----------------
+
+'Invoice_HandlingData',
+    solidityCode: 'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      "import 'IDataImp';\r\n" +
+      '\r\n' +
+      'contract Invoice_HandlingData is IDataImp {\r\n' +
+      '    bool accepted;\r\n' +
+      '\r\n' +
+      '    function executeScript(uint eInd) public returns(uint) {\r\n' +
+      '        if (eInd == 5) {\r\n' +
+      '            if (accepted)\r\n' +
+      '                return 32;\r\n' +
+      '            if (!accepted)\r\n' +
+      '                return 64;\r\n' +
+      '        }\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function checkIn(uint eInd) public {\r\n' +
+      '        require (132 & (1 << eInd) != 0);\r\n' +
+      '        continueExecution(eInd);\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function checkIn(uint eInd, bool i1) public {\r\n' +
+      '        require (8 & (1 << eInd) != 0);\r\n' +
+      '        {accepted = i1;}\r\n' +
+      '        continueExecution(eInd);\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function checkOut(uint eInd) public view  {\r\n' +
+      '        require (140 & (1 << eInd) != 0);\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '}\r\n' +
+      '\r\n',
+    address: ''
+  },
+  processID: 'Invoice_Handling',
+  prpcessName: 'Invoice_Handling',
+  bpmnModel: '<?xml version="1.0" encoding="UTF-8"?><bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.6.0"><bpmn:process id="Invoice_Handling" name="Invoice_Handling" isExecutable="false"><bpmn:documentation>bool accepted;</bpmn:documentation><bpmn:startEvent id="StartEvent_1" name="Invoice Handling Started"><bpmn:outgoing>SequenceFlow_0ep6zut</bpmn:outgoing></bpmn:startEvent><bpmn:sequenceFlow id="SequenceFlow_0ep6zut" sourceRef="StartEvent_1" targetRef="Task_0e5xumt" /><bpmn:userTask id="Task_0e5xumt" name="Issue Invoice"><bpmn:documentation>@ Invoicer @</bpmn:documentation><bpmn:incoming>SequenceFlow_0ep6zut</bpmn:incoming><bpmn:outgoing>SequenceFlow_0oiwqsu</bpmn:outgoing></bpmn:userTask><bpmn:sequenceFlow id="SequenceFlow_0oiwqsu" sourceRef="Task_0e5xumt" targetRef="ExclusiveGateway_0bvmb9p" /><bpmn:userTask id="Task_1j0spgi" name="Approve Invoice"><bpmn:documentation><![CDATA[@ Invoicee @() : (bool _accepted) -> {accepted = _accepted;}]]></bpmn:documentation><bpmn:incoming>SequenceFlow_1w3n1g7</bpmn:incoming><bpmn:outgoing>SequenceFlow_09h00sj</bpmn:outgoing></bpmn:userTask><bpmn:exclusiveGateway id="ExclusiveGateway_0bvmb9p"><bpmn:incoming>SequenceFlow_0oiwqsu</bpmn:incoming><bpmn:incoming>SequenceFlow_07vj39u</bpmn:incoming><bpmn:outgoing>SequenceFlow_1w3n1g7</bpmn:outgoing></bpmn:exclusiveGateway><bpmn:sequenceFlow id="SequenceFlow_1w3n1g7" sourceRef="ExclusiveGateway_0bvmb9p" targetRef="Task_1j0spgi" /><bpmn:exclusiveGateway id="ExclusiveGateway_18klyzt" name="Is Invoice Accepted?"><bpmn:incoming>SequenceFlow_09h00sj</bpmn:incoming><bpmn:outgoing>SequenceFlow_0927rr5</bpmn:outgoing><bpmn:outgoing>SequenceFlow_006j8eo</bpmn:outgoing></bpmn:exclusiveGateway><bpmn:sequenceFlow id="SequenceFlow_09h00sj" sourceRef="Task_1j0spgi" targetRef="ExclusiveGateway_18klyzt" /><bpmn:endEvent id="EndEvent_063of2z" name="Invoice Handling Completed"><bpmn:incoming>SequenceFlow_0927rr5</bpmn:incoming></bpmn:endEvent><bpmn:sequenceFlow id="SequenceFlow_0927rr5" name="Yes" sourceRef="ExclusiveGateway_18klyzt" targetRef="EndEvent_063of2z"><bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">accepted</bpmn:conditionExpression></bpmn:sequenceFlow><bpmn:sequenceFlow id="SequenceFlow_006j8eo" name="No" sourceRef="ExclusiveGateway_18klyzt" targetRef="Task_0m7b8xz"><bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">!accepted</bpmn:conditionExpression></bpmn:sequenceFlow><bpmn:sequenceFlow id="SequenceFlow_07vj39u" sourceRef="Task_0m7b8xz" targetRef="ExclusiveGateway_0bvmb9p" /><bpmn:userTask id="Task_0m7b8xz" name="Fix Invoice"><bpmn:documentation>@ Invoicer @</bpmn:documentation><bpmn:incoming>SequenceFlow_006j8eo</bpmn:incoming><bpmn:outgoing>SequenceFlow_07vj39u</bpmn:outgoing></bpmn:userTask></bpmn:process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Invoice_Handling"><bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1"><dc:Bounds x="215" y="105" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="191" y="141" width="83" height="24" /></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id="SequenceFlow_0ep6zut_di" bpmnElement="SequenceFlow_0ep6zut"><di:waypoint xsi:type="dc:Point" x="251" y="123" /><di:waypoint xsi:type="dc:Point" x="285" y="123" /><bpmndi:BPMNLabel><dc:Bounds x="268" y="108" width="0" height="0" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id="UserTask_06i5cy1_di" bpmnElement="Task_0e5xumt"><dc:Bounds x="285" y="83" width="100" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNEdge id="SequenceFlow_0oiwqsu_di" bpmnElement="SequenceFlow_0oiwqsu"><di:waypoint xsi:type="dc:Point" x="385" y="123" /><di:waypoint xsi:type="dc:Point" x="419" y="123" /><bpmndi:BPMNLabel><dc:Bounds x="402" y="108" width="0" height="0" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id="UserTask_1igus1e_di" bpmnElement="Task_1j0spgi"><dc:Bounds x="498" y="83" width="100" height="80" /></bpmndi:BPMNShape><bpmndi:BPMNShape id="ExclusiveGateway_0bvmb9p_di" bpmnElement="ExclusiveGateway_0bvmb9p" isMarkerVisible="true"><dc:Bounds x="419" y="98" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="444" y="148" width="0" height="0" /></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id="SequenceFlow_1w3n1g7_di" bpmnElement="SequenceFlow_1w3n1g7"><di:waypoint xsi:type="dc:Point" x="469" y="123" /><di:waypoint xsi:type="dc:Point" x="498" y="123" /><bpmndi:BPMNLabel><dc:Bounds x="484" y="108" width="0" height="0" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id="ExclusiveGateway_18klyzt_di" bpmnElement="ExclusiveGateway_18klyzt" isMarkerVisible="true"><dc:Bounds x="629" y="98" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="627" y="62" width="53" height="24" /></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id="SequenceFlow_09h00sj_di" bpmnElement="SequenceFlow_09h00sj"><di:waypoint xsi:type="dc:Point" x="598" y="123" /><di:waypoint xsi:type="dc:Point" x="629" y="123" /><bpmndi:BPMNLabel><dc:Bounds x="614" y="108" width="0" height="0" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id="EndEvent_063of2z_di" bpmnElement="EndEvent_063of2z"><dc:Bounds x="718" y="105" width="36" height="36" /><bpmndi:BPMNLabel><dc:Bounds x="694" y="141" width="83" height="24" /></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge id="SequenceFlow_0927rr5_di" bpmnElement="SequenceFlow_0927rr5"><di:waypoint xsi:type="dc:Point" x="679" y="123" /><di:waypoint xsi:type="dc:Point" x="718" y="123" /><bpmndi:BPMNLabel><dc:Bounds x="683" y="101" width="18" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="SequenceFlow_006j8eo_di" bpmnElement="SequenceFlow_006j8eo"><di:waypoint xsi:type="dc:Point" x="654" y="148" /><di:waypoint xsi:type="dc:Point" x="654" y="213" /><di:waypoint xsi:type="dc:Point" x="597" y="213" /><bpmndi:BPMNLabel><dc:Bounds x="634" y="175" width="14" height="12" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge id="SequenceFlow_07vj39u_di" bpmnElement="SequenceFlow_07vj39u"><di:waypoint xsi:type="dc:Point" x="497" y="213" /><di:waypoint xsi:type="dc:Point" x="444" y="213" /><di:waypoint xsi:type="dc:Point" x="444" y="148" /><bpmndi:BPMNLabel><dc:Bounds x="471" y="198" width="0" height="0" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape id="UserTask_0mjla0b_di" bpmnElement="Task_0m7b8xz"><dc:Bounds x="497" y="173" width="100" height="80" /></bpmndi:BPMNShape></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></bpmn:definitions>',
+  indexToElement: [
+    null,
+    {
+      element: '{"eInd":1,"eName":"Invoice_Handling_Started","typeInfo":"1060","postC":"2","next":[],"preC":"0"}',
+      input: '[]',
+      output: '[]'
+    },
+    {
+      element: '{"eInd":2,"eName":"Issue_Invoice","typeInfo":"2057","postC":"4","next":[4],"preC":"2"}',
+      input: '[]',
+      output: '[]'
+    },
+    {
+      element: '{"eInd":3,"eName":"Approve_Invoice","typeInfo":"2057","postC":"16","next":[5],"preC":"8"}',
+      input: '[{"type":"bool","name":"_accepted"}]',
+      output: '[]'
+    },
+    {
+      element: '{"eInd":4,"eName":"ExclusiveGateway_0bvmb9p","typeInfo":"26","postC":"8","next":[],"preC":"132"}',
+      input: '[]',
+      output: '[]'
+    },
+    {
+      element: '{"eInd":5,"eName":"Is_Invoice_Accepted?","typeInfo":"18","postC":"96","next":[6],"preC":"16"}',
+      input: '[]',
+      output: '[]'
+    },
+    {
+      element: '{"eInd":6,"eName":"Invoice_Handling_Completed","typeInfo":"1548","postC":"0","next":[],"preC":"32"}',
+      input: '[]',
+      output: '[]'
+    },
+    {
+      element: '{"eInd":7,"eName":"Fix_Invoice","typeInfo":"2057","postC":"128","next":[4],"preC":"64"}',
+      input: '[]',
+      output: '[]'
+    }
+  ],
+  children: [],
+  iData: {
+    contractName: 'Invoice_HandlingData',
+    solidityCode: 'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      "import 'IDataImp';\r\n" +
+      '\r\n' +
+      'contract Invoice_HandlingData is IDataImp {\r\n' +
+      '    bool accepted;\r\n' +
+      '\r\n' +
+      '    function executeScript(uint eInd) public returns(uint) {\r\n' +
+      '        if (eInd == 5) {\r\n' +
+      '            if (accepted)\r\n' +
+      '                return 32;\r\n' +
+      '            if (!accepted)\r\n' +
+      '                return 64;\r\n' +
+      '        }\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function checkIn(uint eInd) public {\r\n' +
+      '        require (132 & (1 << eInd) != 0);\r\n' +
+      '        continueExecution(eInd);\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function checkIn(uint eInd, bool i1) public {\r\n' +
+      '        require (8 & (1 << eInd) != 0);\r\n' +
+      '        {accepted = i1;}\r\n' +
+      '        continueExecution(eInd);\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function checkOut(uint eInd) public view  {\r\n' +
+      '        require (140 & (1 << eInd) != 0);\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '}\r\n' +
+      '\r\n',
+    address: ''
+  },
+  iFactory: {
+    contractName: 'Invoice_HandlingFactory',
+    solidityCode: 'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      "import 'Invoice_HandlingData';\r\n" +
+      '\r\n' +
+      'contract Invoice_HandlingFactory {\r\n' +
+      '\r\n' +
+      '    function newInstance() public returns(address) {\r\n' +
+      '        return address(new Invoice_HandlingData());\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '}',
+    address: '0x6de894509B70202019402f9B72119Be01bcaAc4a'
+  },
+  iFlow: {
+    contractName: 'IFlowImpl',
+    solidityCode: 'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      'abstract contract IFlow {\r\n' +
+      '\r\n' +
+      '    function getPreCond(uint eInd) public virtual view returns(uint);\r\n' +
+      '    function getPostCond(uint eInd) public virtual view returns(uint);\r\n' +
+      '    function getTypeInfo(uint eInd) public virtual view returns(uint);\r\n' +
+      '    function getAdyElements(uint eInd) public virtual view returns(uint[] memory);\r\n' +
+      '    function getEventCode(uint eInd) public virtual view returns(bytes32);\r\n' +
+      '    function getAttachedTo(uint eInd) public virtual view returns(uint);\r\n' +
+      '    \r\n' +
+      '    function getElementInfo(uint eInd) public virtual view returns(uint, uint, uint, uint[] memory);\r\n' +
+      '    function getFirstElement() public virtual view returns(uint);\r\n' +
+      '    \r\n' +
+      '    function getEventList() public virtual view returns(uint[] memory);\r\n' +
+      '    function getSubProcList() public virtual view returns(uint[] memory);\r\n' +
+      '    function getSubProcInst(uint eInd) public virtual view returns(address);\r\n' +
+      '    function getFactoryInst() public virtual view returns(address);\r\n' +
+      '    function setFactoryInst(address _factory) public virtual;\r\n' +
+      '    function getInstanceCount(uint eInd) public virtual view returns(uint);\r\n' +
+      '\r\n' +
+      '    function getIDataInstances() public virtual view returns(address[] memory);\r\n' +
+      '    function addIDataInstance(address iDataAddr) external virtual;\r\n' +
+      '\r\n' +
+      '    function getRegistryInst() public virtual view returns(address);\r\n' +
+      '\r\n' +
+      '    function getInterpreterInst() public virtual view returns(address);\r\n' +
+      '    function setInterpreterInst(address _interpreter) public virtual;\r\n' +
+      '    \r\n' +
+      '    function setElement(uint eInd, uint preC, uint postC, uint typeInfo, bytes32 eCode, uint[] memory _nextElem) public virtual;\r\n' +
+      '    function linkSubProcess(uint pInd, address cFlowInst, uint[] memory attachedEvt, uint countInstances) public virtual;\r\n' +
+      '}\r\n' +
+      '\r\n' +
+      '/// @title Control Flow Data Structure \r\n' +
+      '/// @dev Tree mirroring the process hierarchy derived from a process model. \r\n' +
+      '/// @dev This contract must be deployed/instantiated once per process model.\r\n' +
+      'contract IFlowImpl {\r\n' +
+      '    \r\n' +
+      '    uint private startEvt;\r\n' +
+      '    address private factory;\r\n' +
+      '    address private interpreter;\r\n' +
+      '    address private registry;\r\n' +
+      '    address[] private iDataInstances;\r\n' +
+      '\r\n' +
+      '    constructor(address _registry) public {\r\n' +
+      '        registry = _registry;\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    // elemIndex => [preC, postC, type]\r\n' +
+      '    mapping(uint => uint[3]) private condTable;\r\n' +
+      '    \r\n' +
+      '    // Element Index => List of elements that can be enabled with the completion of the key element\r\n' +
+      '    mapping(uint => uint[]) private nextElem;\r\n' +
+      '    \r\n' +
+      '    // List of Indexes of the subprocesses\r\n' +
+      '    uint[] private subProcesses;\r\n' +
+      '    \r\n' +
+      '    // List of Event Indexes defined in the current Subprocess\r\n' +
+      '    uint[] private events;\r\n' +
+      '    \r\n' +
+      '    // Event Index => Index of the element where event is attachedTo\r\n' +
+      '    mapping(uint => uint) private attachedTo;\r\n' +
+      '    \r\n' +
+      '    // Event Index => String representing the code to identify the event (for catching)\r\n' +
+      '    mapping(uint => bytes32) private eventCode;\r\n' +
+      '    \r\n' +
+      '    // Subprocess Index => Child Subproces address\r\n' +
+      '    mapping(uint => address) private pReferences;\r\n' +
+      '    \r\n' +
+      '    // Subprocess Index => number of instances\r\n' +
+      '    mapping(uint => uint) private instanceCount;\r\n' +
+      '\r\n' +
+      '    function getPreCond(uint eInd) public view returns(uint) {\r\n' +
+      '        return condTable[eInd][0];\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getPostCond(uint eInd) public view returns(uint) {\r\n' +
+      '        return condTable[eInd][1];\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getTypeInfo(uint eInd) public view returns(uint) {\r\n' +
+      '        return condTable[eInd][2];\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getFirstElement() public view returns(uint) {\r\n' +
+      '        return startEvt;\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getAdyElements(uint eInd) public view returns(uint[] memory) {\r\n' +
+      '        return nextElem[eInd];\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getElementInfo(uint eInd) public view returns(uint, uint, uint, uint[] memory) {\r\n' +
+      '        return (condTable[eInd][0], condTable[eInd][1], condTable[eInd][2], nextElem[eInd]);\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getSubProcList() public view returns(uint[] memory) {\r\n' +
+      '        return subProcesses;\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getInstanceCount(uint eInd) public view returns(uint) {\r\n' +
+      '        return instanceCount[eInd];\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getEventCode(uint eInd) public view returns(bytes32) {\r\n' +
+      '        return eventCode[eInd];\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getEventList() public view returns(uint[] memory) {\r\n' +
+      '        return events;\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getAttachedTo(uint eInd) public view returns(uint) {\r\n' +
+      '        return attachedTo[eInd];\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getSubProcInst(uint eInd) public view returns(address) {\r\n' +
+      '        return pReferences[eInd];\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function getFactoryInst() public view returns(address) {\r\n' +
+      '        return factory;\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function setFactoryInst(address _factory) public {\r\n' +
+      '        factory = _factory;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function getInterpreterInst() public view returns(address) {\r\n' +
+      '        return interpreter;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function getRegistryInst() public view returns(address) {\r\n' +
+      '        return registry;\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function setInterpreterInst(address _interpreter) public {\r\n' +
+      '        interpreter = _interpreter;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function getIDataInstances() public view returns(address[] memory) {\r\n' +
+      '        return iDataInstances;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function addIDataInstance(address iDataAddr) external {\r\n' +
+      '        require(msg.sender == interpreter);\r\n' +
+      '        iDataInstances.push(iDataAddr);\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function setElement(uint eInd, uint preC, uint postC, uint typeInfo, bytes32 eCode, uint[] memory _nextElem) public {\r\n' +
+      '        uint _typeInfo = condTable[eInd][2];\r\n' +
+      '        if (_typeInfo == 0) {\r\n' +
+      '            if (typeInfo & 4 == 4) {\r\n' +
+      '                events.push(eInd);\r\n' +
+      '                if (typeInfo & 36 == 36)\r\n' +
+      '                    startEvt = eInd;\r\n' +
+      '                eventCode[eInd] = eCode;\r\n' +
+      '            } else if (typeInfo & 33 == 33)\r\n' +
+      '                subProcesses.push(eInd);\r\n' +
+      '        } else\r\n' +
+      '            require (_typeInfo == typeInfo);\r\n' +
+      '        condTable[eInd] = [preC, postC, typeInfo];\r\n' +
+      '        nextElem[eInd] = _nextElem;\r\n' +
+      '    }\r\n' +
+      '    \r\n' +
+      '    function linkSubProcess(uint pInd, address cFlowInst, uint[] memory attachedEvt, uint countInstances) public {\r\n' +
+      '        require(condTable[pInd][2] & 33 == 33);  // BITs (0, 5) Veryfing the subprocess to link is already in the data structure\r\n' +
+      '        pReferences[pInd] = cFlowInst;\r\n' +
+      '        for(uint i = 0; i < attachedEvt.length; i++) \r\n' +
+      '            if(condTable[attachedEvt[i]][2] & 4 == 4)\r\n' +
+      '                attachedTo[attachedEvt[i]] = pInd;\r\n' +
+      '        instanceCount[pInd] = countInstances;\r\n' +
+      '    }\r\n' +
+      '}',
+    address: '0x3811010f9eb8065d6058dA1e79924F042BcA5369',
+    _relId: '6359e2be15d45a2a4c963b2b'
+  },
+  _id: '6359e2bf15d45a2a4c963b2e'
+}
+----------------------------------------------------------------
+GET /interpreter/models/6359e2bf15d45a2a4c963b2e 200 86.861 ms - 47678
+----------------------------------------------------------------
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Query registered IFlow nodes from Runtime Registry at 0xef59F6787a2BC57d324DA3b5823F6b3b8C25D930
+SUCCESS: List Retrieved Successfully.
+ bytes32[]: 6359e2bf15d45a2a4c963b2e
+----------------------------------------------------------------
+GET /interpreter/models 200 127.906 ms - 28
+
+
+
+REQUESTED: Create new instance of IFlow node
+SUCCESS: IFlowImpl deployed successfully
+ Address: 0x6B825Dc082Ca147EDBfE6D1b246b7954bD8d3155
+ Cost: 715554 gas units
+----------------------------------------------------------------
+POST /i-flow 201 1002.956 ms - 20706
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Compile and deploy role binding policy
+{ Invoicer is case-creator; Invoicer nominates Invoicee } { }
+Success: the policy is consistent
+ Role Precedence:
+   0: Invoicer
+   1: Invoicee
+----------------------------------------------------------------
+SUBMITTED: new instance of BindingPolicyContract submitted
+   Transaction Hash: 0x8358c01fd5ec4b1b79bc5fea3b9eb31fe8d42ef7b48a422d1971b18c6a357c17
+----------------------------------------------------------------
+POST /rb-policy 202 332.390 ms - 68
+SUCCESS: BindingPolicyContract deployed succesfully
+   Transaction Hash: 0x8358c01fd5ec4b1b79bc5fea3b9eb31fe8d42ef7b48a422d1971b18c6a357c17
+   Address: 0x2Ec1007b61889bB2006aaaE76CA0e71138465A6F
+   Cost: 171847 gas
+   Repository ID: 635a0c8c56ffbf41f8f50711
+   
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+GET /task-role-map/0x3A1E6ACbC562Fd9Fc202E865E633dd1F6318A004 200 10.387 ms - 1545
+REQUESTED: Compile and deploy role-task map
+   Map: ["635a0c8c56ffbf41f8f50711", "6359e2bf15d45a2a4c963b2e"]
+inside generateRoleTaskContract...
+SUBMITTED: new instance of Invoice_HandlingContract submitted
+   Transaction Hash: 0xca6226652883ce8c554a3a0445060483a8d6822e4a76cb80eb79366d797d1042
+----------------------------------------------------------------
+POST /task-role-map 202 272.921 ms - 68
+SUCCESS: Invoice_HandlingContract deployed succesfully
+   Transaction Hash: 0xca6226652883ce8c554a3a0445060483a8d6822e4a76cb80eb79366d797d1042
+   Address: 0x7263dB5d2aB02C87D0e93631beDf574aB474944b
+   Cost: 112201 gas
+   Repository ID: 635a111456ffbf41f8f50713
+
+{
+  "contractName": "Invoice_Handling",
+  "roleTaskPairs": "[\"635a0c8c56ffbf41f8f50711\", \"6359e2bf15d45a2a4c963b2e\"]"
+}
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+POST /access-control 202 605.974 ms - 68
+SUCCESS: BindingAccessControl deployed succesfully
+   Transaction Hash: 0x152d26f503a3674b75553f9ac1e4bf3356a1f917abe827f4518842dd336b376f
+   Address: 0xC20E661635c101B48011BdD4c78A891d4CD93733
+   Cost: 1238058 gas
+   Repository ID: 635a11eb56ffbf41f8f50714
+   
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+REQUESTED: Query Process Information from IFlow node at 0x3811010f9eb8065d6058dA1e79924F042BcA5369
+SUCCESS: Information from IFlow node at 0x3811010f9eb8065d6058dA1e79924F042BcA5369 collected
+{
+  factoryAddress: '0x6de894509B70202019402f9B72119Be01bcaAc4a',
+  interpreterAddress: '0xA8C01865675F2A7664A358900ce2E5F6E3Da8078',
+  subProcesses: [],
+  elementInfo: [
+    { eInd: 1, preC: '0', postC: '2', typeInfo: '1060', next: [] },
+    { eInd: 2, preC: '2', postC: '4', typeInfo: '2057', next: [ '4' ] },
+    {
+      eInd: 3,
+      preC: '8',
+      postC: '16',
+      typeInfo: '2057',
+      next: [ '5' ]
+    },
+    { eInd: 4, preC: '132', postC: '8', typeInfo: '26', next: [] },
+    { eInd: 5, preC: '16', postC: '96', typeInfo: '18', next: [ '6' ] },
+    { eInd: 6, preC: '32', postC: '0', typeInfo: '1548', next: [] },
+    {
+      eInd: 7,
+      preC: '64',
+      postC: '128',
+      typeInfo: '2057',
+      next: [ '4' ]
+    }
+  ]
+}
+----------------------------------------------------------------
+GET /i-flow/0x3811010f9eb8065d6058dA1e79924F042BcA5369 200 1625.003 ms - 614
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+REQUESTED: Create new instance of process IFlow address 0x3811010f9eb8065d6058dA1e79924F042BcA5369
+POST /i-flow/0x3811010f9eb8065d6058dA1e79924F042BcA5369/i-data 202 709.256 ms - 88
+SUCCESS: New Process Instance created from IFlow running at 0xA8C01865675F2A7664A358900ce2E5F6E3Da8078
+  TransactionHash: 0x53898d9233fcd2841e02c5ba620029cb541eb05c9743c62efd742bcc6450f3d9
+  Address: 0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820
+  GasUsed: 621801 units
+
+
+{
+  "registryAddress": "0xef59F6787a2BC57d324DA3b5823F6b3b8C25D930",
+  "accessCtrlAddr": "0xC20E661635c101B48011BdD4c78A891d4CD93733",
+  "rbPolicyAddr": "0x2Ec1007b61889bB2006aaaE76CA0e71138465A6F",
+  "taskRoleMapAddr": "0x7263dB5d2aB02C87D0e93631beDf574aB474944b"
+}
+
+{
+	"accessControl": "0xC20E661635c101B48011BdD4c78A891d4CD93733",
+	"bindingPolicy": "0x2Ec1007b61889bB2006aaaE76CA0e71138465A6F",
+	"roleTaskMap": "0x7263dB5d2aB02C87D0e93631beDf574aB474944b"
+}
+
+------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820
+Enabled activities of process running at 0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820 retrieved
+[
+  {
+    elementName: 'Issue_Invoice',
+    input: '[]',
+    output: '[]',
+    bundleId: '6359e2bf15d45a2a4c963b2e',
+    hrefs: [ '/i-flow/2/i-data/0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820 200 1767.913 ms - 170
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Perform role-binding operation nominate-case-creator for process instance at 0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820
+PATCH /rb-opertation/0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820/nominate-creator 202 583.396 ms - 88
+SUCCESS: Runtime Operation nominateCaseCreator executed
+   TransactionHash: 0xd7679f90ddc8655892c10b3b2df42fe32d3ae7c5b0aacb9061d87a397aed8560
+   Cost: 159794
+   Input Paramaters:
+     rNominee: Invoicer
+     nominee: 0x069e99442086bC5412D80fEfc00B9DFdF92272f4
+     pCase: 0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820
+	 
+
+
+REQUESTED: Perform role-binding operation nominate for process instance at 0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820
+PATCH /rb-opertation/0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820/nominate 202 398.740 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0x72664f3b256cbb37fde487b0ca928af491b8cd6735896d8f3ec862baa1af101b
+   Cost: 146828
+   Input Paramaters:
+     rNominator: Invoicer
+     rNominee: Invoicee
+     nominator: 0x069e99442086bC5412D80fEfc00B9DFdF92272f4
+     nominee: 0x5a6e23948109142EaFf37c3a32704Dd9e3d5fcB4
+     pCase: 0x4207A317Bc6e3aA8FF82b4F649618171BF4FF820
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+

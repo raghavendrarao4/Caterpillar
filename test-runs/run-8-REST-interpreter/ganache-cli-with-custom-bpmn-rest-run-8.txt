@@ -1,0 +1,6 @@
+ganache-cli --gasPrice=100000000000 --gasLimit=6721975
+
+
+
+
+

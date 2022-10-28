@@ -77,6 +77,7 @@ export let checkOutTaskInProcessInstance = (
       return executionMediatorService.checkOutTaskData(
         request.params.eIndex,
         request.params.pcAddress,
+		request.get("roleAddress"),
         JSON.parse(request.get("outParams")),
         this.runtimeRegistry
       );
@@ -101,6 +102,7 @@ export let checkInTaskInProcessInstance = (
       return executionMediatorService.executeTask(
         request.params.eIndex,
         request.params.pcAddress,
+		request.get("roleAddress"),
         JSON.parse(request.body.inParams),
         this.runtimeRegistry
       );

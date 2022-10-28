@@ -189,27 +189,35 @@ export let queryProcessState = async (
 export let executeTask = async (
   eIndex: string,
   iDataAddr: string,
+  roleAddress: string,
   inParams: any,
   runtimeRegistry: ContractInfo
 ) => {
   try {
     await validateAddressInput(iDataAddr, "IData");
+
     // Retrieving the IFlow node related to the input IData from Runtime Registry.
     let iFlowAddr = await findIFlowAddress(iDataAddr, runtimeRegistry);
+	
     let iFlowInfo = (await mongoDBAdapter.findContractInfoByAddress(
       RepoType.SmartContract,
       iFlowAddr
     )) as ContractInfo;
+	
     let iDataInfo = (await mongoDBAdapter.findContractInfoById(
       RepoType.SmartContract,
       iFlowInfo._relId
     )) as ContractInfo;
+
     let [paramTypes, paramValues] = extractParams(inParams, eIndex);
+	
+	let taskroleAccount = await ethereumAdapter.taskRoleAccountInfo(roleAddress);
+	
     let transactionHash = await ethereumAdapter.execContractFunctionAsync(
       iDataAddr,
       iDataInfo.abi,
       new FunctionInfo("checkIn", paramTypes),
-      this.defaultAccount,
+      taskroleAccount,
       paramValues
     );
     eventMonitorService.listenForPendingTransaction(
@@ -231,6 +239,7 @@ export let executeTask = async (
 export let checkOutTaskData = async (
   eIndex: string,
   iDataAddr: string,
+  roleAddress: string,
   outParams: Array<any>,
   runtimeRegistry: ContractInfo
 ) => {
@@ -247,13 +256,16 @@ export let checkOutTaskData = async (
       RepoType.SmartContract,
       iFlowInfo._relId
     )) as ContractInfo;
+	
     let paramInfo = extractOutParams(outParams);
+	let taskroleAccount = await ethereumAdapter.taskRoleAccountInfo(roleAddress);
+	
     let processData = mapOutParamToValue(
       await ethereumAdapter.callContractFunction(
         iDataAddr,
         iDataInfo.abi,
         new FunctionInfo(paramInfo[0], ["uint256"], paramInfo[1], true),
-        this.defaultAccount,
+        taskroleAccount,
         [eIndex]
       ),
       outParams
