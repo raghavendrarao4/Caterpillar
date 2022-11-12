@@ -1,0 +1,13 @@
+POST
+http://localhost:3000/i-flow/0x3811010f9eb8065d6058da1e79924f042bca5369/i-data
+
+Headers
+Content-Type		application/json
+
+Body
+{
+  "registryAddress": "0xef59F6787a2BC57d324DA3b5823F6b3b8C25D930",
+  "accessCtrlAddr": "0xC20E661635c101B48011BdD4c78A891d4CD93733",
+  "rbPolicyAddr": "0x2Ec1007b61889bB2006aaaE76CA0e71138465A6F",
+  "taskRoleMapAddr": "0x7263dB5d2aB02C87D0e93631beDf574aB474944b"
+}

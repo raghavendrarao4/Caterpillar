@@ -1,0 +1,10 @@
+GET
+http://localhost:3000/i-flow/2/i-data/0x4207a317bc6e3aa8ff82b4f649618171bf4ff820
+
+Headers
+
+Content-Type	application/json
+roleAddress		0x069e99442086bC5412D80fEfc00B9DFdF92272f4
+registryAddress	0xef59F6787a2BC57d324DA3b5823F6b3b8C25D930
+outParams		[ { "type": "bool", "value": "true"} ]
+

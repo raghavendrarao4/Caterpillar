@@ -1,0 +1,12 @@
+POST
+http://localhost:3000/task-role-map
+
+Headers
+Content-Type	application/json
+
+Body
+{
+  "contractName": "policy_process_map",
+  "roleTaskPairs": "[\"0x57a73C6F24F620E8acF2f12905caD650FeeC08Bd\", \"0x2B0024e8AF50590AaC308c4D72A42ec2663dA4Bb\"]"
+		roleTaskPairs --> [ policy address, process template address ]
+}
