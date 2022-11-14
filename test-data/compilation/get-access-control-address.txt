@@ -1,0 +1,5 @@
+GET
+http://localhost:3000/access-control/0x35f1f4cec74baf138a24732b9b4b518f463674ab
+
+Headers
+content-type		application/json

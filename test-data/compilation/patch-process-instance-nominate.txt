@@ -1,0 +1,17 @@
+PATCH
+
+http://localhost:3000/rb-opertation/0x23a3c3bfaa891236130fd2dc8d789d61fc0fa5a1/nominate
+
+Headers
+
+Content-Type		application/json
+
+Body
+
+{
+  "registryAddress": "0xD804424D7b0f265A2CE590A73b1c909757D68c10",
+  "rNominator": "Invoicer",
+  "nominator":  "0xa93D197Fdc79541CDF00fEA708317e23b8B690D9",
+  "rNominee": "invoicee",
+  "nominee": "0xC6Bc936aaBdEB63D4F86b9226a07a63b61AEd17b"
+}

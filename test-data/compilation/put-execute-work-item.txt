@@ -1,0 +1,14 @@
+PUT
+http://localhost:3000/worklists/0x872260DB3fd435bB8507CC979b494146E29E3e88/workitems/0
+
+Headers
+
+Content-Type		application/json
+
+Body
+
+{
+  "registryAddress": "0x1c49440C2a817fc6F5A4C45B1A0F53e4b60Aa874",
+  "roleAddress": "0xc2e7160555EcC30AE389F92216bB9b990Ac31B2e",
+  "inputParameters": ""
+}

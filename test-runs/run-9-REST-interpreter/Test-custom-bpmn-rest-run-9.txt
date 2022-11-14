@@ -1,0 +1,483 @@
+REQUESTED: Compile and Deploy smart contract for Runtime Registry
+SUCCESS: Runtime Registry Metadata updated in Process Repository
+ ID: 6370d75f4633bb14709569f0
+----------------------------------------------------------------
+POST /registries 201 793.046 ms - 33
+"address" : "0x1c49440C2a817fc6F5A4C45B1A0F53e4b60Aa874"
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of BPMN Interpreter
+SUCCESS: BPMNInterpreter deployed successfully
+ Address: 0x7E3EB99CED6bBBeDeFcA24B2a5FD6f711ad92599
+ Cost: 2887950 gas units
+----------------------------------------------------------------
+POST /interpreter 201 1576.842 ms - 207
+{"smartContractName":"BPMNInterpreter","gasCost":2887950,"transactionHash":"0xd439f13f3863bb7f5dffb0c45d328d3e21e56df7c04b04fe6c53cfbb8ed825fd","contractAddress":"0x7E3EB99CED6bBBeDeFcA24B2a5FD6f711ad92599"}
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+REQUESTED: Compile and deploy process model named undefined
+Parsing Process Model ...
+Smart Contracts Generated From Process Model
+----------------------------------------------------------------
+SUBMITED: Compile smart contracts ...
+SUCCESS: Smart contracts compiled
+{
+  contractName: 'Process_0lyvl7dWorkflow',
+  solidityCode: 'pragma solidity >= 0.4.25 < 0.7.0;\n' +
+    'import "IWorkflow";\r\n' +
+    'import "IRegistry";\r\n' +
+    'import "IFactory";\r\n' +
+    '\r\n' +
+    'contract Process_0lyvl7dFactory is IFactory {\r\n' +
+    '    function newInstance(address parent, address processRegistry) public virtual override returns(address) {\r\n' +
+    '        Process_0lyvl7dWorkflow newContract = new Process_0lyvl7dWorkflow(parent, worklist, processRegistry);\r\n' +
+    '        return address(newContract);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function startInstanceExecution(address processAddress) public virtual override {\r\n' +
+    '        Process_0lyvl7dWorkflow(processAddress).startExecution();\r\n' +
+    '    }\r\n' +
+    '}\r\n' +
+    '\r\n' +
+    '\r\n' +
+    'contract Process_0lyvl7dWorkflow is IWorkflow {\r\n' +
+    '\r\n' +
+    '    uint public marking = uint(8);\r\n' +
+    '    uint public startedActivities = 0;\r\n' +
+    '\r\n' +
+    '\r\n' +
+    '    // Process Variables\r\n' +
+    '    bool private autoApprove;uint256 amount;bool private claimStatus;\r\n' +
+    '    constructor(address _parent, address _worklist, address _processRegistry) IWorkflow(_parent, _worklist, _processRegistry) public {\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function startExecution() public virtual override {\r\n' +
+    '        require(marking == uint(8) && startedActivities == 0);\r\n' +
+    '        step(uint(8), 0);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function handleEvent(bytes32 code, bytes32 eventType, uint _instanceIndex, bool isInstanceCompleted) public virtual override {\r\n' +
+    '        // Process without calls to external contracts.\r\n' +
+    '        // No events to catch !!!\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function killProcess() public virtual override {\r\n' +
+    '        (marking, startedActivities) = killProcess(0, marking, startedActivities);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function killProcess(uint processElementIndex, uint tmpMarking, uint tmpStartedActivities) internal virtual override returns(uint, uint) {\r\n' +
+    '        if(processElementIndex == 0)\r\n' +
+    '            tmpMarking = tmpStartedActivities = 0;\r\n' +
+    '        return (tmpMarking, tmpStartedActivities);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function broadcastSignal() public virtual override {\r\n' +
+    '        (uint256 tmpMarking, uint256 tmpStartedActivities) = broadcastSignal(marking, startedActivities, 0);\r\n' +
+    '        step(tmpMarking, tmpStartedActivities);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function broadcastSignal(uint tmpMarking, uint tmpStartedActivities, uint sourceChild) internal virtual override returns(uint, uint) {\r\n' +
+    '        return (tmpMarking, tmpStartedActivities);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '\r\n' +
+    '    function Verify_amountComplete(uint elementIndex, bool _claimStatus) external {\r\n' +
+    '        (uint256 tmpMarking, uint256 tmpStartedActivities) = (marking, startedActivities);\r\n' +
+    '        if(elementIndex == uint(3)) {\r\n' +
+    '            require(msg.sender == worklist && tmpStartedActivities & uint(8) != 0);\r\n' +
+    '           {claimStatus = _claimStatus;}\r\n' +
+    '            step(tmpMarking | uint(48), tmpStartedActivities & uint(~8));\r\n' +
+    '            return;\r\n' +
+    '        }\r\n' +
+    '    }\r\n' +
+    '    function Apply_claimComplete(uint elementIndex, uint _amount) external {\r\n' +
+    '        (uint256 tmpMarking, uint256 tmpStartedActivities) = (marking, startedActivities);\r\n' +
+    '        if(elementIndex == uint(4)) {\r\n' +
+    '            require(msg.sender == worklist && tmpStartedActivities & uint(16) != 0);\r\n' +
+    '           {amount = _amount;}\r\n' +
+    '            step(tmpMarking | uint(64), tmpStartedActivities & uint(~16));\r\n' +
+    '            return;\r\n' +
+    '        }\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '\r\n' +
+    '    function step(uint tmpMarking, uint tmpStartedActivities) internal {\r\n' +
+    '        while (true) {\r\n' +
+    '            if (tmpMarking & uint(128) != 0) {\r\n' +
+    '                tmpMarking &= uint(~128);\r\n' +
+    'if (autoApprove)                tmpMarking |= uint(2);\r\n' +
+    'else                 tmpMarking |= uint(4);\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(2) != 0) {\r\n' +
+    '                tmpMarking &= uint(~2);\r\n' +
+    '                if (tmpMarking & uint(254) == 0 && tmpStartedActivities & uint(88) == 0) {\r\n' +
+    '                    (tmpMarking, tmpStartedActivities) = propagateEvent("Event_0jrdj0u", "Default", tmpMarking, tmpStartedActivities, uint(4));\r\n' +
+    '                }\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(4) != 0) {\r\n' +
+    '                Process_0lyvl7dIWorklist(worklist).Verify_amountStart(3);\r\n' +
+    '                tmpMarking &= uint(~4);\r\n' +
+    '                tmpStartedActivities |= uint(8);\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(40) != 0) {\r\n' +
+    '                Process_0lyvl7dIWorklist(worklist).Apply_claimStart(4);\r\n' +
+    '                tmpMarking &= uint(~40);\r\n' +
+    '                tmpStartedActivities |= uint(16);\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(16) != 0) {\r\n' +
+    '                tmpMarking &= uint(~16);\r\n' +
+    '                if (tmpMarking & uint(254) == 0 && tmpStartedActivities & uint(88) == 0) {\r\n' +
+    '                    (tmpMarking, tmpStartedActivities) = propagateEvent("Event_1ihxztx", "Default", tmpMarking, tmpStartedActivities, uint(32));\r\n' +
+    '                }\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            if (tmpMarking & uint(64) != 0) {\r\n' +
+    '                autoApprove = amount > 1500 ? false: true;                tmpMarking = tmpMarking & uint(~64) | uint(128);\r\n' +
+    '                continue;\r\n' +
+    '            }\r\n' +
+    '            break;\r\n' +
+    '        }\r\n' +
+    '        if(marking != 0 || startedActivities != 0) {\r\n' +
+    '            marking = tmpMarking;\r\n' +
+    '            startedActivities = tmpStartedActivities;\r\n' +
+    '        }\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function getWorklistAddress() external view returns(address) {\r\n' +
+    '        return worklist;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function getInstanceIndex() external view returns(uint) {\r\n' +
+    '        return instanceIndex;\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '}\r\n' +
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+    '\r\n' +
+    'import "IWorklist";\r\n' +
+    '\r\n' +
+    'abstract contract Process_0lyvl7dIWorklist {\r\n' +
+    '\r\n' +
+    '      function Verify_amountStart(uint) external virtual;\r\n' +
+    '      function Apply_claimStart(uint) external virtual;\r\n' +
+    '  \r\n' +
+    '      function Verify_amountComplete(uint, bool) external virtual;\r\n' +
+    '      function Apply_claimComplete(uint, uint) external virtual;\r\n' +
+    '  \r\n' +
+    '}\r\n' +
+    '\r\n' +
+    'contract Process_0lyvl7dWorklist is IWorklist {\r\n' +
+    '\r\n' +
+    '    // Events with the information to include in the Log when a workitem is registered\r\n' +
+    '    event Verify_amountRequested(uint);\r\n' +
+    '    event Apply_claimRequested(uint);\r\n' +
+    '\r\n' +
+    '    event TaskExecutionCompleted(address worklist, uint workItem);\r\n' +
+    '\r\n' +
+    '\r\n' +
+    '    function Verify_amountStart(uint elementIndex) external {\r\n' +
+    '        workitems.push(Workitem(elementIndex, msg.sender));\r\n' +
+    '        emit Verify_amountRequested(workitems.length - 1);\r\n' +
+    '    }\r\n' +
+    '    function Apply_claimStart(uint elementIndex) external {\r\n' +
+    '        workitems.push(Workitem(elementIndex, msg.sender));\r\n' +
+    '        emit Apply_claimRequested(workitems.length - 1);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '    function Verify_amount(uint workitemId, bool _claimStatus) external {\r\n' +
+    '        require(workitemId < workitems.length && workitems[workitemId].processInstanceAddr != address(0));\r\n' +
+    '        Process_0lyvl7dIWorklist(workitems[workitemId].processInstanceAddr).Verify_amountComplete(workitems[workitemId].elementIndex, _claimStatus);\r\n' +
+    '        workitems[workitemId].processInstanceAddr = address(0);\r\n' +
+    '        emit TaskExecutionCompleted(address(this), workitemId);\r\n' +
+    '    }\r\n' +
+    '    function Apply_claim(uint workitemId, uint _amount) external {\r\n' +
+    '        require(workitemId < workitems.length && workitems[workitemId].processInstanceAddr != address(0));\r\n' +
+    '        Process_0lyvl7dIWorklist(workitems[workitemId].processInstanceAddr).Apply_claimComplete(workitems[workitemId].elementIndex, _amount);\r\n' +
+    '        workitems[workitemId].processInstanceAddr = address(0);\r\n' +
+    '        emit TaskExecutionCompleted(address(this), workitemId);\r\n' +
+    '    }\r\n' +
+    '\r\n' +
+    '}\r\n',
+  codeDependencies: [
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      'abstract contract IFactory {\r\n' +
+      '    address internal worklist = address(0);\r\n' +
+      '\r\n' +
+      '    function setWorklist(address _worklist) public {\r\n' +
+      '        worklist = _worklist;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function newInstance(address parent, address globalFactory) public virtual returns(address);\r\n' +
+      '    function startInstanceExecution(address processAddress) public virtual;\r\n' +
+      '}\r\n',
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      'abstract contract IWorkflow {\r\n' +
+      '    address internal parent;\r\n' +
+      '    address internal worklist;\r\n' +
+      '    uint internal instanceIndex;\r\n' +
+      '    address internal processRegistry;\r\n' +
+      '\r\n' +
+      '    constructor(address _parent, address _worklist, address _processRegistry) public {\r\n' +
+      '        parent = _parent;\r\n' +
+      '        worklist = _worklist;\r\n' +
+      '        processRegistry = _processRegistry;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function setInstanceIndex(uint _instanceIndex) public {\r\n' +
+      '        require(msg.sender == parent);\r\n' +
+      '        instanceIndex = _instanceIndex;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function findParent() public view returns(address) {\r\n' +
+      '        return parent;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function handleEvent(bytes32 code, bytes32 eventType, uint _instanceIndex, bool isInstanceCompleted) public virtual;\r\n' +
+      '    function killProcess() public virtual;\r\n' +
+      '    function startExecution() public virtual;\r\n' +
+      '    function broadcastSignal() public virtual;\r\n' +
+      '\r\n' +
+      '    function killProcess(uint processElementIndex, uint marking, uint startedActivities) internal virtual returns(uint, uint);\r\n' +
+      '    function broadcastSignal(uint tmpMarking, uint tmpStartedActivities, uint sourceChild) internal virtual returns(uint, uint);\r\n' +
+      '\r\n' +
+      '    function propagateEvent(bytes32 code, bytes32 eventType, uint tmpMarking, uint tmpStartedActivities, uint sourceChild) internal returns(uint, uint) {\r\n' +
+      '        if (eventType == "Error" || eventType == "Terminate")\r\n' +
+      '            (tmpMarking, tmpStartedActivities) = killProcess(0, tmpMarking, tmpStartedActivities);\r\n' +
+      '        else if (eventType == "Signal")\r\n' +
+      '            (tmpMarking, tmpStartedActivities) = broadcastSignal(tmpMarking, tmpStartedActivities, sourceChild);\r\n' +
+      '        if (parent != address(0))\r\n' +
+      '            IWorkflow(parent).handleEvent(code, eventType, instanceIndex, tmpMarking | tmpStartedActivities == 0);\r\n' +
+      '        return (tmpMarking, tmpStartedActivities);\r\n' +
+      '    }\r\n' +
+      '}\r\n',
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      'abstract contract IRFunct {\r\n' +
+      '    function findRuntimePolicy(address pCase) public virtual view returns(address);\r\n' +
+      '    function canPerform(address actor, address pCase, uint taskIndex) public virtual view returns(bool);\r\n' +
+      '}\r\n' +
+      '\r\n' +
+      'contract IWorklist {\r\n' +
+      '\r\n' +
+      '    struct Workitem {\r\n' +
+      '        uint elementIndex;\r\n' +
+      '        address processInstanceAddr;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    Workitem[] internal workitems;\r\n' +
+      '    address internal runtimeRegistry;\r\n' +
+      '\r\n' +
+      '    function updateRuntimeRegistry(address _runtimeRegistry) public {\r\n' +
+      '        runtimeRegistry = _runtimeRegistry;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function workItemsFor(uint elementIndex, address processInstance) external view returns(uint) {\r\n' +
+      '        uint reqIndex = 0;\r\n' +
+      '        for (uint i = 0; i < workitems.length; i++) {\r\n' +
+      '            if (workitems[i].elementIndex == elementIndex && workitems[i].processInstanceAddr == processInstance)\r\n' +
+      '                reqIndex |= uint(1) << i;\r\n' +
+      '        }\r\n' +
+      '        return reqIndex;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function processInstanceFor(uint workitemId) public view returns(address) {\r\n' +
+      '        require(workitemId < workitems.length);\r\n' +
+      '        return workitems[workitemId].processInstanceAddr;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function elementIndexFor(uint workitemId) public view returns(uint) {\r\n' +
+      '        require(workitemId < workitems.length);\r\n' +
+      '        return workitems[workitemId].elementIndex;\r\n' +
+      '    }\r\n' +
+      '\r\n' +
+      '    function canPerform(address actor, address pCase, uint elementIndex) internal view returns(bool) {\r\n' +
+      '        return IRFunct(IRFunct(runtimeRegistry).findRuntimePolicy(pCase)).canPerform(actor, pCase, elementIndex);\r\n' +
+      '    }\r\n' +
+      '}',
+    'pragma solidity >= 0.4.25 < 0.7.0;\r\n' +
+      '\r\n' +
+      'abstract contract IRegistry {\r\n' +
+      '    function newInstanceFor(uint nodeIndex, address parent) public virtual returns(address);\r\n' +
+      '}\r\n'
+  ],
+  compilationMetadata: [
+    {
+      contractName: 'Process_0lyvl7dFactory',
+      abi: '[{"inputs":[{"internalType":"address","name":"parent","type":"address"},{"internalType":"address","name":"processRegistry","type":"address"}],"name":"newInstance","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_worklist","type":"address"}],"name":"setWorklist","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"processAddress","type":"address"}],"name":"startInstanceExecution","outputs":[],"stateMutability":"nonpayable","type":"function"}]',
+      bytecode: '6080604052600080546001600160a01b031916905534801561002057600080fd5b50610938806100306000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806316ec41f1146100465780634491bdbe1461006e578063a0e3402414610094575b600080fd5b61006c6004803603602081101561005c57600080fd5b50356001600160a01b03166100de565b005b61006c6004803603602081101561008457600080fd5b50356001600160a01b0316610134565b6100c2600480360360408110156100aa57600080fd5b506001600160a01b0381358116916020013516610156565b604080516001600160a01b039092168252519081900360200190f35b806001600160a01b0316639d820b6c6040518163ffffffff1660e01b8152600401600060405180830381600087803b15801561011957600080fd5b505af115801561012d573d6000803e3d6000fd5b5050505050565b600080546001600160a01b0319166001600160a01b0392909216919091179055565b60008054604051829185916001600160a01b03909116908590610178906101c0565b6001600160a01b03938416815291831660208301529091166040808301919091525190819003606001906000f0801580156101b7573d6000803e3d6000fd5b50949350505050565b610735806101ce8339019056fe60806040526008600455600060055534801561001a57600080fd5b506040516107353803806107358339818101604052606081101561003d57600080fd5b5080516020820151604090920151600080546001600160a01b039384166001600160a01b031991821617909155600180549484169482169490941790935560038054929091169190921617905561069c806100996000396000f3fe608060405234801561001057600080fd5b50600436106100b45760003560e01c80637b193c45116100715780637b193c45146101355780638050ed74146101525780639d820b6c14610183578063b1325a141461018b578063da1b4fd6146101af578063e6ee588d146101b7576100b4565b80631d0c54d6146100b957806359e6c09d146100d3578063625dfad6146100fa578063647950c51461011d5780636917151a1461012557806379a42d061461012d575b600080fd5b6100c16101bf565b60408051918252519081900360200190f35b6100f8600480360360408110156100e957600080fd5b508035906020013515156101c5565b005b6100f86004803603604081101561011057600080fd5b5080359060200135610226565b6100f8610271565b6100c1610292565b6100f8610298565b6100f86004803603602081101561014b57600080fd5b50356102b0565b6100f86004803603608081101561016857600080fd5b5080359060208101359060408101359060600135151561021f565b6100f86102cc565b6101936102f5565b604080516001600160a01b039092168252519081900360200190f35b610193610304565b6100c1610313565b60045481565b600454600554600384141561021f576001546001600160a01b0316331480156101f057506008811615155b6101f957600080fd5b6008805460ff1916841515179055610218603083176008198316610319565b5050610222565b50505b5050565b60048054600554909184141561021f576001546001600160a01b03163314801561025257506010811615155b61025b57600080fd5b6007839055610218604083176010198316610319565b600080610284600454600554600061054d565b915091506102228282610319565b60055481565b6102a86000600454600554610552565b600555600455565b6000546001600160a01b031633146102c757600080fd5b600255565b60086004541480156102de5750600554155b6102e757600080fd5b6102f360086000610319565b565b6000546001600160a01b031690565b6001546001600160a01b031690565b60025490565b608082161561034c57600654608019929092169160ff161561034057600282179150610347565b6004821791505b610319565b60028216156103a35760021982169160fc1615801561036c575060588116155b15610347576103996c4576656e745f306a72646a307560981b66111959985d5b1d60ca1b8484600461056c565b9092509050610319565b60048216156104215760015460408051634fb66d4f60e11b81526003600482015290516001600160a01b0390921691639f6cda9e9160248082019260009290919082900301818387803b1580156103f957600080fd5b505af115801561040d573d6000803e3d6000fd5b505050600419929092169150600817610319565b602882161561049e57600154604080516348ad5f7b60e01b815260048181015290516001600160a01b03909216916348ad5f7b9160248082019260009290919082900301818387803b15801561047657600080fd5b505af115801561048a573d6000803e3d6000fd5b505050602819929092169150601017610319565b60108216156104eb5760101982169160ee161580156104be575060588116155b15610347576103996c08aeccadce8be62d2d0f0f4e8f609b1b66111959985d5b1d60ca1b8484602061056c565b604082161561052c576105dc60075411610506576001610509565b60005b6006805491151560ff199092169190911790556040199190911660801790610319565b60045415158061053d575060055415155b1561022257600491909155600555565b509091565b6000808461056257600092508293505b5091939092509050565b600080856422b93937b960d91b1480610590575085685465726d696e61746560b81b145b156105ab576105a160008686610552565b90955093506105cd565b856514da59db985b60d21b14156105cd576105c785858561054d565b90955093505b6000546001600160a01b0316156106595760008054600254604080516320143b5d60e21b8152600481018c9052602481018b90526044810192909252888817156064830152516001600160a01b0390921692638050ed749260848084019382900301818387803b15801561064057600080fd5b505af1158015610654573d6000803e3d6000fd5b505050505b509295919450909250505056fea2646970667358221220a072334ba96e46c5a59480d6fa74340840b8acd9ca01786c171bec21ef29d01764736f6c634300060a0033a2646970667358221220d044cc641788e0fa24166d54b51d9f465ee072b0010a7eca2e6d8130da6a341264736f6c634300060a0033'
+    },
+    {
+      contractName: 'Process_0lyvl7dIWorklist',
+      abi: '[{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"Apply_claimComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"Apply_claimStart","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"bool","name":"","type":"bool"}],"name":"Verify_amountComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"Verify_amountStart","outputs":[],"stateMutability":"nonpayable","type":"function"}]',
+      bytecode: ''
+    },
+    {
+      contractName: 'Process_0lyvl7dWorkflow',
+      abi: '[{"inputs":[{"internalType":"address","name":"_parent","type":"address"},{"internalType":"address","name":"_worklist","type":"address"},{"internalType":"address","name":"_processRegistry","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"Apply_claimComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"},{"internalType":"bool","name":"_claimStatus","type":"bool"}],"name":"Verify_amountComplete","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"broadcastSignal","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"findParent","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getInstanceIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getWorklistAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32","name":"code","type":"bytes32"},{"internalType":"bytes32","name":"eventType","type":"bytes32"},{"internalType":"uint256","name":"_instanceIndex","type":"uint256"},{"internalType":"bool","name":"isInstanceCompleted","type":"bool"}],"name":"handleEvent","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"killProcess","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"marking","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_instanceIndex","type":"uint256"}],"name":"setInstanceIndex","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"startExecution","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"startedActivities","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]',
+      bytecode: '60806040526008600455600060055534801561001a57600080fd5b506040516107353803806107358339818101604052606081101561003d57600080fd5b5080516020820151604090920151600080546001600160a01b039384166001600160a01b031991821617909155600180549484169482169490941790935560038054929091169190921617905561069c806100996000396000f3fe608060405234801561001057600080fd5b50600436106100b45760003560e01c80637b193c45116100715780637b193c45146101355780638050ed74146101525780639d820b6c14610183578063b1325a141461018b578063da1b4fd6146101af578063e6ee588d146101b7576100b4565b80631d0c54d6146100b957806359e6c09d146100d3578063625dfad6146100fa578063647950c51461011d5780636917151a1461012557806379a42d061461012d575b600080fd5b6100c16101bf565b60408051918252519081900360200190f35b6100f8600480360360408110156100e957600080fd5b508035906020013515156101c5565b005b6100f86004803603604081101561011057600080fd5b5080359060200135610226565b6100f8610271565b6100c1610292565b6100f8610298565b6100f86004803603602081101561014b57600080fd5b50356102b0565b6100f86004803603608081101561016857600080fd5b5080359060208101359060408101359060600135151561021f565b6100f86102cc565b6101936102f5565b604080516001600160a01b039092168252519081900360200190f35b610193610304565b6100c1610313565b60045481565b600454600554600384141561021f576001546001600160a01b0316331480156101f057506008811615155b6101f957600080fd5b6008805460ff1916841515179055610218603083176008198316610319565b5050610222565b50505b5050565b60048054600554909184141561021f576001546001600160a01b03163314801561025257506010811615155b61025b57600080fd5b6007839055610218604083176010198316610319565b600080610284600454600554600061054d565b915091506102228282610319565b60055481565b6102a86000600454600554610552565b600555600455565b6000546001600160a01b031633146102c757600080fd5b600255565b60086004541480156102de5750600554155b6102e757600080fd5b6102f360086000610319565b565b6000546001600160a01b031690565b6001546001600160a01b031690565b60025490565b608082161561034c57600654608019929092169160ff161561034057600282179150610347565b6004821791505b610319565b60028216156103a35760021982169160fc1615801561036c575060588116155b15610347576103996c4576656e745f306a72646a307560981b66111959985d5b1d60ca1b8484600461056c565b9092509050610319565b60048216156104215760015460408051634fb66d4f60e11b81526003600482015290516001600160a01b0390921691639f6cda9e9160248082019260009290919082900301818387803b1580156103f957600080fd5b505af115801561040d573d6000803e3d6000fd5b505050600419929092169150600817610319565b602882161561049e57600154604080516348ad5f7b60e01b815260048181015290516001600160a01b03909216916348ad5f7b9160248082019260009290919082900301818387803b15801561047657600080fd5b505af115801561048a573d6000803e3d6000fd5b505050602819929092169150601017610319565b60108216156104eb5760101982169160ee161580156104be575060588116155b15610347576103996c08aeccadce8be62d2d0f0f4e8f609b1b66111959985d5b1d60ca1b8484602061056c565b604082161561052c576105dc60075411610506576001610509565b60005b6006805491151560ff199092169190911790556040199190911660801790610319565b60045415158061053d575060055415155b1561022257600491909155600555565b509091565b6000808461056257600092508293505b5091939092509050565b600080856422b93937b960d91b1480610590575085685465726d696e61746560b81b145b156105ab576105a160008686610552565b90955093506105cd565b856514da59db985b60d21b14156105cd576105c785858561054d565b90955093505b6000546001600160a01b0316156106595760008054600254604080516320143b5d60e21b8152600481018c9052602481018b90526044810192909252888817156064830152516001600160a01b0390921692638050ed749260848084019382900301818387803b15801561064057600080fd5b505af1158015610654573d6000803e3d6000fd5b505050505b509295919450909250505056fea2646970667358221220a072334ba96e46c5a59480d6fa74340840b8acd9ca01786c171bec21ef29d01764736f6c634300060a0033'
+    },
+    {
+      contractName: 'Process_0lyvl7dWorklist',
+      abi: '[{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"","type":"uint256"}],"name":"Apply_claimRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"worklist","type":"address"},{"indexed":false,"internalType":"uint256","name":"workItem","type":"uint256"}],"name":"TaskExecutionCompleted","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"","type":"uint256"}],"name":"Verify_amountRequested","type":"event"},{"inputs":[{"internalType":"uint256","name":"workitemId","type":"uint256"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"Apply_claim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"}],"name":"Apply_claimStart","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"workitemId","type":"uint256"},{"internalType":"bool","name":"_claimStatus","type":"bool"}],"name":"Verify_amount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"}],"name":"Verify_amountStart","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"workitemId","type":"uint256"}],"name":"elementIndexFor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"workitemId","type":"uint256"}],"name":"processInstanceFor","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_runtimeRegistry","type":"address"}],"name":"updateRuntimeRegistry","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"elementIndex","type":"uint256"},{"internalType":"address","name":"processInstance","type":"address"}],"name":"workItemsFor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]',
+      bytecode: '608060405234801561001057600080fd5b5061070c806100206000396000f3fe608060405234801561001057600080fd5b50600436106100885760003560e01c806389495a311161005b57806389495a31146101485780639f6cda9e1461016b578063b11b7c6614610188578063ce1613e4146101a557610088565b8063151a37351461008d578063229ac27b146100cb578063312b9fe31461010457806348ad5f7b1461012b575b600080fd5b6100b9600480360360408110156100a357600080fd5b50803590602001356001600160a01b03166101cb565b60408051918252519081900360200190f35b6100e8600480360360208110156100e157600080fd5b5035610257565b604080516001600160a01b039092168252519081900360200190f35b6101296004803603604081101561011a57600080fd5b50803590602001351515610296565b005b6101296004803603602081101561014157600080fd5b503561040a565b6101296004803603604081101561015e57600080fd5b50803590602001356104d7565b6101296004803603602081101561018157600080fd5b50356105b2565b6100b96004803603602081101561019e57600080fd5b503561067f565b610129600480360360208110156101bb57600080fd5b50356001600160a01b03166106b4565b600080805b60005481101561024f5784600082815481106101e857fe5b9060005260206000209060020201600001541480156102385750836001600160a01b03166000828154811061021957fe5b60009182526020909120600160029092020101546001600160a01b0316145b1561024757806001901b821791505b6001016101d0565b509392505050565b60008054821061026657600080fd5b6000828154811061027357fe5b60009182526020909120600290910201600101546001600160a01b031692915050565b600054821080156102da575060006001600160a01b0316600083815481106102ba57fe5b60009182526020909120600160029092020101546001600160a01b031614155b6102e357600080fd5b600082815481106102f057fe5b6000918252602082206001600290920201015481546001600160a01b03909116916359e6c09d918590811061032157fe5b60009182526020822060029091020154604080516001600160e01b031960e086901b16815260048101929092528515156024830152516044808301939282900301818387803b15801561037357600080fd5b505af1158015610387573d6000803e3d6000fd5b50505050600080838154811061039957fe5b60009182526020918290206002919091020160010180546001600160a01b0319166001600160a01b0393909316929092179091556040805130815291820184905280517ff8956fa7f0240308d94432302af68e4943f349d4ec58bd94970fbae78f95a5b49281900390910190a15050565b6040805180820182528281523360208083019182526000805460018101825581805293517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56360029095029485015591517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56490930180546001600160a01b0319166001600160a01b039094169390931790925554825160001991909101815291517f97cad6fab6a4c93e4b7233031e2402fa1ae5100f6ec7f11fe1b6b82b4fbdb35f9281900390910190a150565b6000548210801561051b575060006001600160a01b0316600083815481106104fb57fe5b60009182526020909120600160029092020101546001600160a01b031614155b61052457600080fd5b6000828154811061053157fe5b6000918252602082206001600290920201015481546001600160a01b039091169163625dfad6918590811061056257fe5b906000526020600020906002020160000154836040518363ffffffff1660e01b81526004018083815260200182815260200192505050600060405180830381600087803b15801561037357600080fd5b6040805180820182528281523360208083019182526000805460018101825581805293517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56360029095029485015591517f290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e56490930180546001600160a01b0319166001600160a01b039094169390931790925554825160001991909101815291517fc53d6b9f5a24d6dedc0f550004adfcbdec1de6178b352cbf3eff0b46b16d26159281900390910190a150565b60008054821061068e57600080fd5b6000828154811061069b57fe5b9060005260206000209060020201600001549050919050565b600180546001600160a01b0319166001600160a01b039290921691909117905556fea2646970667358221220e1128a1136673191846f4fb2d2fd62db37b1428a615fca1cdea77d93ae9da16064736f6c634300060a0033'
+    }
+  ]
+}
+----------------------------------------------------------------
+SUBMITED: Update compilation metadata in process repository ...
+SUCCESS: Metadata of contract Process_0lyvl7dWorkflow updated in process repository
+ ID: 63710da8f4445744306a7a56
+----------------------------------------------------------------
+SUBMITED: Update process hierarchical relationships in runtime registry ...
+SUCCESS: Relation Parent(63710da8f4445744306a7a56)-Child(63710da8f4445744306a7a56) updated
+ Cost: 42449 gas units
+----------------------------------------------------------------
+SUBMITED: Deploy and register factory contracts ...
+SUCCESS: Factory Process_0lyvl7dFactory deployed
+ Address: 0x2177E3b4D72891f5A2cB09449af5A718935B8ac2)
+ Cost: 564439 gas units
+----------------------------------------------------------------
+SUCCESS: Runtime registry updated with: Factory Process_0lyvl7dFactory
+ Cost: 83953 gas units
+----------------------------------------------------------------
+SUBMITED: Deploy and register worklist contracts ...
+SUCCESS: Worklist Process_0lyvl7dWorklist deployed
+ Address: 0x872260DB3fd435bB8507CC979b494146E29E3e88)
+ Cost: 442627 gas units
+----------------------------------------------------------------
+SUCCESS: Runtime registry updated with: Worklist Process_0lyvl7dWorklist
+ Cost: 88515 gas units
+----------------------------------------------------------------
+POST /models 201 1616.199 ms - 39
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Compile and Deploy smart contract for DynamicAccessControl
+SUBMITTED: new instance of BindingAccessControl submitted
+   Transaction Hash: 0x4bdb644cf25300b3aed3fc74784e4f7d4a21aecc1ed2359cd5ffdae650fbd08d
+----------------------------------------------------------------
+POST /access-control 202 484.861 ms - 68
+SUCCESS: BindingAccessControl deployed succesfully
+   Transaction Hash: 0x4bdb644cf25300b3aed3fc74784e4f7d4a21aecc1ed2359cd5ffdae650fbd08d
+   Address: 0xc3b052bb8b833AfFB9F4050666583eAE4BB89171
+   Cost: 1238058 gas
+   Repository ID: 63711d1ff4445744306a7a57
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Compile and deploy role binding policy
+{ Claimaint is case-creator; Claimaint nominates Approver } { }
+Success: the policy is consistent
+ Role Precedence:
+   0: Claimaint
+   1: Approver
+----------------------------------------------------------------
+SUBMITTED: new instance of BindingPolicyContract submitted
+   Transaction Hash: 0x21c9109464980dd7e9508e253fbf6e4a4aae94ddcb028165c934ba4d6342059b
+----------------------------------------------------------------
+POST /rb-policy 202 301.606 ms - 68
+SUCCESS: BindingPolicyContract deployed succesfully
+   Transaction Hash: 0x21c9109464980dd7e9508e253fbf6e4a4aae94ddcb028165c934ba4d6342059b
+   Address: 0xCdb98C3633940c8175dc94E0136572a53BC64e41
+   Cost: 171847 gas
+   Repository ID: 63711ee5f4445744306a7a58
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Compile and deploy role-task map
+   Map: ["0xCdb98C3633940c8175dc94E0136572a53BC64e41", "0x2177E3b4D72891f5A2cB09449af5A718935B8ac2"]
+inside generateRoleTaskContract...
+SUBMITTED: new instance of policy_process_mapContract submitted
+   Transaction Hash: 0xdc00f4cc1961e48d45485c66dcf1fa01e49843f3d75c7a1259b5b7a15116f126
+----------------------------------------------------------------
+POST /task-role-map 202 121.264 ms - 68
+SUCCESS: policy_process_mapContract deployed succesfully
+   Transaction Hash: 0xdc00f4cc1961e48d45485c66dcf1fa01e49843f3d75c7a1259b5b7a15116f126
+   Address: 0x708af73E00F31a236745C4fdB3e68CdBb0C17946
+   Cost: 112633 gas
+   Repository ID: 63712541f4445744306a7a59
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Create new instance of process ID 63710da8f4445744306a7a56
+POST /models/63710da8f4445744306a7a56/processes 202 712.232 ms - 88
+New Instance of contract 63710da8f4445744306a7a56 (ID: 63710da8f4445744306a7a56) Created
+  TransactionHash: 0x0645ec16aa4a234ad80bbf42a49cdd1425e5551a6ec01d0f75832ad48042fc81
+  Address: 0x65a7dF33adf61001e09a2aA7FEF92AF06947a414
+  GasUsed: 706387 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Query state of process instance running at 0x65a7dF33adf61001e09a2aA7FEF92AF06947a414
+Started Workitems (Enabled Tasks) Info:
+[
+  {
+    elementId: 'Activity_1f4z428',
+    elementName: 'Apply_claim',
+    input: [ { internalType: 'uint256', name: '_amount', type: 'uint256' } ],
+    bundleId: '63710da8f4445744306a7a56',
+    processAddress: '0x65a7dF33adf61001e09a2aA7FEF92AF06947a414',
+    pCases: [ '0x65a7dF33adf61001e09a2aA7FEF92AF06947a414' ],
+    hrefs: [
+      '/worklists/0x872260DB3fd435bB8507CC979b494146E29E3e88/workitems/0'
+    ]
+  }
+]
+----------------------------------------------------------------
+GET /processes/0x65a7dF33adf61001e09a2aA7FEF92AF06947a414 200 452.504 ms - 367
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Perform role-binding operation nominate-case-creator for process instance at 0x65a7dF33adf61001e09a2aA7FEF92AF06947a414
+PATCH /rb-opertation/0x65a7dF33adf61001e09a2aA7FEF92AF06947a414/nominate-creator 202 636.855 ms - 88
+SUCCESS: Runtime Operation nominateCaseCreator executed
+   TransactionHash: 0xda8ea05fb78d93d64cfdeb5377cf742a49918fd1d9b64eb0b4b5c5bd27c5155b
+   Cost: 159794
+   Input Paramaters:
+     rNominee: Claimaint
+     nominee: 0xc2e7160555EcC30AE389F92216bB9b990Ac31B2e
+     pCase: 0x65a7dF33adf61001e09a2aA7FEF92AF06947a414
+--------------------------------------------------------
+
+REQUESTED: Perform role-binding operation nominate for process instance at 0x65a7dF33adf61001e09a2aA7FEF92AF06947a414
+PATCH /rb-opertation/0x65a7dF33adf61001e09a2aA7FEF92AF06947a414/nominate 202 611.809 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0xdec921024ab2bad875892b9136350b016166561f225e4fcb4b2718ee9f7164cb
+   Cost: 146828
+   Input Paramaters:
+     rNominator: Claimaint
+     rNominee: Approver
+     nominator: 0xc2e7160555EcC30AE389F92216bB9b990Ac31B2e
+     nominee: 0x3667Fed9A9840B85e5C6d55497b4ae81B29cC8dc
+     pCase: 0x65a7dF33adf61001e09a2aA7FEF92AF06947a414
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+REQUESTED: Compile and deploy role-task map
+   Map: ["0xc2e7160555EcC30AE389F92216bB9b990Ac31B2e", "0x872260DB3fd435bB8507CC979b494146E29E3e88"]
+inside generateRoleTaskContract...
+SUBMITTED: new instance of policy_process_mapContract submitted
+   Transaction Hash: 0x87dc153f4565401c4b2ba2d970289d4f32a1f590bd9f1f66416eab9ca1477200
+----------------------------------------------------------------
+POST /task-role-map 202 214.398 ms - 68
+SUCCESS: policy_process_mapContract deployed succesfully
+   Transaction Hash: 0x87dc153f4565401c4b2ba2d970289d4f32a1f590bd9f1f66416eab9ca1477200
+   Address: 0x988324faBdc344b6a8E655Ac9CE1C0015d669936
+   Cost: 112633 gas
+   Repository ID: 6371326af4445744306a7a5a
+   
+   
+   

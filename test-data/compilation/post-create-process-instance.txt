@@ -1,0 +1,14 @@
+POST
+http://localhost:3000/models/63574cb36e41ec15449afc94/processes
+
+Headers
+content-type		application/json
+
+Body
+
+{
+  "registryAddress": "0xD804424D7b0f265A2CE590A73b1c909757D68c10",
+  "accessCtrlAddr": "0x398e51003f9868BB39c302Ccf86CBBBE26a381F7",
+  "rbPolicyAddr": "0xAAb3C157F137501724Af05658076DFB02C54081b",
+  "taskRoleMapAddr": "0xa328E6271017B48686dD95Ae21E728583f592cAB"
+}

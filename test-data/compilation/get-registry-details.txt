@@ -1,0 +1,3 @@
+GET
+
+http://localhost:3000/registries/63451f8cb9d6140a1893df79

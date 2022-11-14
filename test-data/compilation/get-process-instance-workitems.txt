@@ -1,0 +1,6 @@
+GET
+http://localhost:3000/processes/0x23a3c3bfaa891236130fd2dc8d789d61fc0fa5a1
+
+Headers
+registryAddress		0xD804424D7b0f265A2CE590A73b1c909757D68c10
+

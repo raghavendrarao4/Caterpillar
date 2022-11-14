@@ -1,0 +1,11 @@
+POST
+http://localhost:3000/rb-policy
+
+Headers
+Content-Type		application/json
+
+Body
+
+{
+  "policy": "{ Invoicer is case-creator; Invoicer nominates Invoicee } { }"
+}
