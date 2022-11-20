@@ -1,0 +1,65 @@
+ganache-cli --gasPrice=100000000000 --gasLimit=6721975
+
+Available Accounts
+==================
+(0) 0xfA53caAA11989D89C6d9B1e1FEe2a126fB4e5664 (100 ETH) Supplier
+(1) 0x3bdAb6f334AB67bDC78cf88b4913fCb2aE354720 (100 ETH) Candidate
+(2) 0x94233Ca004778A089AD142bb649de08ab7F36BD0 (100 ETH) Carrier
+(3) 0x9B5650Dcc35BcE93266d5F1FcBB6c913293EeCA3 (100 ETH)
+(4) 0xf1396f4f01C2b88dC9D0B6BA7B4b69418DcD3a30 (100 ETH)
+(5) 0x16183295677f1DD301b8c1D1aD2f2b2c05F9A16e (100 ETH)
+(6) 0x7986FA43902582e2e777C95405659bb1df1FADE3 (100 ETH)
+(7) 0xF3aEEcFfE1dfc270429Ec76c8825a0557C3da211 (100 ETH)
+(8) 0x327E0d015FCDe162A1B4881450Ee1048D316Cd5B (100 ETH)
+(9) 0xbDF23c25c4a701635Fe7A3AeC2c83538a4EBd1eA (100 ETH)
+
+Private Keys
+==================
+(0) 0x6e72efb3308f89ef490cd3c3ccd32ff8ce19fcaff6a70f6b2e69192851047963
+(1) 0xc60bffcc44b12f34f11609f15d5f27bf92bc1588d4374447d5409108dcbc678c
+(2) 0x65e9472b5d12fd136d2f5494a0578698ce7b24c3265945d2ea103a7dcdbbccbe
+(3) 0xb19387e3e909a50be254a72298f05fbe1001688956a36b51e9bfb02cac1856fb
+(4) 0xd5a57f0b149a06d5568bb608d69d21ad6c881f88c415deb22a3444242644aab0
+(5) 0x286111793c2cb779e2399ed5aac52250c724ff0096096ff4ed9be220190095c2
+(6) 0x839e542d3b5d08976bca0816d6f59f4ff758842cb19619e885b84724fd53f1c6
+(7) 0x637adb70de16ab45b2695dd3b25ebea0bc5fe5a6e8cec668c2d18954996aa846
+(8) 0x01c236b62c953b3af887b71bf01aacd048ca2bcc4ffa643bba4a0d206db403a0
+(9) 0xe977f50b574873ad968abde588d666dffedc4f12e1dc396ec478d0542d2f0e47
+
+HD Wallet
+==================
+Mnemonic:      bench earth present excuse bless topple focus kingdom connect siege alert claim
+Base HD Path:  m/44'/60'/0'/0/{account_index}
+
+Gas Price
+==================
+100000000000
+
+Gas Limit
+==================
+6721975
+
+Call Gas Limit
+==================
+9007199254740991
+
+Listening on 127.0.0.1:8545
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

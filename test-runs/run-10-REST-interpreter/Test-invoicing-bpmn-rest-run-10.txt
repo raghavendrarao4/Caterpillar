@@ -1,0 +1,583 @@
+REQUESTED: Compile and Deploy smart contract for Runtime Registry
+SUCCESS: Runtime Registry Metadata updated in Process Repository
+ ID: 6378dcb29e45270f14630109
+"address" : "0xA46A7b0187b3FeD9c3C848b304A059a57fB39776"
+----------------------------------------------------------------
+SUCCESS: Runtime Registry Metadata updated in Process Repository
+ ID: 6378dcb29e45270f1463010a
+----------------------------------------------------------------
+POST /registries 201 13631.307 ms - 33
+"address" : "0xaA502c3C52DEe77e1C6CaD33Ae61352a3561bf39"
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of BPMN Interpreter
+SUCCESS: BPMNInterpreter deployed successfully
+ Address: 0xf1E436bdE5cf5C3F06ADA4756232E2fce6B76f5C
+ Cost: 2887950 gas units
+----------------------------------------------------------------
+POST /interpreter 201 2932.734 ms - 207
+{"smartContractName":"BPMNInterpreter","gasCost":2887950,"transactionHash":"0x14ffccf24cd9ff1eb8a44785459a6a05310fcf93f0c1b2eb240cd36af3dd00ef","contractAddress":"0xf1E436bdE5cf5C3F06ADA4756232E2fce6B76f5C"}
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Compile and deploy process model named Process_0lyvl7d
+POST /interpreter/models 400 2653.296 ms - 422
+REQUESTED: Compile and deploy process model named Invoice_Handling
+IData and IFactory contracts generated and compiled succesfully
+Starting contract deployments and registration
+SUCCESS: Transaction 0x2781454319c2f514e806357502a2397a070e584c479e23afa22d84a3b68eeb3b for deploying BPMNINterpreter accepted
+ Contract Address 0xdE31774f717Ef3D32e8508B8CeABCf947A675a18
+ Cost 2887950 gas units
+----------------------------------------------------------------
+SUCCESS: BPMNINterpreter running at 0xdE31774f717Ef3D32e8508B8CeABCf947A675a18 updated in repositpry
+  ID: 6378e27f9e45270f1463010b
+----------------------------------------------------------------
+SUCCESS: Transaction 0xbd56041e56317635abca66bee28986aaaa05f9f0cc99aff2ff107ebd60d8cae6 for deploying IFlow accepted
+ Contract Address 0x4790457430De1b98eA9F87952B2D48E60CC74067
+ Cost 715554 gas units
+----------------------------------------------------------------
+SUCCESS: IData metadata from Invoice_Handling updated in repositpry
+  ID: 6378e2809e45270f1463010c
+----------------------------------------------------------------
+SUCCESS: IFlow running at 0x4790457430De1b98eA9F87952B2D48E60CC74067 updated in repositpry
+  ID: 6378e2809e45270f1463010d
+----------------------------------------------------------------
+Deployment transactions sent
+{
+  interpreterTHash: '0x2781454319c2f514e806357502a2397a070e584c479e23afa22d84a3b68eeb3b',
+  iFlowTHashes: [
+    '0xbd56041e56317635abca66bee28986aaaa05f9f0cc99aff2ff107ebd60d8cae6'
+  ],
+  iFactoryTHashes: [
+    '0x00eccb2e7cea0566fb26e9a62fea24bf7c4ad073103cd3239e2f843afa2d084c'
+  ]
+}
+POST /interpreter/models 201 4713.387 ms - 79650
+SUCCESS: Transaction 0x00eccb2e7cea0566fb26e9a62fea24bf7c4ad073103cd3239e2f843afa2d084c for deploying IFactory accepted
+ Contract Address 0x763aA6eF932A3eE725dFdf1bfcFCbc84890f2277
+ Cost 459523 gas units
+----------------------------------------------------------------
+SUCCESS: IFactory running at 0x763aA6eF932A3eE725dFdf1bfcFCbc84890f2277 updated in repositpry
+  ID: 6378e2809e45270f1463010e
+----------------------------------------------------------------
+Process Invoice_Handling updated in repositpry
+  ID: 6378e2809e45270f1463010f
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 1,
+  eName: 'Invoice_Handling_Started',
+  typeInfo: '1060',
+  postC: '2',
+  next: [],
+  preC: '0'
+}
+ Cost: 148099 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 2,
+  eName: 'Issue_Invoice',
+  typeInfo: '2057',
+  postC: '4',
+  next: [ 4 ],
+  preC: '2'
+}
+ Cost: 125709 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 3,
+  eName: 'Approve_Invoice',
+  typeInfo: '2057',
+  postC: '16',
+  next: [ 5 ],
+  preC: '8'
+}
+ Cost: 125733 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 4,
+  eName: 'ExclusiveGateway_0bvmb9p',
+  typeInfo: '26',
+  postC: '8',
+  next: [],
+  preC: '132'
+}
+ Cost: 86359 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 5,
+  eName: 'Is_Invoice_Accepted?',
+  typeInfo: '18',
+  postC: '96',
+  next: [ 6 ],
+  preC: '16'
+}
+ Cost: 125781 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 6,
+  eName: 'Invoice_Handling_Completed',
+  typeInfo: '1548',
+  postC: '0',
+  next: [],
+  preC: '32'
+}
+ Cost: 113114 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 7,
+  eName: 'Fix_Invoice',
+  typeInfo: '2057',
+  postC: '128',
+  next: [ 4 ],
+  preC: '64'
+}
+ Cost: 125685 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setFactoryInst
+'0x763aA6eF932A3eE725dFdf1bfcFCbc84890f2277'
+ Cost: 42616 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setInterpreterInst
+'0xdE31774f717Ef3D32e8508B8CeABCf947A675a18'
+ Cost: 42594 gas
+----------------------------------------------------------------
+SUCCESS: Executed function RuntimeRegistry.registerIFlow
+[
+  '6378e2809e45270f1463010f',
+  '0x4790457430De1b98eA9F87952B2D48E60CC74067'
+]
+ Cost: 83013 gas
+---------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Compile and Deploy smart contract for DynamicAccessControl
+SUBMITTED: new instance of BindingAccessControl submitted
+   Transaction Hash: 0x199d54dbc5f44a409bc7790c18b2ce918aecf4b9b9e87be1cf07426ba43f1738
+----------------------------------------------------------------
+POST /access-control 202 806.327 ms - 68
+SUCCESS: BindingAccessControl deployed succesfully
+   Transaction Hash: 0x199d54dbc5f44a409bc7790c18b2ce918aecf4b9b9e87be1cf07426ba43f1738
+   Address: 0x32f5d12cE8F1AF5E83905701f6eF943CBDE9d932
+   Cost: 1238058 gas
+   Repository ID: 6378e8829e45270f14630110
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+REQUESTED: Compile and deploy role binding policy
+{ Invoicer is case-creator; Invoicer nominates Invoicee } { }
+Success: the policy is consistent
+ Role Precedence:
+   0: Invoicer
+   1: Invoicee
+----------------------------------------------------------------
+SUBMITTED: new instance of BindingPolicyContract submitted
+   Transaction Hash: 0x877d8f36323de6079edf712fff68082188ddbf4189b865b44d837df9421f3a9f
+----------------------------------------------------------------
+POST /rb-policy 202 343.568 ms - 68
+SUCCESS: BindingPolicyContract deployed succesfully
+   Transaction Hash: 0x877d8f36323de6079edf712fff68082188ddbf4189b865b44d837df9421f3a9f
+   Address: 0x037D0a37074f629FCF05d7aCa243D500619579Ab
+   Cost: 171847 gas
+   Repository ID: 6378e8dd9e45270f14630111
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Compile and deploy role-task map
+   Map: ["0x037D0a37074f629FCF05d7aCa243D500619579Ab", "0x4790457430De1b98eA9F87952B2D48E60CC74067"]
+inside generateRoleTaskContract...
+SUBMITTED: new instance of policy_process_mapContract submitted
+   Transaction Hash: 0xee22444c4d18632101aa99857351d27898aaa3ee01b288fae8897b8f563d6f49
+----------------------------------------------------------------
+POST /task-role-map 202 194.423 ms - 68
+SUCCESS: policy_process_mapContract deployed succesfully
+   Transaction Hash: 0xee22444c4d18632101aa99857351d27898aaa3ee01b288fae8897b8f563d6f49
+   Address: 0x4a486CAB812F7451538b585Af88420a97cb258A9
+   Cost: 112633 gas
+   Repository ID: 6378e97e9e45270f14630112
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of process IFlow address 0x4790457430De1b98eA9F87952B2D48E60CC74067
+POST /i-flow/0x4790457430De1b98eA9F87952B2D48E60CC74067/i-data 202 879.593 ms - 88
+SUCCESS: New Process Instance created from IFlow running at 0xdE31774f717Ef3D32e8508B8CeABCf947A675a18
+  TransactionHash: 0x94ca58c91d709563eb8df4e8b6ca102e5c432f7b7becb74561f882474f5a9cb9
+  Address: 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+  GasUsed: 621813 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate-case-creator for process instance at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+PATCH /rb-opertation/0xb9E6a3b55cB524FA1febcc2264dEd9926446194B/nominate-creator 202 670.196 ms - 88
+SUCCESS: Runtime Operation nominateCaseCreator executed
+   TransactionHash: 0x88a432065d72d5bec48b65bccf965ed09bcc7128114541e8b788df7031d461fd
+   Cost: 159794
+   Input Paramaters:
+     rNominee: Invoicer
+     nominee: 0x96BDe835C922d5c19e540565A41f8B43044BF060
+     pCase: 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate for process instance at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+PATCH /rb-opertation/0xb9E6a3b55cB524FA1febcc2264dEd9926446194B/nominate 202 570.955 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0x9b5ed20bf4388741cc2f9fd549f72a485bb93046cab084ebcefa283b41cbaa48
+   Cost: 146828
+   Input Paramaters:
+     rNominator: Invoicer
+     rNominee: Invoicee
+     nominator: 0x96BDe835C922d5c19e540565A41f8B43044BF060
+     nominee: 0x99da9b29EF2b93C0C36C9fd15511488E12872B58
+     pCase: 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+Enabled activities of process running at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B retrieved
+[
+  {
+    elementName: 'Issue_Invoice',
+    input: '[]',
+    output: '[]',
+    bundleId: '6378e2809e45270f1463010f',
+    hrefs: [ '/i-flow/2/i-data/0xb9E6a3b55cB524FA1febcc2264dEd9926446194B' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0xb9E6a3b55cB524FA1febcc2264dEd9926446194B 200 1964.543 ms - 170
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: CheckIn (execute) task ID 2 on IData at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+PATCH /i-flow/2/i-data/0xb9E6a3b55cB524FA1febcc2264dEd9926446194B 202 431.473 ms - 68
+SUCCESS: Task 2 executed successfully at IData running at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+  TransactionHash: 0x39f0bb3de2077d3f321beeb9af6a3959b13096977110d3168bb17a25d712942a
+  Input Params: 2
+  GasUsed: 60649 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+Enabled activities of process running at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B retrieved
+[
+  {
+    elementName: 'Approve_Invoice',
+    input: '[{"type":"bool","name":"_accepted"}]',
+    output: '[]',
+    bundleId: '6378e2809e45270f1463010f',
+    hrefs: [ '/i-flow/3/i-data/0xb9E6a3b55cB524FA1febcc2264dEd9926446194B' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0xb9E6a3b55cB524FA1febcc2264dEd9926446194B 200 2036.623 ms - 214
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: CheckIn (execute) task ID 3 on IData at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+bool
+true
+PATCH /i-flow/3/i-data/0xb9E6a3b55cB524FA1febcc2264dEd9926446194B 202 579.005 ms - 68
+SUCCESS: Task 3 executed successfully at IData running at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+  TransactionHash: 0x3a50e006be69ac4ae3b5b16c2a2d0f61a37ddffbd820386f80b40b173dbd5be4
+  Input Params: 3,true
+  GasUsed: 96806 units
+
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B
+Enabled activities of process running at 0xb9E6a3b55cB524FA1febcc2264dEd9926446194B retrieved
+[]
+----------------------------------------------------------------
+GET /i-data/0xb9E6a3b55cB524FA1febcc2264dEd9926446194B 200 1877.717 ms - 2
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of process IFlow address 0x4790457430De1b98eA9F87952B2D48E60CC74067
+POST /i-flow/0x4790457430De1b98eA9F87952B2D48E60CC74067/i-data 202 590.766 ms - 88
+SUCCESS: New Process Instance created from IFlow running at 0xdE31774f717Ef3D32e8508B8CeABCf947A675a18
+  TransactionHash: 0xb1100e55e4b7bebb7c05218e1f679d02c7274c9e2f118f53771a58fe8734b1b0
+  Address: 0x3796069a9f5351268dD86543Cb02Cc00b7Eb567d
+  GasUsed: 586798 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x3796069a9f5351268dD86543Cb02Cc00b7Eb567d
+Enabled activities of process running at 0x3796069a9f5351268dD86543Cb02Cc00b7Eb567d retrieved
+[
+  {
+    elementName: 'Issue_Invoice',
+    input: '[]',
+    output: '[]',
+    bundleId: '6378e2809e45270f1463010f',
+    hrefs: [ '/i-flow/2/i-data/0x3796069a9f5351268dD86543Cb02Cc00b7Eb567d' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0x3796069a9f5351268dD86543Cb02Cc00b7Eb567d 200 1715.616 ms - 170
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate for process instance at 0x3796069a9f5351268dD86543Cb02Cc00b7Eb567d
+PATCH /rb-opertation/0x3796069a9f5351268dD86543Cb02Cc00b7Eb567d/nominate 202 522.187 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0x8289ca1d2d7306a58ab6f5033303c7a5efe356eb0b9899c2b8d636f1e0b4933f
+   Cost: 127604
+   Input Paramaters:
+     rNominator: Invoicer
+     rNominee: Invoicee
+     nominator: 0x96BDe835C922d5c19e540565A41f8B43044BF060
+     nominee: 0x1ca1d0006340733C4472eE61ee29FfBAA2ec5cFd
+     pCase: 0x3796069a9f5351268dD86543Cb02Cc00b7Eb567d
+----------------------------------------------------------------
+REQUESTED: CheckIn (execute) task ID 2 on IData at 0x3796069a9f5351268dD86543Cb02Cc00b7Eb567d
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of process IFlow address 0x4790457430De1b98eA9F87952B2D48E60CC74067
+POST /i-flow/0x4790457430De1b98eA9F87952B2D48E60CC74067/i-data 202 594.330 ms - 88
+SUCCESS: New Process Instance created from IFlow running at 0xdE31774f717Ef3D32e8508B8CeABCf947A675a18
+  TransactionHash: 0x8f6541e7030e74547a46f9bacf37c4d124994ca4daf0aa6afc8b772e8595a5f8
+  Address: 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+  GasUsed: 586798 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate-case-creator for process instance at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+PATCH /rb-opertation/0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359/nominate-creator 202 567.509 ms - 88
+SUCCESS: Runtime Operation nominateCaseCreator executed
+   TransactionHash: 0x7d5d05b5e9130d21f83e126c6213e351a5f3679b910fcd5ecf93a6e971373bc0
+   Cost: 140594
+   Input Paramaters:
+     rNominee: Invoicer
+     nominee: 0x6EC0F3D2Bb5e0457592A14433afE2F82a18f71A7
+     pCase: 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate for process instance at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+PATCH /rb-opertation/0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359/nominate 202 447.333 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0xf647e1a8a0928a0293c6a43a26c95e17871894f195ac36346e9ef3d44b88cda8
+   Cost: 127628
+   Input Paramaters:
+     rNominator: Invoicer
+     rNominee: Invoicee
+     nominator: 0x6EC0F3D2Bb5e0457592A14433afE2F82a18f71A7
+     nominee: 0xbFe68d8853a441Da867da2331bBce3102ffC48c1
+     pCase: 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+Enabled activities of process running at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359 retrieved
+[
+  {
+    elementName: 'Issue_Invoice',
+    input: '[]',
+    output: '[]',
+    bundleId: '6378e2809e45270f1463010f',
+    hrefs: [ '/i-flow/2/i-data/0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359 200 1617.620 ms - 170
+----------------------------------------------------------------
+----------------------------------------------------------------
+PATCH /i-flow/2/i-data/0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359 202 289.215 ms - 68
+SUCCESS: Task 2 executed successfully at IData running at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+  TransactionHash: 0xdf6f73b5c11df85f41571f0821b5aa12d69f6a1a055d1c813dfcaaaa2ab90ee1
+  Input Params: 2
+  GasUsed: 60649 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+Enabled activities of process running at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359 retrieved
+[
+  {
+    elementName: 'Approve_Invoice',
+    input: '[{"type":"bool","name":"_accepted"}]',
+    output: '[]',
+    bundleId: '6378e2809e45270f1463010f',
+    hrefs: [ '/i-flow/3/i-data/0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359 200 1580.902 ms - 214
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: CheckIn (execute) task ID 3 on IData at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+bool
+false
+PATCH /i-flow/3/i-data/0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359 202 337.064 ms - 68
+SUCCESS: Task 3 executed successfully at IData running at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+  TransactionHash: 0x54ce7014e75fad3490730bbca7044106d1e13ddffda5bd59ae36d77d955ac732
+  Input Params: 3,false
+  GasUsed: 96806 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359
+Enabled activities of process running at 0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359 retrieved
+[]
+----------------------------------------------------------------
+GET /i-data/0x5328505EE993ecbCB1B6a3e3ea74726EdBCa6359 200 1750.465 ms - 2
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of process IFlow address 0x4790457430De1b98eA9F87952B2D48E60CC74067
+POST /i-flow/0x4790457430De1b98eA9F87952B2D48E60CC74067/i-data 202 472.401 ms - 88
+SUCCESS: New Process Instance created from IFlow running at 0xdE31774f717Ef3D32e8508B8CeABCf947A675a18
+  TransactionHash: 0x208746081d8680ba75d3d787c2f67c29f89507969be539da3ee4dab212388d40
+  Address: 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+  GasUsed: 586798 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate-case-creator for process instance at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+PATCH /rb-opertation/0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c/nominate-creator 202 408.685 ms - 88
+SUCCESS: Runtime Operation nominateCaseCreator executed
+   TransactionHash: 0xd64147c8c8f54e38f4dd942a6dc74ab5d14ec0ed4315e5260621f71df9de9ca2
+   Cost: 140582
+   Input Paramaters:
+     rNominee: Invoicer
+     nominee: 0x49CEa19b4A33e8F8431f25c27600FD1Ebf225E83
+     pCase: 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate for process instance at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+PATCH /rb-opertation/0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c/nominate 202 488.973 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0xb33c802a3787185d35bcd94850145cdc3a5c22c5d6d323f2fef9b86a986a5125
+   Cost: 127604
+   Input Paramaters:
+     rNominator: Invoicer
+     rNominee: Invoicee
+     nominator: 0x49CEa19b4A33e8F8431f25c27600FD1Ebf225E83
+     nominee: 0x73989A834f86f1E100512659482e8868069DFf5E
+     pCase: 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+Enabled activities of process running at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c retrieved
+[
+  {
+    elementName: 'Issue_Invoice',
+    input: '[]',
+    output: '[]',
+    bundleId: '6378e2809e45270f1463010f',
+    hrefs: [ '/i-flow/2/i-data/0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c 200 1921.243 ms - 170
+----------------------------------------------------------------
+----------------------------------------------------------------
+PATCH /i-flow/2/i-data/0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c 202 323.907 ms - 68
+SUCCESS: Task 2 executed successfully at IData running at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+  TransactionHash: 0x91a7817a469610e273ba1eb1d9edfcdbba91e38ec4fd386a38c0bca8dbbfe023
+  Input Params: 2
+  GasUsed: 60649 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+Enabled activities of process running at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c retrieved
+[
+  {
+    elementName: 'Approve_Invoice',
+    input: '[{"type":"bool","name":"_accepted"}]',
+    output: '[]',
+    bundleId: '6378e2809e45270f1463010f',
+    hrefs: [ '/i-flow/3/i-data/0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c 200 1842.109 ms - 214
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: CheckIn (execute) task ID 3 on IData at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+bool
+_accepted
+PATCH /i-flow/3/i-data/0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c 202 457.052 ms - 68
+SUCCESS: Task 3 executed successfully at IData running at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+  TransactionHash: 0x6e1403dbe911ee51a9195bd68600d7fa4af12c1e6f36296e7fc63e4e02f504f0
+  Input Params: 3,_accepted
+  GasUsed: 96806 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c
+Enabled activities of process running at 0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c retrieved
+[]
+----------------------------------------------------------------
+GET /i-data/0x426d5444D8A2062D193764Ee9C5A8C3A15CD144c 200 1546.058 ms - 2
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of process IFlow address 0x4790457430De1b98eA9F87952B2D48E60CC74067
+POST /i-flow/0x4790457430De1b98eA9F87952B2D48E60CC74067/i-data 202 520.417 ms - 88
+SUCCESS: New Process Instance created from IFlow running at 0xdE31774f717Ef3D32e8508B8CeABCf947A675a18
+  TransactionHash: 0xf9018eca1fc10e7f6cbece48d1ae04f8aa7ece4507271754608e640bbf66438c
+  Address: 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+  GasUsed: 586798 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate-case-creator for process instance at 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+PATCH /rb-opertation/0x6DE7E13a19B85352f133015eF728797ddcBbd361/nominate-creator 202 604.369 ms - 88
+SUCCESS: Runtime Operation nominateCaseCreator executed
+   TransactionHash: 0xcc7efb7c27a2e86428e8b66321e43ef57cb78d4039a665464d9be714ce374863
+   Cost: 140594
+   Input Paramaters:
+     rNominee: Invoicer
+     nominee: 0xfCB374735f332D9c129b1d5e48189056b027A733
+     pCase: 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate for process instance at 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+PATCH /rb-opertation/0x6DE7E13a19B85352f133015eF728797ddcBbd361/nominate 202 502.116 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0x30751c460504408e5d02d26d6d463cfe7ab56f2a7051415ab9c3700f94767e01
+   Cost: 127628
+   Input Paramaters:
+     rNominator: Invoicer
+     rNominee: Invoicee
+     nominator: 0xfCB374735f332D9c129b1d5e48189056b027A733
+     nominee: 0xb2A84291A63e489b68AB4fedF974CCEd44D6FF2E
+     pCase: 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+Enabled activities of process running at 0x6DE7E13a19B85352f133015eF728797ddcBbd361 retrieved
+[
+  {
+    elementName: 'Issue_Invoice',
+    input: '[]',
+    output: '[]',
+    bundleId: '6378e2809e45270f1463010f',
+    hrefs: [ '/i-flow/2/i-data/0x6DE7E13a19B85352f133015eF728797ddcBbd361' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0x6DE7E13a19B85352f133015eF728797ddcBbd361 200 1950.061 ms - 170
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: CheckIn (execute) task ID 2 on IData at 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+PATCH /i-flow/2/i-data/0x6DE7E13a19B85352f133015eF728797ddcBbd361 202 414.013 ms - 68
+SUCCESS: Task 2 executed successfully at IData running at 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+  TransactionHash: 0x6d2245c50624f9b71c10219517c0c375775bcb2339e96faeb5b6800a590925e4
+  Input Params: 2
+  GasUsed: 60649 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of process instance running at 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+Enabled activities of process running at 0x6DE7E13a19B85352f133015eF728797ddcBbd361 retrieved
+[
+  {
+    elementName: 'Approve_Invoice',
+    input: '[{"type":"bool","name":"_accepted"}]',
+    output: '[]',
+    bundleId: '6378e2809e45270f1463010f',
+    hrefs: [ '/i-flow/3/i-data/0x6DE7E13a19B85352f133015eF728797ddcBbd361' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0x6DE7E13a19B85352f133015eF728797ddcBbd361 200 1922.044 ms - 214
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: CheckIn (execute) task ID 3 on IData at 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+bool
+false
+PATCH /i-flow/3/i-data/0x6DE7E13a19B85352f133015eF728797ddcBbd361 202 430.103 ms - 68
+SUCCESS: Task 3 executed successfully at IData running at 0x6DE7E13a19B85352f133015eF728797ddcBbd361
+  TransactionHash: 0x9c940cf32ff6313a4169ab3b0c8f5b63a4416a1ff3b8c3ccc87f81afd7a8e531
+  Input Params: 3,false
+  GasUsed: 96806 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+

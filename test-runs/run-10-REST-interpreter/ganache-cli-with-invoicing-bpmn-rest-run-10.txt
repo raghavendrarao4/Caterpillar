@@ -1,0 +1,533 @@
+ganache-cli --gasPrice=100000000000 --gasLimit=6721975
+
+Available Accounts
+==================
+(0) 0xFf3D580b0fb6bB02E52E89F89bB63671AB266B04 (100 ETH)
+(1) 0x96BDe835C922d5c19e540565A41f8B43044BF060 (100 ETH) Invoicer
+(2) 0x99da9b29EF2b93C0C36C9fd15511488E12872B58 (100 ETH) Invoicee
+(3) 0xfCB374735f332D9c129b1d5e48189056b027A733 (100 ETH)Invoicer
+(4) 0x1ca1d0006340733C4472eE61ee29FfBAA2ec5cFd (100 ETH) Invoicee
+(5) 0x49CEa19b4A33e8F8431f25c27600FD1Ebf225E83 (100 ETH) Invoicer
+(6) 0x73989A834f86f1E100512659482e8868069DFf5E (100 ETH) Invoicee
+(7) 0x6EC0F3D2Bb5e0457592A14433afE2F82a18f71A7 (100 ETH) Invoicer
+(8) 0xbFe68d8853a441Da867da2331bBce3102ffC48c1 (100 ETH) Invoicee
+(9) 0xb2A84291A63e489b68AB4fedF974CCEd44D6FF2E (100 ETH)Invoicee
+
+Private Keys
+==================
+(0) 0x713f2690e618e337d6bcd9be637efa6d001bb485135dd7451fb6046e9b130176
+(1) 0x2880c72b8e53b3261d90428e0ce299244264fb5c26eaff991aef9803c27af216
+(2) 0x175622737632130b992b795f537cd45479ac48152dd812265d2f12b8784b4e34
+(3) 0x995a7460b59211e1d43b0b0b7bc78a231115e1376ec27bd22a15b0da4671cf62
+(4) 0x1106056afc15a402ee066f72ac455fa1da5c03b322433410718230ecaf42e343
+(5) 0x45c5da108ddb7a0e211ec9b0c39b37447df11bc2cbaa2b6211bcd9f070feb33c
+(6) 0x163bd1d706e5f04a623566ee2c7d4ec00b2f2b3a7b2c64f6c94fe987630dbe8b
+(7) 0xbe0b847e9e59f57c855835b820081e8d73e3848d9b18fab1b21d40759cc9b9d0
+(8) 0x61ab6089a754619324467b001b36eb0b9f8e1e65963d74fffb7760e38e861444
+(9) 0x145a61797f296438d8aa7a539df106648b323bf8d9ccbd8223a571e5dabdfb55
+
+HD Wallet
+==================
+Mnemonic:      dignity vehicle bird taste leg embody genre army rescue solid bird float
+Base HD Path:  m/44'/60'/0'/0/{account_index}
+
+Gas Price
+==================
+100000000000
+
+Gas Limit
+==================
+6721975
+
+Call Gas Limit
+==================
+9007199254740991
+
+Listening on 127.0.0.1:8545
+
+
+eth_accounts
+eth_gasPrice
+eth_sendTransaction
+eth_sendTransaction
+
+  Transaction: 0x529a3072db407f222ccda2b66afe37fbf5a91c59d22361ee34a9e9ed87a86a7c
+  Contract created: 0xa46a7b0187b3fed9c3c848b304a059a57fb39776
+  Gas usage: 985032
+  Block Number: 1
+  Block Time: Sat Nov 19 2022 19:10:01 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+
+  Transaction: 0x69c195c6d3fdb8f03c0f9305d5d579db15a522bcc9194af3020ae717ed2a9c9d
+  Contract created: 0xaa502c3c52dee77e1c6cad33ae61352a3561bf39
+  Gas usage: 985032
+  Block Number: 2
+  Block Time: Sat Nov 19 2022 19:10:01 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getCode
+eth_getCode
+
+eth_accounts
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x14ffccf24cd9ff1eb8a44785459a6a05310fcf93f0c1b2eb240cd36af3dd00ef
+  Contract created: 0xf1e436bde5cf5c3f06ada4756232e2fce6b76f5c
+  Gas usage: 2887950
+  Block Number: 3
+  Block Time: Sat Nov 19 2022 19:14:48 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getCode
+
+
+
+eth_sendTransaction
+
+  Transaction: 0x2781454319c2f514e806357502a2397a070e584c479e23afa22d84a3b68eeb3b
+  Contract created: 0xde31774f717ef3d32e8508b8ceabcf947a675a18
+  Gas usage: 2887950
+  Block Number: 4
+  Block Time: Sat Nov 19 2022 19:34:47 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_sendTransaction
+eth_getCode
+
+  Transaction: 0xbd56041e56317635abca66bee28986aaaa05f9f0cc99aff2ff107ebd60d8cae6
+  Contract created: 0x4790457430de1b98ea9f87952b2d48e60cc74067
+  Gas usage: 715554
+  Block Number: 5
+  Block Time: Sat Nov 19 2022 19:34:47 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_sendTransaction
+eth_getCode
+eth_accounts
+eth_gasPrice
+eth_accounts
+eth_gasPrice
+eth_accounts
+eth_gasPrice
+eth_accounts
+eth_gasPrice
+eth_accounts
+eth_gasPrice
+eth_accounts
+eth_gasPrice
+eth_accounts
+eth_gasPrice
+
+  Transaction: 0x00eccb2e7cea0566fb26e9a62fea24bf7c4ad073103cd3239e2f843afa2d084c
+  Contract created: 0x763aa6ef932a3ee725dfdf1bfcfcbc84890f2277
+  Gas usage: 459523
+  Block Number: 6
+  Block Time: Sat Nov 19 2022 19:34:48 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_gasPrice
+eth_gasPrice
+eth_gasPrice
+eth_gasPrice
+eth_gasPrice
+eth_gasPrice
+eth_gasPrice
+eth_getCode
+eth_gasPrice
+eth_gasPrice
+eth_sendTransaction
+eth_sendTransaction
+eth_sendTransaction
+eth_sendTransaction
+eth_sendTransaction
+eth_sendTransaction
+eth_sendTransaction
+eth_sendTransaction
+eth_sendTransaction
+eth_gasPrice
+
+  Transaction: 0x7c716f3cebf71dad2623638b2c46b9a4d04379bf4fe5ae2354c82fde27d94361
+  Gas usage: 148099
+  Block Number: 7
+  Block Time: Sat Nov 19 2022 19:34:48 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+  Transaction: 0xe4b829e001ee55d8a93422164e54a1ea94abce24336fa526d1839feb173db76a
+  Gas usage: 125709
+  Block Number: 8
+  Block Time: Sat Nov 19 2022 19:34:49 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+  Transaction: 0x9a035203634ee422fd6d4b487b4f9d6cc7c4d1107e0a8574f6f2b3ef2757c3e9
+  Gas usage: 125733
+  Block Number: 9
+  Block Time: Sat Nov 19 2022 19:34:49 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+  Transaction: 0xb42ba9b4353d1598e5da824d46d83c0c22ff426db3b34aa7b46f8e3689d1d75f
+  Gas usage: 86359
+  Block Number: 10
+  Block Time: Sat Nov 19 2022 19:34:49 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+  Transaction: 0xa761f4e10ddd138ebe707e61aee9ac3eed2dd43588fc8576a8f5529478fb6087
+  Gas usage: 125781
+  Block Number: 11
+  Block Time: Sat Nov 19 2022 19:34:49 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+  Transaction: 0xd75169354e8a77a41eb0b70688d45009269d3fdcea4e4d0146ec5726c4ccaa4c
+  Gas usage: 113114
+  Block Number: 12
+  Block Time: Sat Nov 19 2022 19:34:50 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+  Transaction: 0xfa50e7420d8225b4e42c11fa433c00f59acf0ec63a865302e3465237e2989d5b
+  Gas usage: 125685
+  Block Number: 13
+  Block Time: Sat Nov 19 2022 19:34:50 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+  Transaction: 0x7b380e228df64ad9a034d0695bd87d02899e721b88011e844831e30c4c44a370
+  Gas usage: 42616
+  Block Number: 14
+  Block Time: Sat Nov 19 2022 19:34:50 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+  Transaction: 0x9f61defa4b20958b960a472e735d192b48f1a92d6e99868be653f65007ae9ccc
+  Gas usage: 42594
+  Block Number: 15
+  Block Time: Sat Nov 19 2022 19:34:51 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_sendTransaction
+
+  Transaction: 0xa35a370aa595604d12f83996f0bc2fea8a29c124dbedb34557ec4d82fcb89d90
+  Gas usage: 83013
+  Block Number: 16
+  Block Time: Sat Nov 19 2022 19:34:51 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+eth_accounts
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x199d54dbc5f44a409bc7790c18b2ce918aecf4b9b9e87be1cf07426ba43f1738
+  Contract created: 0x32f5d12ce8f1af5e83905701f6ef943cbde9d932
+  Gas usage: 1238058
+  Block Number: 17
+  Block Time: Sat Nov 19 2022 20:00:26 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_getCode
+
+
+eth_sendTransaction
+
+  Transaction: 0x877d8f36323de6079edf712fff68082188ddbf4189b865b44d837df9421f3a9f
+  Contract created: 0x037d0a37074f629fcf05d7aca243d500619579ab
+  Gas usage: 171847
+  Block Number: 18
+  Block Time: Sat Nov 19 2022 20:01:57 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_getCode
+
+
+eth_sendTransaction
+
+  Transaction: 0xee22444c4d18632101aa99857351d27898aaa3ee01b288fae8897b8f563d6f49
+  Contract created: 0x4a486cab812f7451538b585af88420a97cb258a9
+  Gas usage: 112633
+  Block Number: 19
+  Block Time: Sat Nov 19 2022 20:04:37 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_getCode
+
+
+eth_accounts
+eth_gasPrice
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x94ca58c91d709563eb8df4e8b6ca102e5c432f7b7becb74561f882474f5a9cb9
+  Gas usage: 621813
+  Block Number: 20
+  Block Time: Sat Nov 19 2022 20:11:07 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getLogs
+eth_subscribe
+eth_getTransactionReceipt
+eth_unsubscribe
+
+
+eth_accounts
+eth_gasPrice
+eth_accounts
+eth_gasPrice
+eth_call
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x88a432065d72d5bec48b65bccf965ed09bcc7128114541e8b788df7031d461fd
+  Gas usage: 159794
+  Block Number: 21
+  Block Time: Sat Nov 19 2022 20:13:32 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+eth_call
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x9b5ed20bf4388741cc2f9fd549f72a485bb93046cab084ebcefa283b41cbaa48
+  Gas usage: 146828
+  Block Number: 22
+  Block Time: Sat Nov 19 2022 20:17:21 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+eth_call
+eth_accounts
+eth_gasPrice
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x39f0bb3de2077d3f321beeb9af6a3959b13096977110d3168bb17a25d712942a
+  Gas usage: 60649
+  Block Number: 23
+  Block Time: Sat Nov 19 2022 20:40:22 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+eth_call
+eth_accounts
+eth_gasPrice
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x3a50e006be69ac4ae3b5b16c2a2d0f61a37ddffbd820386f80b40b173dbd5be4
+  Gas usage: 96806
+  Block Number: 24
+  Block Time: Sat Nov 19 2022 20:47:40 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xb1100e55e4b7bebb7c05218e1f679d02c7274c9e2f118f53771a58fe8734b1b0
+  Gas usage: 586798
+  Block Number: 25
+  Block Time: Sat Nov 19 2022 21:29:28 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getLogs
+eth_subscribe
+eth_getTransactionReceipt
+eth_unsubscribe
+
+
+
+
+
+
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x8f6541e7030e74547a46f9bacf37c4d124994ca4daf0aa6afc8b772e8595a5f8
+  Gas usage: 586798
+  Block Number: 36
+  Block Time: Sat Nov 19 2022 22:28:02 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getLogs
+eth_subscribe
+eth_getTransactionReceipt
+eth_unsubscribe
+
+
+
+eth_call
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x7d5d05b5e9130d21f83e126c6213e351a5f3679b910fcd5ecf93a6e971373bc0
+  Gas usage: 140594
+  Block Number: 37
+  Block Time: Sat Nov 19 2022 22:29:52 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+eth_call
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xf647e1a8a0928a0293c6a43a26c95e17871894f195ac36346e9ef3d44b88cda8
+  Gas usage: 127628
+  Block Number: 38
+  Block Time: Sat Nov 19 2022 22:31:31 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+eth_call
+eth_accounts
+eth_gasPrice
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xdf6f73b5c11df85f41571f0821b5aa12d69f6a1a055d1c813dfcaaaa2ab90ee1
+  Gas usage: 60649
+  Block Number: 41
+  Block Time: Sat Nov 19 2022 22:37:23 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+eth_call
+eth_accounts
+eth_gasPrice
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x54ce7014e75fad3490730bbca7044106d1e13ddffda5bd59ae36d77d955ac732
+  Gas usage: 96806
+  Block Number: 42
+  Block Time: Sat Nov 19 2022 22:41:08 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x208746081d8680ba75d3d787c2f67c29f89507969be539da3ee4dab212388d40
+  Gas usage: 586798
+  Block Number: 43
+  Block Time: Sat Nov 19 2022 22:49:19 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getLogs
+eth_subscribe
+eth_getTransactionReceipt
+eth_unsubscribe
+
+eth_call
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xd64147c8c8f54e38f4dd942a6dc74ab5d14ec0ed4315e5260621f71df9de9ca2
+  Gas usage: 140582
+  Block Number: 44
+  Block Time: Sat Nov 19 2022 22:51:33 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+eth_call
+eth_call
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0xb33c802a3787185d35bcd94850145cdc3a5c22c5d6d323f2fef9b86a986a5125
+  Gas usage: 127604
+  Block Number: 45
+  Block Time: Sat Nov 19 2022 22:53:30 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+eth_call
+eth_accounts
+eth_gasPrice
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x91a7817a469610e273ba1eb1d9edfcdbba91e38ec4fd386a38c0bca8dbbfe023
+  Gas usage: 60649
+  Block Number: 47
+  Block Time: Sat Nov 19 2022 22:57:01 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+eth_call
+eth_accounts
+eth_gasPrice
+eth_gasPrice
+eth_sendTransaction
+
+  Transaction: 0x6e1403dbe911ee51a9195bd68600d7fa4af12c1e6f36296e7fc63e4e02f504f0
+  Gas usage: 96806
+  Block Number: 50
+  Block Time: Sat Nov 19 2022 23:13:20 GMT+0530 (India Standard Time)
+
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,369 @@
+REQUESTED: Compile and Deploy smart contract for Runtime Registry
+SUCCESS: Runtime Registry Metadata updated in Process Repository
+ ID: 6379d1a028a8d618d48e7e8e
+----------------------------------------------------------------
+POST /registries 201 1074.167 ms - 33
+"address" : "0x340694Feb3a3692a9422d8C80434e7ff7BCc5Be1"
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of BPMN Interpreter
+SUCCESS: BPMNInterpreter deployed successfully
+ Address: 0x54d7756d2996A147A445F13f982bFB40c2E50670
+ Cost: 2887950 gas units
+----------------------------------------------------------------
+POST /interpreter 201 2705.005 ms - 207
+{"smartContractName":"BPMNInterpreter","gasCost":2887950,"transactionHash":"0x274108a416e5a604ec5efb06150b8b88e3419d0dbfab3e3c8476d8e831a7abf5","contractAddress":"0x54d7756d2996A147A445F13f982bFB40c2E50670"}
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Compile and deploy process model named Goods_Shipement
+IData and IFactory contracts generated and compiled succesfully
+Starting contract deployments and registration
+SUCCESS: Transaction 0x1defd8617df56991d08356d7b68a09142bc4e582f367f4bfb88becb22e8076c2 for deploying BPMNINterpreter accepted
+ Contract Address 0xDBe174c368d5F31bD3eF62946f327ebe8fba9208
+ Cost 2887950 gas units
+----------------------------------------------------------------
+SUCCESS: BPMNINterpreter running at 0xDBe174c368d5F31bD3eF62946f327ebe8fba9208 updated in repositpry
+  ID: 6379d35528a8d618d48e7e8f
+----------------------------------------------------------------
+SUCCESS: Transaction 0xf64b339f47e150b2adba8301200df4da023ebcbf6632af0e522d2f96e840dd69 for deploying IFlow accepted
+ Contract Address 0x4a908A103a247480c3744FDe8824F1A6dc3f4290
+ Cost 715554 gas units
+----------------------------------------------------------------
+SUCCESS: IData metadata from Submit_Quotes updated in repositpry
+  ID: 6379d35528a8d618d48e7e90
+----------------------------------------------------------------
+SUCCESS: IFlow running at 0x4a908A103a247480c3744FDe8824F1A6dc3f4290 updated in repositpry
+  ID: 6379d35528a8d618d48e7e91
+----------------------------------------------------------------
+SUCCESS: Transaction 0x95e2833e85d98e9f464dc6eb572b1e045443c1be78a39a3c53a30aa4864b5a98 for deploying IFactory accepted
+ Contract Address 0x11483572F391C629a0895DdC464A137f51750583
+ Cost 430590 gas units
+----------------------------------------------------------------
+SUCCESS: IFactory running at 0x11483572F391C629a0895DdC464A137f51750583 updated in repositpry
+  ID: 6379d35528a8d618d48e7e92
+----------------------------------------------------------------
+SUCCESS: Transaction 0x93355565baa6ca659951a3bcd3b28986a0161fd2c973d5542b7f49b95133edea for deploying IFlow accepted
+ Contract Address 0xB8f66bA0bbd0E3236b83D81D1c1E447C37Ad74c1
+ Cost 715554 gas units
+----------------------------------------------------------------
+SUCCESS: IData metadata from Goods_Shipement updated in repositpry
+  ID: 6379d35628a8d618d48e7e93
+----------------------------------------------------------------
+SUCCESS: IFlow running at 0xB8f66bA0bbd0E3236b83D81D1c1E447C37Ad74c1 updated in repositpry
+  ID: 6379d35628a8d618d48e7e94
+----------------------------------------------------------------
+Deployment transactions sent
+{
+  interpreterTHash: '0x1defd8617df56991d08356d7b68a09142bc4e582f367f4bfb88becb22e8076c2',
+  iFlowTHashes: [
+    '0xf64b339f47e150b2adba8301200df4da023ebcbf6632af0e522d2f96e840dd69',
+    '0x93355565baa6ca659951a3bcd3b28986a0161fd2c973d5542b7f49b95133edea'
+  ],
+  iFactoryTHashes: [
+    '0x95e2833e85d98e9f464dc6eb572b1e045443c1be78a39a3c53a30aa4864b5a98',
+    '0x753d7f2386fa0dfab75aecdd5bacd54006c13688bb3c7219161402f317137d97'
+  ]
+}
+POST /interpreter/models 201 5214.707 ms - 91129
+SUCCESS: Transaction 0x753d7f2386fa0dfab75aecdd5bacd54006c13688bb3c7219161402f317137d97 for deploying IFactory accepted
+ Contract Address 0x78c09CC55AB83b349032C3a57F80C2b41CC5a7cA
+ Cost 430590 gas units
+----------------------------------------------------------------
+SUCCESS: IFactory running at 0x78c09CC55AB83b349032C3a57F80C2b41CC5a7cA updated in repositpry
+  ID: 6379d35728a8d618d48e7e95
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 1,
+  eName: 'Submit_Quotes',
+  typeInfo: '2057',
+  postC: '4',
+  next: [ 3 ],
+  preC: '2'
+}
+ Cost: 125709 gas
+----------------------------------------------------------------
+Process Submit_Quotes updated in repositpry
+  ID: 6379d35728a8d618d48e7e96
+----------------------------------------------------------------
+Process Goods_Shipement updated in repositpry
+  ID: 6379d35728a8d618d48e7e97
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 2,
+  eName: 's1',
+  typeInfo: '1060',
+  postC: '2',
+  next: [],
+  preC: '0'
+}
+ Cost: 147835 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 3,
+  eName: 'e1',
+  typeInfo: '1548',
+  postC: '0',
+  next: [],
+  preC: '4'
+}
+ Cost: 112826 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setFactoryInst
+'0x11483572F391C629a0895DdC464A137f51750583'
+ Cost: 42616 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setInterpreterInst
+'0xDBe174c368d5F31bD3eF62946f327ebe8fba9208'
+ Cost: 42594 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 1,
+  eName: 'Goods_Shipment_Started',
+  typeInfo: '1060',
+  postC: '2',
+  next: [],
+  preC: '0'
+}
+ Cost: 148075 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 2,
+  eName: 'Ship_Goods',
+  typeInfo: '2057',
+  postC: '4',
+  next: [ 3 ],
+  preC: '8'
+}
+ Cost: 125673 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 3,
+  eName: 'Goods_Shipment_Completed',
+  typeInfo: '1548',
+  postC: '0',
+  next: [],
+  preC: '4'
+}
+ Cost: 113090 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 5,
+  eName: 'Request_Quotes',
+  typeInfo: '2057',
+  postC: '16',
+  next: [ 4 ],
+  preC: '2'
+}
+ Cost: 125721 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setFactoryInst
+'0x78c09CC55AB83b349032C3a57F80C2b41CC5a7cA'
+ Cost: 42616 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setInterpreterInst
+'0xDBe174c368d5F31bD3eF62946f327ebe8fba9208'
+ Cost: 42594 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.setElement
+{
+  eInd: 4,
+  eName: 'Submit_Quotes',
+  typeInfo: '1121',
+  postC: '8',
+  next: [],
+  preC: '16'
+}
+ Cost: 127084 gas
+----------------------------------------------------------------
+SUCCESS: Executed function RuntimeRegistry.registerIFlow
+[
+  '6379d35728a8d618d48e7e97',
+  '0xB8f66bA0bbd0E3236b83D81D1c1E447C37Ad74c1'
+]
+ Cost: 83013 gas
+----------------------------------------------------------------
+SUCCESS: Executed function IFlow.linkSubProcess
+{
+  pInd: 4,
+  cFlowInst: '0x4a908A103a247480c3744FDe8824F1A6dc3f4290',
+  attachedEvt: [],
+  countInstances: 2
+}
+ Cost: 64580 gas
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of IFlow node
+SUCCESS: IFlowImpl deployed successfully
+ Address: 0xB25cd0b622898f247783DbbA8b1Ac42dc7c79999
+ Cost: 715554 gas units
+----------------------------------------------------------------
+POST /i-flow 201 594.375 ms - 20706
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Compile and Deploy smart contract for DynamicAccessControl
+SUBMITTED: new instance of BindingAccessControl submitted
+   Transaction Hash: 0x55471d8d7d53d95b9eec6168545cc57e0914ca299edd2f1b5b68c42e794d31be
+----------------------------------------------------------------
+POST /access-control 202 739.710 ms - 68
+SUCCESS: BindingAccessControl deployed succesfully
+   Transaction Hash: 0x55471d8d7d53d95b9eec6168545cc57e0914ca299edd2f1b5b68c42e794d31be
+   Address: 0x7eb04b43F8e9a2164D97123370A367A45ad2972C
+   Cost: 1238058 gas
+   Repository ID: 6379d63928a8d618d48e7e98
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Compile and deploy role binding policy
+{ Supplier is case-creator; Supplier nominates Candidate; Supplier nominates Carrier } { }
+Success: the policy is consistent
+ Role Precedence:
+   0: Supplier
+   1: Candidate Carrier
+----------------------------------------------------------------
+SUBMITTED: new instance of BindingPolicyContract submitted
+   Transaction Hash: 0x8a711b0c54d33714266887d75ea1921ab18c6bbcd930fffe2ca714bb1f658f69
+----------------------------------------------------------------
+POST /rb-policy 202 328.283 ms - 68
+SUCCESS: BindingPolicyContract deployed succesfully
+   Transaction Hash: 0x8a711b0c54d33714266887d75ea1921ab18c6bbcd930fffe2ca714bb1f658f69
+   Address: 0xC849c8a83dC6E4c2c958a1f4da9f8B25AC05B183
+   Cost: 171847 gas
+   Repository ID: 6379d6e628a8d618d48e7e99
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Compile and deploy role-task map
+   Map: ["0xC849c8a83dC6E4c2c958a1f4da9f8B25AC05B183", "0xB8f66bA0bbd0E3236b83D81D1c1E447C37Ad74c1"]
+inside generateRoleTaskContract...
+SUBMITTED: new instance of policy_process_mapContract submitted
+   Transaction Hash: 0x125ddca5f4ca081f5947ee62d22f482966f6571bd616e79602f75217328b3c1b
+----------------------------------------------------------------
+POST /task-role-map 202 220.518 ms - 68
+SUCCESS: policy_process_mapContract deployed succesfully
+   Transaction Hash: 0x125ddca5f4ca081f5947ee62d22f482966f6571bd616e79602f75217328b3c1b
+   Address: 0x78097Aa0Ed6a56a7E505E26CC26c827C8a95d0c9
+   Cost: 112633 gas
+   Repository ID: 6379d7bb28a8d618d48e7e9a
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query Process Information from IFlow node at 0xB8f66bA0bbd0E3236b83D81D1c1E447C37Ad74c1
+SUCCESS: Information from IFlow node at 0xB8f66bA0bbd0E3236b83D81D1c1E447C37Ad74c1 collected
+{
+  factoryAddress: '0x78c09CC55AB83b349032C3a57F80C2b41CC5a7cA',
+  interpreterAddress: '0xDBe174c368d5F31bD3eF62946f327ebe8fba9208',
+  subProcesses: [
+    {
+      subProcIndex: '4',
+      iFlowAddress: '0x4a908A103a247480c3744FDe8824F1A6dc3f4290'
+    }
+  ],
+  elementInfo: [
+    { eInd: 1, preC: '0', postC: '2', typeInfo: '1060', next: [] },
+    { eInd: 2, preC: '8', postC: '4', typeInfo: '2057', next: [ '3' ] },
+    { eInd: 3, preC: '4', postC: '0', typeInfo: '1548', next: [] },
+    { eInd: 4, preC: '16', postC: '8', typeInfo: '1121', next: [] },
+    {
+      eInd: 5,
+      preC: '2',
+      postC: '16',
+      typeInfo: '2057',
+      next: [ '4' ]
+    }
+  ]
+}
+----------------------------------------------------------------
+GET /i-flow/0xB8f66bA0bbd0E3236b83D81D1c1E447C37Ad74c1 200 1551.855 ms - 561
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Create new instance of process IFlow address 0xB8f66bA0bbd0E3236b83D81D1c1E447C37Ad74c1
+POST /i-flow/0xB8f66bA0bbd0E3236b83D81D1c1E447C37Ad74c1/i-data 202 830.073 ms - 88
+SUCCESS: New Process Instance created from IFlow running at 0xDBe174c368d5F31bD3eF62946f327ebe8fba9208
+  TransactionHash: 0x201bbc4cbf56c98b8bd19f8355ee5b4b160f7047a5a9b525424abafbbf9364c9
+  Address: 0x7E0a9077a72876daEB0C422599732f870489FD62
+  GasUsed: 594908 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate-case-creator for process instance at 0x7E0a9077a72876daEB0C422599732f870489FD62
+PATCH /rb-opertation/0x7E0a9077a72876daEB0C422599732f870489FD62/nominate-creator 202 794.529 ms - 88
+SUCCESS: Runtime Operation nominateCaseCreator executed
+   TransactionHash: 0xe9c4da3378dd2f1ce3402d7206f507724ad4c38ac1112dfc47fd3ae3ab74b244
+   Cost: 159794
+   Input Paramaters:
+     rNominee: Supplier
+     nominee: 0xfA53caAA11989D89C6d9B1e1FEe2a126fB4e5664
+     pCase: 0x7E0a9077a72876daEB0C422599732f870489FD62
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate for process instance at 0x7E0a9077a72876daEB0C422599732f870489FD62
+PATCH /rb-opertation/0x7E0a9077a72876daEB0C422599732f870489FD62/nominate 202 612.449 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0x7302b231b6fc45f5e38663ee2fbe762e4e7d5ff8143cae8022eb56ba57216f46
+   Cost: 146828
+   Input Paramaters:
+     rNominator: Supplier
+     rNominee: Candidate
+     nominator: 0xfA53caAA11989D89C6d9B1e1FEe2a126fB4e5664
+     nominee: 0x3bdAb6f334AB67bDC78cf88b4913fCb2aE354720
+     pCase: 0x7E0a9077a72876daEB0C422599732f870489FD62
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Perform role-binding operation nominate for process instance at 0x7E0a9077a72876daEB0C422599732f870489FD62
+PATCH /rb-opertation/0x7E0a9077a72876daEB0C422599732f870489FD62/nominate 202 614.768 ms - 88
+SUCCESS: Runtime Operation nominate executed
+   TransactionHash: 0x6c9fff97d883b009d2ae5d75620656259287b39616c204a1058d0af60623a0fc
+   Cost: 146828
+   Input Paramaters:
+     rNominator: Supplier
+     rNominee: Carrier
+     nominator: 0xfA53caAA11989D89C6d9B1e1FEe2a126fB4e5664
+     nominee: 0x94233Ca004778A089AD142bb649de08ab7F36BD0
+     pCase: 0x7E0a9077a72876daEB0C422599732f870489FD62
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: Query state of role Supplier for process instance at 0x7E0a9077a72876daEB0C422599732f870489FD62
+SUCCESS: State of role Supplier  retrieved
+ State: BOUND
+----------------------------------------------------------------
+GET /rb-opertation/0x7E0a9077a72876daEB0C422599732f870489FD62/state 200 401.375 ms - 35
+REQUESTED: Query state of role Candidate for process instance at 0x7E0a9077a72876daEB0C422599732f870489FD62
+SUCCESS: State of role Candidate  retrieved
+ State: BOUND
+----------------------------------------------------------------
+GET /rb-opertation/0x7E0a9077a72876daEB0C422599732f870489FD62/state 200 417.105 ms - 36
+REQUESTED: Query state of role Carrier for process instance at 0x7E0a9077a72876daEB0C422599732f870489FD62
+SUCCESS: State of role Carrier  retrieved
+ State: BOUND
+----------------------------------------------------------------
+GET /rb-opertation/0x7E0a9077a72876daEB0C422599732f870489FD62/state 200 362.870 ms - 34
+REQUESTED: Query state of process instance running at 0x7E0a9077a72876daEB0C422599732f870489FD62
+Enabled activities of process running at 0x7E0a9077a72876daEB0C422599732f870489FD62 retrieved
+[
+  {
+    elementName: 'Request_Quotes',
+    input: '[]',
+    output: '[]',
+    bundleId: '6379d35728a8d618d48e7e97',
+    hrefs: [ '/i-flow/5/i-data/0x7E0a9077a72876daEB0C422599732f870489FD62' ]
+  }
+]
+----------------------------------------------------------------
+GET /i-data/0x7E0a9077a72876daEB0C422599732f870489FD62 200 1567.030 ms - 171
+----------------------------------------------------------------
+----------------------------------------------------------------
+REQUESTED: CheckIn (execute) task ID 5 on IData at 0x7E0a9077a72876daEB0C422599732f870489FD62
+PATCH /i-flow/5/i-data/0x7E0a9077a72876daEB0C422599732f870489FD62 202 1157.775 ms - 68
+SUCCESS: Task 5 executed successfully at IData running at 0x7E0a9077a72876daEB0C422599732f870489FD62
+  TransactionHash: 0x60d825c14997abe0e4d425444aad0301d4033a1925f0b026d651c288565cb2b7
+  Input Params: 5
+  GasUsed: 1138210 units
+----------------------------------------------------------------
+----------------------------------------------------------------
+
+
+
+
