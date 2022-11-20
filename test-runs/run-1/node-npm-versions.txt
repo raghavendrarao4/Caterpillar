@@ -1,0 +1,30 @@
+upto caterpillar v2.1
+----------------------
+node-v8.11.0-x64.msi
+vs_buildtools__b33a161d993b461c90a5eeec1779669a.exe
+vs_community__7bf8a85119d24bfa98fcab308fbcf9cc.exe
+mongodb-windows-x86_64-5.0.3-signed.msi
+camunda-modeler-4.8.1-win-x64
+Git-2.33.0-64-bit.exe
+
+
+caterpillar v3.0 & REST API
+---------------------------
+node-v14.18.0-x64.msi
+vs_buildtools__b33a161d993b461c90a5eeec1779669a.exe
+vs_community__7bf8a85119d24bfa98fcab308fbcf9cc.exe
+mongodb-windows-x86_64-5.0.3-signed.msi
+camunda-modeler-4.8.1-win-x64
+Git-2.33.0-64-bit.exe
+
+
+1. Install Python - C:\Python\Python310\python.exe
+	1a. npm config set python "C:\Python\Python310\python.exe"
+2. Install VC++ build environment - https://github.com/nodejs/node-gyp#on-windows
+	2a. VS 2022 C++ x64/x86 build tools
+	2b. Desktop development with C++
+	2c. https://stackoverflow.com/questions/57541402/node-gyp-configure-got-gyp-err-find-vs --> MS VS build-tools problem
+	2d. npm install -g node-gyp@latest --> install node gyp npm package
+3. npm config set msvs_version 2017 --global
+4. npm config set msbuild_path "C:\Program Files\Microsoft Visual Studio\2022\Community\Msbuild\Current\Bin\MSBuild.exe"
+	npm config set msbuild_path "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe"
